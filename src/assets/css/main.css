@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --nav-base: #f804ec00;
+  --nav-pill: #ffffff;
+  --nav-text: #000000;
+  --background: #ffffff;
+  --border: #a7acb796;
+  --seprator : #7f59d73c;
+
+
+  --button-gradient: linear-gradient(135deg, #571bc1, #004395);
+
+  /* Text */
+  --text: #1a1c20;
+  --span: #630ed4;
+
+  --on-surface-variant: #4a4455;
+
+  /* Brand */
+  --primary: #6f2aca;
+  --secondary-container: #39b8fd;
+
+  /* Aurora gradient */
+  --aurora-purple: #7f5af0;
+  --aurora-blue: #1964de;
+  --aurora-white: #829bc4;
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.05);
+
+  /* Shadow / Glow */
+  --primary-glow: rgba(99, 14, 212, 0.2);
+  --primary-glow-strong: rgba(99, 14, 212, 0.3);
+
+  /* Border */
+  --border-light: rgba(0, 0, 0, 0.05);
+  --border-medium: rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  --nav-pill: #120f17;
+  --nav-text: #ffffff;
+  --background: #000000;
+
+  /* Text */
+  --text: #d4e4fa;
+  --span: #adc6ff;
+  --border: #a7acb796;
+  --hero-description: #c6c6cb;
+
+  /* Brand */
+  --primary: #8b5cf6;
+  --secondary-container: #3b82f6;
+
+  /* Aurora gradient */
+  --aurora-purple: #8b5cf6;
+  --aurora-blue: #3b82f6;
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.12);
+
+  /* Shadow / Glow */
+  --primary-glow: rgba(139, 92, 246, 0.35);
+  --primary-glow-strong: rgba(139, 92, 246, 0.6);
+
+  /* Border */
+  --border-light: rgba(255, 255, 255, 0.12);
+  --border-medium: rgba(255, 255, 255, 0.2);
+}
+
+@theme inline {
+  --color-span: var(--span);
+  --color-text: var(--text);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-secondary-container: var(--secondary-container);
+
+  --color-aurora-purple: var(--aurora-purple);
+  --color-aurora-blue: var(--aurora-blue);
+
+  --color-hero-background: var(--background);
+
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+  --color-seprator : var(--seprator);
+
+  --color-on-surface: var(--on-surface);
+  --color-hero-description: var(--hero-description);
+  --background-image-button-gradient: var(--button-gradient);
+}
+
+@layer base {
+  button {
+    cursor: pointer;
+  }
+}
