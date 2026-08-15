@@ -9,26 +9,25 @@ export default function HeroContent() {
     .trim();
 
   return (
-    <section className="flex flex-col mt-20 gap-10">
-      <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-text">
-        <span className="block font-bold ps-6">
-          {t("home.hero.title.before")}
-        </span>
+    <section className="flex flex-col gap-5 md:gap-10">
+      <h1 className="text-2xl sm:text-5xl lg:text-7xl text-text">
+        <span className="block font-bold">{t("home.hero.title.before")}</span>
 
         <ParticleText
           className="
-          w-43
-          h-12
+          w-46
+          h-10
           translate-y-3
-          lg:h-30
+          rtl:w-30
           sm:w-60
-          md:translate-y-6
-          ltr:md:w-90
           md:h-20
-          ltr:lg:w-140
-          ltr:lg:h-35
-          ltr:lg:translate-y-8
-          rtl:lg:w-100
+          md:translate-y-6
+          ltr:md:w-80
+          rtl:md:w-80
+          lg:h-20
+          ltr:lg:w-100
+          ltr:lg:h-20
+          rtl:lg:w-80
         "
           text={t("home.hero.title.highlight")}
           particleSize={2}
@@ -48,7 +47,7 @@ export default function HeroContent() {
         <span>{t("home.hero.title.after")}</span>
       </h1>
 
-      <p className=" w-full sm:max-w-md md:max-w-2xl text-hero-description">
+      <p className="w-full text-xs lg:text-xl sm:max-w-md md:max-w-3xl text-hero-description">
         {t("home.hero.description")}
       </p>
     </section>

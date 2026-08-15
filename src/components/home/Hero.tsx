@@ -5,7 +5,7 @@ import HeroStats from "./HeroStats";
 
 function Hero() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden flex flex-col justify-center items-center gap-6">
+    <section className="relative min-h-screen w-full overflow-hidden pb-8 pl-5">
       <div className="absolute inset-0 z-10">
         <Aurora
           colorStops={[
@@ -19,7 +19,7 @@ function Hero() {
         />
       </div>
 
-      <div className="relative z-10 flex w-full max-w-6xl flex-col gap-6 px-5 sm:px-8">
+      <div className="relative z-10 flex w-full flex-col gap-10 px-5 sm:px-8 justify-center sm:justify-end h-full">
         <HeroContent />
 
         <HeroButtons />

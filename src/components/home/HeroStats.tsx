@@ -12,18 +12,21 @@ export default function HeroStats() {
   }[];
 
   return (
-    <ElectricBorder color="var(--primary)">
+    <ElectricBorder color="var(--primary)" className="mt-25 md:mt-0 ">
       {" "}
       <Card className="mx-auto">
-        <CardContent className="flex  items-center justify-around ">
+        <CardContent className="flex items-center justify-around">
           {stats.map((item, index) => (
-            <div key={index} className="flex items-center sm:gap-6 p-0">
+            <div
+              key={index}
+              className="flex items-end sm:gap-6 p-0"
+            >
               <div className="text-center min-w-24">
-                <span className="text-span text-xl sm:text-2xl md:text-2xl lg:text-3xl">
+                <span className="text-span text-xs sm:text-2xl md:text-2xl lg:text-3xl">
                   {item.value}
                 </span>
 
-                <p className="text-text text-xs sm:text-xs md:text-xl">
+                <p className="text-text text-[9px] sm:text-xs md:text-xl">
                   {item.label}
                 </p>
               </div>
@@ -31,7 +34,8 @@ export default function HeroStats() {
               {index !== stats.length - 1 && (
                 <Separator
                   orientation="vertical"
-                  className="hidden md:block h-20 w-0.5 bg-seprator ltr:ml-20 rtl:mr-20"                />
+                  className="hidden md:block h-20 w-0.5 bg-seprator "
+                />
               )}
             </div>
           ))}

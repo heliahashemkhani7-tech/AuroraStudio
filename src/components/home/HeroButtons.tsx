@@ -5,7 +5,7 @@ export default function HeroButtons() {
   const { t } = useTranslation();
 
   return (
-    <section className="flex gap-4 ps-6">
+    <section className="flex gap-4">
       <Button className="bg-button-gradient text-amber-50 p-2 sm:p-6 font-bold text-sm sm:text-xl">
         {t("home.hero.buttons.portfolio")}
       </Button>

@@ -9,6 +9,7 @@ export default function Nav() {
   return (
     
     <PillNav
+    className="text-xl"
       logo="/imgs/aurora_logo.png"
       logoAlt="Aurora Studio"
       items={[
