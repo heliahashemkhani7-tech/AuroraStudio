@@ -1,16 +1,20 @@
 import { Button } from "@/components/ui/button";
-import i18n from "@/i18n";
+import { useTranslation } from "react-i18next";
 
 export default function LanguageSwitcher() {
-  const changeLanguage = (lang: "en" | "fa") => {
-    i18n.changeLanguage(lang);
+  const { i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const currentLang = i18n.language;
+    const newLang = currentLang === "en" ? "fa" : "en";
+    i18n.changeLanguage(newLang);
   };
 
   return (
     <div className="flex gap-2 text-hero-background">
-      <Button onClick={() => changeLanguage("en")}>EN</Button>
-
-      <Button onClick={() => changeLanguage("fa")}>FA</Button>
+      <Button onClick={toggleLanguage}>
+        {i18n.language === "en" ? "FA" : "EN"}
+      </Button>
     </div>
   );
 }
