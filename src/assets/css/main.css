@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --nav-base: #f804ec00;
+  --nav-base: #ff00f200;
   --nav-pill: #ffffff;
+  --nav-hambur: #000000;
   --nav-text: #000000;
   --background: #ffffff;
   --border: #a7acb796;
-  --seprator : #7f59d73c;
+  --seprator: #7f59d73c;
+  --hover-btn:#9ac3fb;
 
 
   --button-gradient: linear-gradient(135deg, #571bc1, #004395);
@@ -22,8 +24,8 @@
   --secondary-container: #39b8fd;
 
   /* Aurora gradient */
-  --aurora-purple: #7f5af0;
-  --aurora-blue: #1964de;
+  --aurora-purple: #5929e7;
+  --aurora-blue: #0062ff;
   --aurora-white: #829bc4;
 
   /* Glass */
@@ -40,6 +42,10 @@
 }
 
 .dark {
+  --nav-hambur: #ffffff;
+
+  --hover-btn:var(--aurora-purple);
+
   --nav-pill: #120f17;
   --nav-text: #ffffff;
   --background: #000000;
@@ -72,7 +78,9 @@
 }
 
 @theme inline {
+  --color-hambur:var(--nav-hambur);
   --color-span: var(--span);
+  --color-hover:var(--hover-btn);
   --color-text: var(--text);
   --color-border: var(--border);
   --color-primary: var(--primary);
@@ -85,7 +93,7 @@
 
   --color-glass-bg: var(--glass-bg);
   --color-glass-border: var(--glass-border);
-  --color-seprator : var(--seprator);
+  --color-seprator: var(--seprator);
 
   --color-on-surface: var(--on-surface);
   --color-hero-description: var(--hero-description);

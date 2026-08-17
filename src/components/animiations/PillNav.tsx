@@ -264,7 +264,7 @@ const PillNav: React.FC<PillNavProps> = ({
     <div className="absolute top-[1em] left-1/2 -translate-x-1/2 z-[1000] md:w-auto">
       {" "}
       <nav
-        className={`flex backdrop-blur-xl border border-white/20 shadow-lg rounded-full w-screen md:w-180 justify-between  ${className}`}
+        className={`flex backdrop-blur-xl border border-white/20 shadow-lg rounded-full w-[calc(100vw-2rem)] md:w-180 justify-between  ${className}`}
         style={{
           ...cssVars,
           background: "var(--base)",
@@ -419,32 +419,26 @@ const PillNav: React.FC<PillNavProps> = ({
           </ul>
         </div>
 
-        <div className="flex items-center gap-2 px-3">
+        <div className="flex items-center gap-2 px-2">
           <LanguageSwitcher />
           <ThemeToggle />
-        </div>
 
-        <button
-          ref={hamburgerRef}
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-          aria-expanded={isMobileMenuOpen}
-          className="md:hidden rounded-full border-0 flex flex-col items-center justify-center gap-1 cursor-pointer p-0 relative"
-          style={{
-            width: "var(--nav-h)",
-            height: "var(--nav-h)",
-            background: "var(--base, #000)",
-          }}
-        >
-          <span
-            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all duration-[10ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-            style={{ background: "var(--pill-bg, #fff)" }}
-          />
-          <span
-            className="hamburger-line w-4 h-0.5 rounded origin-center transition-all duration-[10ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-            style={{ background: "var(--pill-bg, #fff)" }}
-          />
-        </button>
+          <button
+            ref={hamburgerRef}
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+            className="md:hidden rounded-full border-0 flex flex-col items-center justify-center gap-1 cursor-pointer p-0 relative"
+            style={{
+              width: "var(--nav-h)",
+              height: "var(--nav-h)",
+              background: "var(--base, #000)",
+            }}
+          >
+            <span className="hamburger-line w-4 h-0.5 rounded origin-center transition-all duration-[10ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-hambur" />
+            <span className="hamburger-line w-4 h-0.5 rounded origin-center transition-all duration-[10ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] bg-hambur" />
+          </button>
+        </div>
       </nav>
       <div
         ref={mobileMenuRef}

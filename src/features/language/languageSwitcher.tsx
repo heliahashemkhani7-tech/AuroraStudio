@@ -11,8 +11,8 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex gap-2 text-hero-background">
-      <Button onClick={toggleLanguage}>
+    <div className="flex gap-2 text-white hover:bg-hover hover:rounded-lg  border-span ">
+      <Button onClick={toggleLanguage} variant="outline">
         {i18n.language === "en" ? "FA" : "EN"}
       </Button>
     </div>
