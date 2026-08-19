@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
-/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+
+body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -10,13 +22,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color1);
+  background: var(--primary);
+  border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text);
+  background: var(--span);
 }
 
 :root {

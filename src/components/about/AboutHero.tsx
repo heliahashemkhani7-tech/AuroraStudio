@@ -9,7 +9,7 @@ export default function AboutHero() {
   const isPersian = i18n.language === "fa";
 
   return (
-    <section className="md:grid flex flex-col justify-center gap-20 mt-5 h-screen items-center  md:gap-30 md:grid-cols-2">
+    <section className="md:grid flex flex-col justify-center gap-20 mt-5 h-screen items-center overflow-hidden md:gap-30 md:grid-cols-2">
       {/* Text */}
       <div className="flex flex-col items-start">
         <Badge className="text-span" variant="outline">
