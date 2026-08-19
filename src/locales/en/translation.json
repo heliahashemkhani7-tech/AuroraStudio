@@ -114,53 +114,54 @@
       }
     }
   },
+
   "nav": {
     "home": "Home",
     "about": "About",
-    "services": "Portfolio",
+    "portfolio": "Portfolio",
     "contact": "Contact"
   },
-    "about": {
-      "hero": {
-        "eyebrow": "OUR PHILOSOPHY",
-        "title": "Crafting Excellence",
-        "description": "We believe in the power of digital architecture. Every pixel, every interaction, and every line of code is an opportunity to build something enduring. We don't just design interfaces; we engineer digital atmospheres that resonate.",
-        "imageAlt": "Abstract architectural concept"
-      },
-  
-      "story": {
-        "title": "The Intersection of Design and Technology",
-        "paragraphs": [
-          "Aurora Studio was founded on a simple premise: technology should feel like magic, not mechanics. In a world saturated with templates and generic solutions, we sought to bring the principles of high-end industrial design and fine art into the digital realm.",
-          "Our journey began in the spaces between disciplines. We are a collective of designers who code and engineers who obsess over typography. We build for the discerning client who understands that true luxury lies in the flawless execution of invisible details."
-        ]
-      },
-  
-      "process": {
-        "eyebrow": "METHODOLOGY",
-        "title": "Our Process",
-        "steps": [
-          {
-            "title": "Discovery",
-            "description": "Uncovering the architectural intent and emotional core of your brand.",
-            "icon": "explore"
-          },
-          {
-            "title": "Design",
-            "description": "Translating concepts into precise, atmospheric visual systems.",
-            "icon": "design_services"
-          },
-          {
-            "title": "Development",
-            "description": "Engineering with rigorous attention to performance and fluidity.",
-            "icon": "code_blocks"
-          },
-          {
-            "title": "Launch",
-            "description": "Deployment and continuous refinement in the live environment.",
-            "icon": "rocket_launch"
-          }
-        ]
-      }
+
+  "about": {
+    "hero": {
+      "eyebrow": "OUR PHILOSOPHY",
+      "title": "Crafting Excellence",
+      "description": "We believe in the power of digital architecture. Every pixel, every interaction, and every line of code is an opportunity to build something enduring. We don't just design interfaces; we engineer digital atmospheres that resonate."
+    },
+
+    "story": {
+      "title": "The Intersection of Design and Technology",
+      "paragraphs": [
+        "Aurora Studio was founded on a simple premise: technology should feel like magic, not mechanics. In a world saturated with templates and generic solutions, we sought to bring the principles of high-end industrial design and fine art into the digital realm.",
+        "Our journey began in the spaces between disciplines. We are a collective of designers who code and engineers who obsess over typography. We build for the discerning client who understands that true luxury lies in the flawless execution of invisible details."
+      ]
+    },
+
+    "process": {
+      "eyebrow": "METHODOLOGY",
+      "title": "Our Process",
+      "steps": [
+        {
+          "title": "Discovery",
+          "description": "Uncovering the architectural intent and emotional core of your brand.",
+          "icon": "explore"
+        },
+        {
+          "title": "Design",
+          "description": "Translating concepts into precise, atmospheric visual systems.",
+          "icon": "design_services"
+        },
+        {
+          "title": "Development",
+          "description": "Engineering with rigorous attention to performance and fluidity.",
+          "icon": "code_blocks"
+        },
+        {
+          "title": "Launch",
+          "description": "Deployment and continuous refinement in the live environment.",
+          "icon": "rocket_launch"
+        }
+      ]
     }
+  }
 }

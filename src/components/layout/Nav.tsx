@@ -15,7 +15,7 @@ export default function Nav() {
       items={[
         { label: t("nav.home"), href: "/" },
         { label: t("nav.about"), href: "/about" },
-        { label: t("nav.services"), href: "/services" },
+        { label: t("nav.portfolio"), href: "/portfolio" },
         { label: t("nav.contact"), href: "/contact" },
       ]}
       activeHref={location.pathname}

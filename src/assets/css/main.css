@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color1);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text);
+}
+
 :root {
   --nav-base: #ff00f200;
   --nav-pill: #ffffff;
@@ -8,11 +27,14 @@
   --background: #ffffff;
   --border: #a7acb796;
   --seprator: #7f59d73c;
-  --hover-btn:#9ac3fb;
-
+  --hover-btn: #9ac3fb;
+  --separator: #00000039;
 
   --button-gradient: linear-gradient(135deg, #571bc1, #004395);
 
+  --color1: #bfbdbd;
+  --color2: #9ac3fb;
+  --color3: #7f46ca;
   /* Text */
   --text: #1a1c20;
   --span: #630ed4;
@@ -44,7 +66,8 @@
 .dark {
   --nav-hambur: #ffffff;
 
-  --hover-btn:var(--aurora-purple);
+  --hover-btn: var(--aurora-purple);
+  --separator: #ffffff21;
 
   --nav-pill: #120f17;
   --nav-text: #ffffff;
@@ -55,6 +78,10 @@
   --span: #adc6ff;
   --border: #a7acb796;
   --hero-description: #c6c6cb;
+
+  --color3: #1c2b3c;
+  --color1: #1c2b3c;
+  --color2: #212122;
 
   /* Brand */
   --primary: #8b5cf6;
@@ -78,12 +105,13 @@
 }
 
 @theme inline {
-  --color-hambur:var(--nav-hambur);
+  --color-hambur: var(--nav-hambur);
   --color-span: var(--span);
-  --color-hover:var(--hover-btn);
+  --color-hover: var(--hover-btn);
   --color-text: var(--text);
   --color-border: var(--border);
   --color-primary: var(--primary);
+  --color-separator: var(--separator);
   --color-secondary-container: var(--secondary-container);
 
   --color-aurora-purple: var(--aurora-purple);
@@ -104,4 +132,19 @@
   button {
     cursor: pointer;
   }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+.float-animation {
+  animation: float 5s ease-in-out infinite;
 }

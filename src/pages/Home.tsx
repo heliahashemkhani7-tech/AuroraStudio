@@ -1,4 +1,4 @@
-import Hero from "@/components/home/Hero";
+import Hero from "@/components/home/HomeHero";
 import Nav from "@/components/layout/Nav";
 
 function Home() {

@@ -1,7 +1,7 @@
 import Aurora from "../animiations/Aurora";
-import HeroContent from "./HeroContent";
-import HeroButtons from "./HeroButtons";
-import HeroStats from "./HeroStats";
+import HeroContent from "./HomeHeroContent";
+import HeroButtons from "./HomeHeroButtons";
+import HeroStats from "./HomeHeroStats";
 
 function Hero() {
   return (

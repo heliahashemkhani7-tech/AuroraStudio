@@ -261,7 +261,7 @@ const PillNav: React.FC<PillNavProps> = ({
   } as React.CSSProperties;
 
   return (
-    <div className="absolute top-[1em] left-1/2 -translate-x-1/2 z-[1000] md:w-auto">
+    <div className="fixed top-[1em] left-1/2 -translate-x-1/2 z-[1000] md:w-auto">
       {" "}
       <nav
         className={`flex backdrop-blur-xl border border-white/20 shadow-lg rounded-full w-[calc(100vw-2rem)] md:w-180 justify-between  ${className}`}
