@@ -2,7 +2,7 @@ import Grainient from "../animiations/Grainient";
 
 export default function GrainientBg() {
   return (
-    <div className="fixed w-full h-full">
+    <div className="fixed w-screen h-full">
       <Grainient
         color1="var(--color1)"
         color2="var(--color2)"

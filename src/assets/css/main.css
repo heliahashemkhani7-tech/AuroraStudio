@@ -9,7 +9,7 @@
 body {
   overflow-y: auto !important;
   overflow-x: hidden !important;
-}
+} 
 
 /* Custom Scrollbar */
 
@@ -30,7 +30,7 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--span);
-}
+} 
 
 :root {
   --nav-base: #ff00f200;

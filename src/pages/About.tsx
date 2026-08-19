@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 
 export default function About() {
   return (
-    <main className="relative overflow-x-hidden  text-text flex  items-center px-5">
+    <main className="relative overflow-hidden text-text flex items-center px-5">
       <div className="relative z-10 flex flex-col gap-5">
         <AboutHero />
         <Separator className="max-x-full h-0.5 bg-separator" />

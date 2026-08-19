@@ -9,7 +9,7 @@ export default function AboutStory() {
   }) as string[];
 
   return (
-    <section className="h-screen flex flex-col  md:flex-row justify-center items-center gap-20 overflow-hidden">
+    <section className="h-screen flex flex-col  md:flex-row justify-center items-center gap-20">
       <h2 className="text-span  text-2xl md:text-5xl max-w-xl">
         {t("about.story.title")}
       </h2>
