@@ -38,7 +38,7 @@ body {
   --nav-hambur: #000000;
   --nav-text: #000000;
   --background: #ffffff;
-  --border: #a7acb796;
+  --border: #a7acb7;
   --seprator: #7f59d73c;
   --hover-btn: #9ac3fb;
   --separator: #00000039;
@@ -142,7 +142,7 @@ body {
 }
 
 @layer base {
-  button {
+  button  {
     cursor: pointer;
   }
 }

@@ -1,15 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Nav from "./Nav";
 import GrainientBg from "../ui/GrainientBg";
-// import Footer from "./Footer";
+import Footer from "./Footer";
 
 export default function DefaultLayout() {
+  const location = useLocation();
+
   return (
-    <div>
+    <div className="flex flex-col gap-50">
       <GrainientBg />
       <Nav />
       <Outlet />
-      {/* <Footer /> */}
+      {location.pathname !== "/" && <Footer />}
     </div>
   );
 }

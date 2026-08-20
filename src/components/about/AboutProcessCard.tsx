@@ -34,7 +34,7 @@ export default function AboutProcessCard() {
             speed={5}
             chaos={0}
           >
-            <Card className="h-50 md:max-w-80">
+            <Card className="h-50 md:max-w-80 bg-glass-bg">
               <CardContent className="h-full">
                 <div className="flex h-full max-w-xs flex-col justify-around">
                   <Icon
