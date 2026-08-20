@@ -8,10 +8,13 @@ export default function DefaultLayout() {
 
   return (
     <div className="flex flex-col gap-50">
-      <GrainientBg />
       <Nav />
       <Outlet />
-      {location.pathname !== "/" && <Footer />}
+      {location.pathname !== "/" && (
+        <>
+          <GrainientBg /> <Footer />
+        </>
+      )}
     </div>
   );
 }
