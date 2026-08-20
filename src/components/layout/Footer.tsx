@@ -16,7 +16,7 @@ export default function Footer() {
         <Icon icon="mdi:twitter" className="cursor-pointer" width="24" />
       </div>
 
-      <p className="mt-5 text-xs sm:text-xl">{footerData.copyright}</p>
+      <p className="mt-5 text-xs">{footerData.copyright}</p>
     </footer>
   );
 }
