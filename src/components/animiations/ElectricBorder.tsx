@@ -399,7 +399,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
         <div
           className="absolute inset-0 rounded-[inherit] pointer-events-none"
           style={{
-            border: `2px solid ${hexToRgba(actualColor, 0.6)}`,
+            border: `1px solid ${hexToRgba(actualColor, 0.6)}`,
             filter: "blur(1px)",
           }}
         />

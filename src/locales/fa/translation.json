@@ -34,39 +34,54 @@
       "description": "منتخبی از تأثیرگذارترین تجربه‌های دیجیتال ما. ما به‌جای کمیت، روی کیفیت تمرکز می‌کنیم و پروژه‌هایی را انتخاب می‌کنیم که نیازمند دقت معماری و عمق بصری هستند."
     },
     "filters": {
-      "all": "همه",
-      "websites": "وب‌سایت‌ها",
-      "ecommerce": "فروشگاه اینترنتی",
-      "dashboards": "داشبوردها",
-      "uiux": "UI/UX"
+      "all": {
+        "label": "همه",
+        "value": "all"
+      },
+      "websites": {
+        "label": "وب‌سایت‌ها",
+        "value": "websites"
+      },
+      "ecommerce": {
+        "label": "فروشگاه اینترنتی",
+        "value": "ecommerce"
+      },
+      "dashboards": {
+        "label": "داشبورد",
+        "value": "dashboards"
+      },
+      "uiux": {
+        "label": "UI/UX",
+        "value": "uiux"
+      }
     },
     "projects": [
       {
         "id": "nexus-analytics",
         "title": "Nexus Analytics",
         "description": "رابط کاربری معاملات با فرکانس بالا.",
-        "category": "داشبورد",
+        "category": "dashboards",
         "technology": "React"
       },
       {
         "id": "aura-timepieces",
         "title": "Aura Timepieces",
         "description": "تجربه دیجیتال یک بوتیک لوکس.",
-        "category": "فروشگاه اینترنتی",
+        "category": "ecommerce",
         "technology": "Next.js"
       },
       {
         "id": "void-architecture",
         "title": "Void Architecture",
         "description": "تجربه‌ای تعاملی برای کاوش ساختارهای سه‌بعدی.",
-        "category": "وب‌سایت",
+        "category": "websites",
         "technology": "Three.js"
       },
       {
         "id": "lumina-smart-app",
         "title": "Lumina Smart App",
         "description": "رابط کنترل هوشمند محیط.",
-        "category": "UI/UX",
+        "category": "uiux",
         "technology": "Figma"
       }
     ]
