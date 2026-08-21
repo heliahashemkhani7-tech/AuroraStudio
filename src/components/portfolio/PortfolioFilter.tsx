@@ -24,19 +24,27 @@ export default function PortfolioFilter({
   ) as Filter[];
 
   return (
-    <ToggleGroup
-      value={[activeFilter]}
-      onValueChange={(value) => {
-        if (value.length > 0) {
-          setActiveFilter(value[0]);
-        }
-      }}
-    >
-      {filters.map((filter) => (
-        <ToggleGroupItem key={filter.value} value={filter.value}>
-          {filter.label}
-        </ToggleGroupItem>
-      ))}
-    </ToggleGroup>
+    <div className="flex justify-center w-full">
+      <ToggleGroup
+        variant={"outline"}
+        value={[activeFilter]}
+        onValueChange={(value) => {
+          if (value.length > 0) {
+            setActiveFilter(value[0]);
+          }
+        }}
+        className="flex flex-wrap justify-center gap-2 w-full max-w-2xl mx-auto"
+      >
+        {filters.map((filter) => (
+          <ToggleGroupItem
+            className="rounded-xl px-5 py-2 data-[pressed]:bg-border data-[pressed]:text-text data-[pressed]:border-border"
+            key={filter.value}
+            value={filter.value}
+          >
+            {filter.label}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
+    </div>
   );
 }
