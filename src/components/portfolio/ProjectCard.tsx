@@ -19,15 +19,15 @@ type Props = {
 export default function ProjectCard({ project, index }: Props) {
   return (
     <ElectricBorder
-      className={` md:w-90 cursor-pointer transition-transform duration-500 hover:-scale-x-100 max-w-xs mx-5  md:max-w-xl ${
-        index % 2 === 0 ? "md:h-[350px]" : "md:h-[300px]"
+      className={`my-2 md:w-90 cursor-pointer transition-transform duration-500 hover:-scale-x-100 max-w-xs mx-5  md:max-w-xl ${
+        index % 2 === 0 ? "md:h-[330px]" : "md:h-[300px]"
       }`}
       color="var(--border)"
       chaos={0.03}
     >
       <Card
         className={`flex justify-between [--card-spacing:0] relative  h-[250px] 
-        ${index % 2 === 0 ? "md:h-[350px]" : "md:h-[300px]"}`}
+        ${index % 2 === 0 ? "md:h-[330px]" : "md:h-[300px]"}`}
       >
         <div className="relative">
           <img
@@ -38,15 +38,15 @@ export default function ProjectCard({ project, index }: Props) {
         </div>
 
         <CardContent
-          className={` top-35  md:top-45  absolute ltr:left-3 rtl:right- flex flex-col gap-2`}
+          className={` top-35  md:top-45  absolute pl-5 ltr:left-3 rtl:right-3 lex flex-col gap-2 w-full`}
         >
-          <div className="flex gap-2 text-white">
-            <Badge className="text-badge-text">{project.category}</Badge>
+          <div className="flex gap-2 text-white w-full" dir="ltr">
+            <Badge dir="ltr" className="text-badge-text">{project.category}</Badge>
 
             <Badge className="bg-badge-dark">{project.technology}</Badge>
           </div>
 
-          <h3 className="text-xl font-semibold text-text mb-2">
+          <h3 className="text-xl font-semibold text-text mb-2" dir="ltr">
             {project.title}
           </h3>
 
