@@ -26,7 +26,7 @@ export default function Portfolio() {
       : projects.filter((project) => project.category === activeFilter);
 
   return (
-    <main className="z-10 text-text flex flex-col overflow-hidden">
+    <main className="z-10 text-text flex flex-col overflow-hidden mt-10">
       <PortfolioHero />
 
       <PortfolioFilter
@@ -34,7 +34,7 @@ export default function Portfolio() {
         setActiveFilter={setActiveFilter}
       />
 
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-y-8 justify-items-center mt-8 w-full max-w-4xl mx-auto items-end">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-y-8 justify-items-center mt-8 w-full  md:max-w-4xl mx-auto items-end">
         {" "}
         {filteredProjects.map((project, index) => (
           <ProjectCard key={project.title} project={project} index={index} />

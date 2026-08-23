@@ -19,14 +19,14 @@ type Props = {
 export default function ProjectCard({ project, index }: Props) {
   return (
     <ElectricBorder
-      className={` w-96  cursor-pointer transition-transform duration-500 hover:-scale-x-100 msx-w-xs md:max-w-xl ${
+      className={` w-96  cursor-pointer transition-transform duration-500 hover:-scale-x-100 max-w-xs md:max-w-xl ${
         index % 2 === 0 ? "h-[350px]" : "h-[300px]"
       }`}
       color="var(--primary)"
       chaos={0}
     >
       <Card
-        className={`flex justify-between [--card-spacing:0] relative w-full
+        className={`flex justify-between [--card-spacing:0] relative md:w-full
         ${index % 2 === 0 ? "h-[350px]" : "h-[300px]"}`}
       >
         <div className="relative">
