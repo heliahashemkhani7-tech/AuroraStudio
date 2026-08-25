@@ -178,5 +178,61 @@
         }
       ]
     }
+  },
+
+  "contact": {
+    "hero": {
+      "title": "Let's Build Something Great.",
+      "description": "Ready to elevate your digital presence? We collaborate with visionary brands to create immersive experiences that leave a lasting impact."
+    },
+    "form": {
+      "title": "Get in Touch",
+      "name": {
+        "label": "Name",
+        "placeholder": "Helia Hashemkhani"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Helia@example.com"
+      },
+      "projectType": {
+        "label": "Project Type",
+        "placeholder": "Select an option",
+        "options": {
+          "webDesign": "Web Design",
+          "webDevelopment": "Web Development",
+          "branding": "Branding",
+          "uiUx": "UI/UX Design",
+          "other": "Other"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell us about your vision..."
+      },
+      "submit": "Send Message"
+    },
+    "info": {
+      "email": {
+        "label": "Email Us",
+        "value": "hello@aurorastudio.com"
+      },
+      "studio": {
+        "label": "Studio",
+        "address": {
+          "line1": "123 Design Avenue",
+          "line2": "Creative District, NY 10001"
+        }
+      }
+    },
+    "connect": {
+      "title": "Connect",
+      "socials": {
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn",
+        "dribbble": "Dribbble",
+        "twitter": "Twitter"
+      }
+    }
   }
 }
