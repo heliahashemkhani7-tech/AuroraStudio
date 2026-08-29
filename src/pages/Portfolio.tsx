@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import PortfolioFilter from "@/components/portfolio/PortfolioFilter";
 import PortfolioHero from "@/components/portfolio/PortfolioHero";
 import ProjectCard from "@/components/portfolio/ProjectCard";
+import Container from "@/components/layout/Container";
 
 export default function Portfolio() {
   const { t } = useTranslation();
@@ -18,6 +19,7 @@ export default function Portfolio() {
     technology: string;
     description: string;
     link: string;
+    id: number;
   }[];
 
   const filteredProjects =
@@ -26,20 +28,22 @@ export default function Portfolio() {
       : projects.filter((project) => project.category === activeFilter);
 
   return (
-    <main className="z-10 text-text flex flex-col w-screen overflow-hidden mt-10">
-      <PortfolioHero />
+    <Container className="flex items-center">
+        <div className="z-10 text-text flex flex-col w-screen overflow-hidden mt-10">
+          <PortfolioHero />
 
-      <PortfolioFilter
-        activeFilter={activeFilter}
-        setActiveFilter={setActiveFilter}
-      />
+          <PortfolioFilter
+            activeFilter={activeFilter}
+            setActiveFilter={setActiveFilter}
+          />
 
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-y-7 gap-x-0 overflow-hidden justify-items-center mt-8 w-full md:max-w-4xl mx-auto items-end">
-        {" "}
-        {filteredProjects.map((project, index) => (
-          <ProjectCard key={project.title} project={project} index={index} />
-        ))}
-      </section>
-    </main>
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-y-7 gap-x-0 overflow-hidden justify-items-center mt-8 w-full mx-auto items-end">
+            {" "}
+            {filteredProjects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
+          </section>
+        </div>
+    </Container>
   );
 }

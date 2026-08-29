@@ -16,7 +16,7 @@ export default function ContactForm() {
   const { t } = useTranslation();
 
   return (
-    <div className="w-200 rounded-xl  border-primary border-3 bg-glass-bg p-6 md:p-7">
+    <div className=" rounded-xl  border-primary border-3 bg-glass-bg p-6 md:p-7">
       <form className="space-y-5">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div className="space-y-2">
@@ -31,7 +31,7 @@ export default function ContactForm() {
               id="name"
               type="text"
               placeholder={t("contact.form.name.placeholder")}
-              className="h-10 border-primary border-2 bg-background text-text placeholder:text-muted-foreground focus:border-4 focus:border-text"
+              className="h-10 border-primary border-2 bg-background text-text placeholder:text-muted-foreground"
             />
           </div>
 
@@ -47,7 +47,7 @@ export default function ContactForm() {
               id="email"
               type="email"
               placeholder={t("contact.form.email.placeholder")}
-              className="h-10 border-primary border-2 bg-background text-text placeholder:text-muted-foreground focus:border-4 focus:border-text"
+              className="h-10 border-primary border-2 bg-background text-text placeholder:text-muted-foreground"
             />
           </div>
         </div>
@@ -70,25 +70,28 @@ export default function ContactForm() {
               />
             </SelectTrigger>
 
-            <SelectContent>
-              <SelectItem value="webDesign">
+            <SelectContent className="bg-primary  text-white">
+              <SelectItem
+                value={t("contact.form.projectType.options.webDesign")}
+                className="h-10 w-full border-primary border-2 bg-background text-text"
+              >
                 {t("contact.form.projectType.options.webDesign")}
               </SelectItem>
 
-              <SelectItem value="webDevelopment">
+              <SelectItem
+                value={t("contact.form.projectType.options.webDevelopment")}
+              >
                 {t("contact.form.projectType.options.webDevelopment")}
               </SelectItem>
 
-              <SelectItem value="branding">
+              <SelectItem
+                value={t("contact.form.projectType.options.branding")}
+              >
                 {t("contact.form.projectType.options.branding")}
               </SelectItem>
 
-              <SelectItem value="uiUx">
+              <SelectItem value={t("contact.form.projectType.options.uiUx")}>
                 {t("contact.form.projectType.options.uiUx")}
-              </SelectItem>
-
-              <SelectItem value="other">
-                {t("contact.form.projectType.options.other")}
               </SelectItem>
             </SelectContent>
           </Select>
@@ -105,7 +108,7 @@ export default function ContactForm() {
           <Textarea
             id="message"
             placeholder={t("contact.form.message.placeholder")}
-            className="min-h-[101px] resize-none border-primary border-2 bg-background text-text placeholder:text-muted-foreground focus:border-4 focus:border-text"
+            className="min-h-[101px] resize-none border-primary border-2 bg-background text-text placeholder:text-muted-foreground"
           />
         </div>
 

@@ -264,7 +264,8 @@ const PillNav: React.FC<PillNavProps> = ({
     <div className="fixed top-[1em] left-1/2 -translate-x-1/2 z-[1000] md:w-auto">
       {" "}
       <nav
-        className={`flex backdrop-blur-xl border border-white/20 shadow-lg rounded-full w-[calc(100vw-2rem)] md:w-180 justify-between  ${className}`}
+        dir="ltr"
+        className={`container max-w-7xl flex backdrop-blur-xl border border-white/20 shadow-lg rounded-full w-[calc(100vw-2rem)]  justify-between  ${className}`}
         style={{
           ...cssVars,
           background: "var(--base)",
@@ -279,9 +280,8 @@ const PillNav: React.FC<PillNavProps> = ({
             ref={(el) => {
               logoRef.current = el;
             }}
-            className="p-2 inline-flex overflow-hidden"
+            className="flex"
             style={{
-              width: "var(--nav-h)",
               height: "var(--nav-h)",
             }}
           >
@@ -289,8 +289,11 @@ const PillNav: React.FC<PillNavProps> = ({
               src={logo}
               alt={logoAlt}
               ref={logoImgRef}
-              className="w-full h-full object-cover block"
+              className="object-cover"
             />
+            <p className="text-span items-end md:flex hidden font-bold">
+              urora Studio
+            </p>
           </Link>
         ) : (
           <a

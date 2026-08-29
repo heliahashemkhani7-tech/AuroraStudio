@@ -31,9 +31,7 @@ export default function AboutHero() {
           />
         </div>
 
-        <p className="mt-4 max-w-3xl  text-xs lg:text-xl text-text">
-          {t("about.hero.description")}
-        </p>
+        <p className="mt-4 text-xs lg:text-xl w-full text-text">{t("about.hero.description")}</p>
       </div>
 
       <div className="w-full flex justify-center float-animation ">
