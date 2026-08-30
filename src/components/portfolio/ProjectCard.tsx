@@ -56,7 +56,7 @@ export default function ProjectCard({ project, index }: Props) {
         {/* ================= FRONT ================= */}
         <ElectricBorder
           className={`my-2 cursor-pointer max-w-xs mx-5 md:max-w-xl ${getHeight()}`}
-          color="var(--border)"
+          color="var(--text)"
           chaos={0.03}
         >
           <Card
@@ -128,7 +128,7 @@ export default function ProjectCard({ project, index }: Props) {
                 justify-end
                 gap-3
                 p-5
-              "
+"
           >
             <h3 className="text-2xl font-semibold text-span">
               {project.title}

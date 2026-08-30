@@ -29,13 +29,13 @@ export default function ContactSocials() {
   const { t } = useTranslation();
 
   return (
-    <Card className="border-2 border-border">
+    <Card className="border-2 border-text bg-card-bg ring-0">
       <CardContent>
         <h2 className="mb-8 text-2xl font-semibold text-text">
           {t("contact.connect.title")}
         </h2>
 
-        <div className="grid grid-cols-2 gap-x-10 gap-y-5">
+        <div className="grid sm:grid-cols-2 gap-x-10 gap-y-5">
           {socials.map((social) => (
             <a
               key={social.key}

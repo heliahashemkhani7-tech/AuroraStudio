@@ -7,7 +7,7 @@ export default function AboutProcess() {
   const { t } = useTranslation();
 
   return (
-    <section className="flex flex-col  justify-center gap-10 h-fit overflow-hidden">
+    <section className="flex flex-col  justify-center gap-10 h-fit overflow-hidden p-2">
       <div className="flex flex-col gap-5 px-5">
         <Badge className="text-span" variant="outline">
           {t("about.process.eyebrow")}

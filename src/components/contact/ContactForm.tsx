@@ -17,8 +17,10 @@ export default function ContactForm() {
   const { t } = useTranslation();
 
   return (
-    <ElectricBorder>
-      <div className=" rounded-xl  border-primary bg-glass-bg p-6 md:p-7">
+    <ElectricBorder 
+    className="bg-glass-bg "
+    chaos={0.02}>
+      <div className="p-6 md:p-7">
         <form className="space-y-5">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div className="space-y-2">
