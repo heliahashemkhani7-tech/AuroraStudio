@@ -19,6 +19,7 @@ export default function Portfolio() {
     technology: string;
     description: string;
     link: string;
+    detail:string;
     id: number;
   }[];
 
@@ -29,21 +30,21 @@ export default function Portfolio() {
 
   return (
     <Container className="flex items-center">
-        <div className="z-10 text-text flex flex-col w-screen overflow-hidden mt-10">
-          <PortfolioHero />
+      <div className="z-10 text-text flex flex-col w-screen overflow-hidden mt-10">
+        <PortfolioHero />
 
-          <PortfolioFilter
-            activeFilter={activeFilter}
-            setActiveFilter={setActiveFilter}
-          />
+        <PortfolioFilter
+          activeFilter={activeFilter}
+          setActiveFilter={setActiveFilter}
+        />
 
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-y-7 gap-x-0 overflow-hidden justify-items-center mt-8 w-full mx-auto items-end">
-            {" "}
-            {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </section>
-        </div>
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-y-7 p-4 gap-x-0 overflow-hidden justify-items-center mt-8 w-full mx-auto items-center">
+          {" "}
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </section>
+      </div>
     </Container>
   );
 }

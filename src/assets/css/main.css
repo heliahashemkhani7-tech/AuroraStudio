@@ -5,11 +5,10 @@
   scrollbar-color: var(--primary) transparent;
 }
 
-
 body {
   overflow-y: auto !important;
   overflow-x: hidden !important;
-} 
+}
 
 /* Custom Scrollbar */
 
@@ -30,7 +29,7 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--span);
-} 
+}
 
 :root {
   --nav-base: #ff00f200;
@@ -42,9 +41,10 @@ body {
   --seprator: #7f59d73c;
   --hover-btn: #9ac3fb;
   --separator: #00000039;
-  --badge-dark:#45474bc6;
---badge-text:#ddc3ff;
+  --badge-dark: #45474bc6;
+  --badge-text: #ddc3ff;
   --button-gradient: linear-gradient(135deg, #571bc1, #004395);
+  --back-card: #ffffffaa;
 
   --color1: #bfbdbd;
   --color2: #9ac3fb;
@@ -65,7 +65,8 @@ body {
   --aurora-white: #829bc4;
 
   /* Glass */
-  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-bg: #c79cff68;
+  --card: rgba(255, 255, 255, 0.386);
   --glass-border: rgba(0, 0, 0, 0.05);
 
   /* Shadow / Glow */
@@ -86,6 +87,9 @@ body {
   --nav-pill: #120f17;
   --nav-text: #ffffff;
   --background: #000000;
+
+  --back-card: #000000c4;
+  --card: #2b2b2b83;
 
   /* Text */
   --text: #d4e4fa;
@@ -127,9 +131,12 @@ body {
   --color-primary: var(--primary);
   --color-separator: var(--separator);
   --color-secondary-container: var(--secondary-container);
-  --color-badge-dark:var(--badge-dark);
+  --color-badge-dark: var(--badge-dark);
 
-  --color-badge-text:var(--badge-text);
+  --color-back-card: var(--back-card);
+  --color-card-bg: var(--card);
+
+  --color-badge-text: var(--badge-text);
 
   --color-aurora-purple: var(--aurora-purple);
   --color-aurora-blue: var(--aurora-blue);
@@ -146,7 +153,7 @@ body {
 }
 
 @layer base {
-  button  {
+  button {
     cursor: pointer;
   }
 }

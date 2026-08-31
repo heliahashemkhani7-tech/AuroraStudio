@@ -152,6 +152,42 @@ const PillNav: React.FC<PillNavProps> = ({
     return () => window.removeEventListener("resize", onResize);
   }, [items, ease, initialLoadAnimation]);
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+
+    const hamburger = hamburgerRef.current;
+    const menu = mobileMenuRef.current;
+
+    if (hamburger) {
+      const lines = hamburger.querySelectorAll(".hamburger-line");
+
+      gsap.to(lines[0], {
+        rotation: 0,
+        y: 0,
+        duration: 0.3,
+        ease,
+      });
+
+      gsap.to(lines[1], {
+        rotation: 0,
+        y: 0,
+        duration: 0.3,
+        ease,
+      });
+    }
+
+    if (menu) {
+      gsap.to(menu, {
+        opacity: 0,
+        y: 10,
+        duration: 0.2,
+        ease,
+        onComplete: () => {
+          gsap.set(menu, { visibility: "hidden" });
+        },
+      });
+    }
+  };
   const handleEnter = (i: number) => {
     const tl = tlRefs.current[i];
     if (!tl) return;
@@ -478,7 +514,7 @@ const PillNav: React.FC<PillNavProps> = ({
                     style={defaultStyle}
                     onMouseEnter={hoverIn}
                     onMouseLeave={hoverOut}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={closeMobileMenu}
                   >
                     {item.label}
                   </Link>
