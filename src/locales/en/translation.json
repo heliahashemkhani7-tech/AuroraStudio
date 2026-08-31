@@ -55,7 +55,6 @@
         "value": "uiux"
       }
     },
-
     "projects": [
       {
         "id": 2,
@@ -66,18 +65,15 @@
         "category": "dashboards",
         "technology": "React",
         "link": "/imgs/nexus.png",
-
         "card": [
           {
             "label": "CLIENT",
             "value": "Lumina Financial Group"
           },
-
           {
             "label": "ROLE",
             "value": "UI/UX Design, Frontend Development"
           },
-
           {
             "label": "YEAR",
             "value": "2024"
@@ -89,19 +85,15 @@
         },
         "overview": {
           "title": "Project Overview",
-
           "paragraphs": [
             "Lumina Wealth required a complete digital transformation to align their wealth management platform with the expectations of high-net-worth individuals. The goal was to translate complex financial data into an intuitive, visually serene experience. We applied our signature minimalist glassmorphism style to create an interface that feels less like a spreadsheet and more like a high-end instrument.",
-
             "The challenge involved overhauling the legacy data architecture while introducing a modern dark-mode aesthetic that reduces eye strain during prolonged analysis, using subtle atmospheric glows to highlight critical portfolio shifts."
           ],
-
           "button": {
             "text": "VISIT LIVE WEBSITE",
             "link": "#"
           }
         },
-
         "highlights": {
           "title": "Design Highlights",
           "links": [
@@ -120,23 +112,42 @@
         "category": "ecommerce",
         "technology": "Next.js",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b",
-        "client": "Aura Watches",
-        "role": "UI/UX Design, Frontend Development",
-        "year": "2025",
-        "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-        "overview": "Aura Timepieces is a premium digital experience created for a contemporary luxury watch brand. The design focuses on creating a sense of exclusivity through sophisticated typography, immersive product imagery, generous spacing, and a minimal visual language. The browsing experience was carefully designed to make every product feel like a collectible piece rather than a standard ecommerce item.",
-        "highlights": [
+        "card": [
           {
-            "title": "Luxury Product Experience",
-            "description": "Large product imagery and refined typography create an immersive presentation for each timepiece.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b"
+            "label": "CLIENT",
+            "value": "Aura Watches"
           },
           {
-            "title": "Seamless Product Browsing",
-            "description": "A clean navigation system allows users to explore collections and individual watches with minimal friction.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b"
+            "label": "ROLE",
+            "value": "UI/UX Design, Frontend Development"
+          },
+          {
+            "label": "YEAR",
+            "value": "2025"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "TECH STACK",
+          "items": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]
+        },
+        "overview": {
+          "title": "Project Overview",
+          "paragraphs": [
+            "Aura Timepieces is a premium digital experience created for a contemporary luxury watch brand. The design focuses on creating a sense of exclusivity through sophisticated typography, immersive product imagery, generous spacing, and a minimal visual language.",
+            "The browsing experience was carefully designed to make every product feel like a collectible piece rather than a standard ecommerce item."
+          ],
+          "button": {
+            "text": "VISIT LIVE WEBSITE",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "Design Highlights",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b"
+          ]
+        }
       },
 
       {
@@ -148,23 +159,42 @@
         "category": "websites",
         "technology": "Three.js",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
-        "client": "Void Architects",
-        "role": "Creative Development, 3D Interaction",
-        "year": "2024",
-        "techStack": ["Three.js", "React", "TypeScript", "WebGL"],
-        "overview": "Void Architecture explores how digital experiences can transform the way architectural concepts are presented. Instead of relying on traditional galleries and static layouts, the project introduces an interactive 3D environment where users can explore architectural forms, spaces, and structural details. The experience combines cinematic visuals with subtle interactions to create a sense of depth and discovery.",
-        "highlights": [
+        "card": [
           {
-            "title": "Interactive 3D Environment",
-            "description": "Three-dimensional architectural elements create an immersive environment that users can explore interactively.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+            "label": "CLIENT",
+            "value": "Void Architects"
           },
           {
-            "title": "Spatial Storytelling",
-            "description": "The interface uses movement, depth, and composition to communicate architectural concepts beyond static imagery.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+            "label": "ROLE",
+            "value": "Creative Development, 3D Interaction"
+          },
+          {
+            "label": "YEAR",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "TECH STACK",
+          "items": ["Three.js", "React", "TypeScript", "WebGL"]
+        },
+        "overview": {
+          "title": "Project Overview",
+          "paragraphs": [
+            "Void Architecture explores how digital experiences can transform the way architectural concepts are presented. Instead of relying on traditional galleries and static layouts, the project introduces an interactive 3D environment where users can explore architectural forms, spaces, and structural details.",
+            "The experience combines cinematic visuals with subtle interactions to create a sense of depth and discovery."
+          ],
+          "button": {
+            "text": "VISIT LIVE WEBSITE",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "Design Highlights",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+          ]
+        }
       },
 
       {
@@ -176,23 +206,42 @@
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-        "client": "Lumina Home",
-        "role": "Product Design, UI/UX Design",
-        "year": "2024",
-        "techStack": ["Figma", "Prototyping", "UI/UX Design", "Design System"],
-        "overview": "Lumina Smart App is a modern smart home control experience designed to bring everyday environmental controls into one intuitive interface. The product allows users to manage lighting, temperature, energy consumption, and connected devices without navigating through complicated menus. The visual system combines a calm interface with clear information hierarchy to make everyday interactions feel effortless.",
-        "highlights": [
+        "card": [
           {
-            "title": "Smart Home Control",
-            "description": "Lighting, temperature, energy usage, and connected devices are organized into a single unified control experience.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "CLIENT",
+            "value": "Lumina Home"
           },
           {
-            "title": "Clear Information Hierarchy",
-            "description": "Important environmental information is presented through simple visual patterns that are easy to understand at a glance.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "ROLE",
+            "value": "Product Design, UI/UX Design"
+          },
+          {
+            "label": "YEAR",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "TECH STACK",
+          "items": ["Figma", "Prototyping", "UI/UX Design", "Design System"]
+        },
+        "overview": {
+          "title": "Project Overview",
+          "paragraphs": [
+            "Lumina Smart App is a modern smart home control experience designed to bring everyday environmental controls into one intuitive interface. The product allows users to manage lighting, temperature, energy consumption, and connected devices without navigating through complicated menus.",
+            "The visual system combines a calm interface with clear information hierarchy to make everyday interactions feel effortless."
+          ],
+          "button": {
+            "text": "VISIT LIVE WEBSITE",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "Design Highlights",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+          ]
+        }
       },
 
       {
@@ -204,23 +253,42 @@
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-        "client": "Lumina Living",
-        "role": "UX Design, Interaction Design",
-        "year": "2024",
-        "techStack": ["Figma", "Prototyping", "UI/UX Design", "Accessibility"],
-        "overview": "This version of the Lumina Smart App focuses on accessibility and effortless interaction. The goal was to create an interface that could be understood quickly by users with different levels of technical familiarity. Clear controls, strong visual hierarchy, readable information, and predictable interactions form the foundation of the experience.",
-        "highlights": [
+        "card": [
           {
-            "title": "Accessible Interface",
-            "description": "The interface uses clear controls, readable typography, and predictable interaction patterns to improve usability.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "CLIENT",
+            "value": "Lumina Living"
           },
           {
-            "title": "Effortless Interactions",
-            "description": "Common smart-home actions are simplified into intuitive controls that require minimal navigation.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "ROLE",
+            "value": "UX Design, Interaction Design"
+          },
+          {
+            "label": "YEAR",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "TECH STACK",
+          "items": ["Figma", "Prototyping", "UI/UX Design", "Accessibility"]
+        },
+        "overview": {
+          "title": "Project Overview",
+          "paragraphs": [
+            "This version of the Lumina Smart App focuses on accessibility and effortless interaction. The goal was to create an interface that could be understood quickly by users with different levels of technical familiarity.",
+            "Clear controls, strong visual hierarchy, readable information, and predictable interactions form the foundation of the experience."
+          ],
+          "button": {
+            "text": "VISIT LIVE WEBSITE",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "Design Highlights",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+          ]
+        }
       },
 
       {
@@ -232,25 +300,45 @@
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-        "client": "Lumina Technologies",
-        "role": "Mobile UI/UX Design",
-        "year": "2024",
-        "techStack": ["Figma", "Mobile Design", "Prototyping", "UI/UX Design"],
-        "overview": "Lumina Smart App explores a mobile-first approach to intelligent environmental management. The experience was designed around quick interactions, allowing users to monitor their surroundings and control connected devices without unnecessary steps. The visual direction combines a calm aesthetic with responsive components and a strong focus on usability.",
-        "highlights": [
+        "card": [
           {
-            "title": "Mobile-first Experience",
-            "description": "The interface is designed specifically around touch interactions and quick access to the most important controls.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "CLIENT",
+            "value": "Lumina Technologies"
           },
           {
-            "title": "Calm Visual System",
-            "description": "A clean visual language reduces cognitive load while keeping environmental information easy to understand.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "ROLE",
+            "value": "Mobile UI/UX Design"
+          },
+          {
+            "label": "YEAR",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "TECH STACK",
+          "items": ["Figma", "Mobile Design", "Prototyping", "UI/UX Design"]
+        },
+        "overview": {
+          "title": "Project Overview",
+          "paragraphs": [
+            "Lumina Smart App explores a mobile-first approach to intelligent environmental management. The experience was designed around quick interactions, allowing users to monitor their surroundings and control connected devices without unnecessary steps.",
+            "The visual direction combines a calm aesthetic with responsive components and a strong focus on usability."
+          ],
+          "button": {
+            "text": "VISIT LIVE WEBSITE",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "Design Highlights",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+          ]
+        }
       }
     ],
+
     "btn": "View Project"
   },
 
