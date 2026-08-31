@@ -14,13 +14,40 @@ export default function Portfolio() {
   const projects = t("portfolio.projects", {
     returnObjects: true,
   }) as {
+    id: number;
+    slug: string;
     title: string;
+    description: string;
+    detail: string;
     category: string;
     technology: string;
-    description: string;
     link: string;
-    detail:string;
-    id: number;
+
+    card: {
+      label: string;
+      value: string;
+    }[];
+
+    client: string;
+    role: string;
+    year: string;
+
+    techStack: {
+      label: string;
+      items: string[];
+    };
+
+    overview: {
+      title: string;
+      paragraphs: string[];
+      button: {
+        text: string;
+      };
+    };
+    highlights: {
+      title: string;
+      links: string[];
+    };
   }[];
 
   const filteredProjects =
