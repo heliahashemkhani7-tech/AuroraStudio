@@ -35,6 +35,7 @@ export default function ProjectCard({ project, index }: Props) {
   return (
     <div
       className="
+      
           relative
           h-[250px]
           lg:h-full
@@ -71,7 +72,7 @@ export default function ProjectCard({ project, index }: Props) {
             </div>
 
             <CardContent
-              className={`top-35 md:top-30 lg:top-45 absolute pl-8 rtl:right-3 flex flex-col gap-2   w-full`}
+              className={`top-30 md:top-30 lg:top-45 absolute pl-8 rtl:right-3 flex flex-col gap-2   w-full`}
             >
               <div className="flex gap-2 text-white w-full mb-2" dir="ltr">
                 <Badge dir="ltr" className="text-badge-text">

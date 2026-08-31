@@ -38,7 +38,7 @@ export default function Portfolio() {
           setActiveFilter={setActiveFilter}
         />
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-y-7 px-4 gap-x-0 overflow-hidden justify-items-center mt-8 w-full mx-auto items-center">
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-y-7 p-4 gap-x-0 overflow-hidden justify-items-center mt-8 w-full mx-auto items-center">
           {" "}
           {filteredProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
