@@ -36,7 +36,7 @@ export default function AboutHero() {
 
       <div className="w-full flex justify-center float-animation ">
         <TiltedCard
-          imageSrc="/imgs/ChatGPT Image Aug 19, 2026, 12_01_14 PM.png"
+          imageSrc="/imgs/about.png"
           containerWidth="min(85vw, 400px)"
           containerHeight="min(50vw, 400px)"
           imageWidth="min(85vw, 500px)"
