@@ -22,7 +22,7 @@ export default function AboutProcessCard() {
   }[];
 
   return (
-    <div className="grid gap-5 grid-cols-2 md:flex md:flex-row md:justify-around">
+    <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:flex md:flex-row md:justify-around">
       {steps.map((step, index) => {
         const Icon = icons[step.icon];
 
@@ -48,7 +48,7 @@ export default function AboutProcessCard() {
     text-span
   "
                   />
-                  <h3 className="text-2xl text-text">{step.title}</h3>
+                  <h3 className="text-xl sm:text-2xl text-text">{step.title}</h3>
 
                   <p>{step.description}</p>
                 </div>

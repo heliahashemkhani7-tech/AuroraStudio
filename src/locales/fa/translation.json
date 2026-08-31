@@ -55,11 +55,13 @@
         "value": "uiux"
       }
     },
+
     "projects": [
       {
-        "id":1,
+        "id": 1,
         "title": "Nexus Analytics",
         "description": "رابط کاربری معاملات با فرکانس بالا.",
+        "detail": "یک داشبورد تحلیلی قدرتمند برای نمایش و بررسی داده‌های مالی به‌صورت لحظه‌ای. این پروژه با تمرکز بر سرعت، خوانایی اطلاعات و تجربه کاربری روان طراحی شده و امکان مشاهده تغییرات بازار، شاخص‌های عملکرد و فعالیت‌های معاملاتی را در یک محیط یکپارچه فراهم می‌کند.",
         "category": "dashboards",
         "technology": "React",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuAwjMTxAzp6X7Hu75T-OPdiDym2bLRYAjIJbiKJddfNvPr8BMC34b4NTAy7JHcYedxJT5IlvYPyfcm5i41YHUWvImU7ps3B8N7z630rW7eOXfkJcMctBz9Ei_kSs7wwcLc7WTVWbCeR3v59y6EUTJY9hdpE5Yai2UXRiTaQ3Na6tS8XRa9LLbISWuy4g-Mf8cwX4E8Ge_5TZDFcOE5r21NY65nUHtBhPvv8pBsCRMLvXrLMyYD2r_nd"
@@ -68,6 +70,7 @@
         "id": 2,
         "title": "Aura Timepieces",
         "description": "تجربه دیجیتال یک بوتیک لوکس.",
+        "detail": "یک تجربه دیجیتال لوکس برای یک برند ساعت که با تمرکز بر زیبایی بصری، تایپوگرافی ظریف و ارائه حرفه‌ای محصولات طراحی شده است. این پروژه تلاش می‌کند حس یک بوتیک لوکس را در فضای دیجیتال ایجاد کرده و تجربه‌ای ساده و جذاب برای مشاهده و بررسی محصولات ارائه دهد.",
         "category": "ecommerce",
         "technology": "Next.js",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b"
@@ -76,6 +79,7 @@
         "id": 3,
         "title": "Void Architecture",
         "description": "تجربه‌ای تعاملی برای کاوش ساختارهای سه‌بعدی.",
+        "detail": "یک وب‌سایت معماری تعاملی که ارائه ساختارها و فضاهای معماری را به یک تجربه سه‌بعدی و پویا تبدیل می‌کند. کاربران می‌توانند فرم‌ها، جزئیات و ساختارهای مختلف را در محیطی immersive بررسی کرده و با پروژه از طریق تعاملات سه‌بعدی ارتباط برقرار کنند.",
         "category": "websites",
         "technology": "Three.js",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
@@ -84,6 +88,7 @@
         "id": 4,
         "title": "Lumina Smart App",
         "description": "رابط کنترل هوشمند محیط.",
+        "detail": "یک رابط کاربری مدرن برای کنترل هوشمند محیط که امکان مدیریت بخش‌های مختلف خانه و محیط اطراف را در یک فضای یکپارچه فراهم می‌کند. طراحی پروژه بر سادگی، دسترسی سریع به کنترل‌ها، نمایش واضح اطلاعات و ایجاد تجربه‌ای آرام و روان برای کاربران تمرکز دارد.",
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
@@ -92,6 +97,7 @@
         "id": 5,
         "title": "Lumina Smart App",
         "description": "رابط کنترل هوشمند محیط.",
+        "detail": "این پروژه یک تجربه کاربری متفاوت برای مدیریت هوشمند محیط ارائه می‌دهد که در آن کنترل امکانات مختلف با کمترین پیچیدگی در اختیار کاربر قرار گرفته است. ساختار بصری منظم، سلسله‌مراتب اطلاعات و تعاملات ساده، استفاده روزمره از این رابط را سریع و لذت‌بخش می‌کند.",
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
@@ -100,11 +106,13 @@
         "id": 6,
         "title": "Lumina Smart App",
         "description": "رابط کنترل هوشمند محیط.",
+        "detail": "یک کانسپت رابط کاربری برای یک اپلیکیشن هوشمند که با هدف ساده‌سازی مدیریت محیط طراحی شده است. تمرکز اصلی این طراحی بر ایجاد رابطی مینیمال، واکنش‌گرا و قابل فهم است تا کاربران بتوانند اطلاعات و کنترل‌های مورد نیاز خود را بدون پیچیدگی پیدا کنند.",
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
       }
-    ]
+    ],
+    "btn": "دیدن پروژه"
   },
 
   "projectDetails": {

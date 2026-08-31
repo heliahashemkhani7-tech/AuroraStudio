@@ -14,7 +14,7 @@ export default function HeroStats() {
   return (
     <ElectricBorder color="var(--primary)" className="mt-25 md:mt-0">
       <Card className="mx-auto">
-        <CardContent className="flex items-center ltr:pl-10 rtl:pr-10">
+        <CardContent className="flex items-center">
           {stats.map((item, index) => (
             <div key={index} className="flex flex-1 items-center">
               {index !== 0 && (
@@ -29,7 +29,7 @@ export default function HeroStats() {
                   {item.value}
                 </span>
 
-                <p className="text-text text-[9px] sm:text-xs md:text-xl">
+                <p className="text-text text-[7px] sm:text-xs md:text-xl">
                   {item.label}
                 </p>
               </div>
