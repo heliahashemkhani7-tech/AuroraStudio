@@ -6,6 +6,7 @@ import Footer from "./Footer";
 export default function DefaultLayout() {
   const location = useLocation();
 
+
   return (
     <div className="flex flex-col gap-50">
       <Nav />

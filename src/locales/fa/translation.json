@@ -55,174 +55,287 @@
         "value": "uiux"
       }
     },
-
     "projects": [
       {
         "id": 2,
         "slug": "nexus-analytics",
         "title": "Nexus Analytics",
         "description": "رابط کاربری معاملات با فرکانس بالا.",
-        "detail": "یک داشبورد قدرتمند و لحظه‌ای برای معاملات با فرکانس بالا که به معامله‌گران امکان می‌دهد حرکات بازار، داده‌های زنده، معیارهای عملکرد و فعالیت‌های معاملاتی را از طریق یک رابط سریع و کاربردی به‌صورت واضح مشاهده کنند.",
+        "detail": "یک داشبورد قدرتمند و بلادرنگ برای معاملات با فرکانس بالا که به معامله‌گران امکان می‌دهد حرکات بازار، داده‌های زنده، شاخص‌های عملکرد و فعالیت‌های معاملاتی را از طریق یک رابط سریع و کاربردی به‌صورت واضح مشاهده و مدیریت کنند.",
         "category": "dashboards",
         "technology": "React",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuAwjMTxAzp6X7Hu75T-OPdiDym2bLRYAjIJbiKJddfNvPr8BMC34b4NTAy7JHcYedxJT5IlvYPyfcm5i41YHUWvImU7ps3B8N7z630rW7eOXfkJcMctBz9Ei_kSs7wwcLc7WTVWbCeR3v59y6EUTJY9hdpE5Yai2UXRiTaQ3Na6tS8XRa9LLbISWuy4g-Mf8cwX4E8Ge_5TZDFcOE5r21NY65nUHtBhPvv8pBsCRMLvXrLMyYD2r_nd",
-        "client": "Nexus Financial",
-        "role": "طراحی UI/UX، توسعه فرانت‌اند",
-        "year": "2025",
-        "techStack": ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-        "overview": "Nexus Analytics با هدف تبدیل داده‌های پیچیده مالی به یک تجربه معاملاتی واضح و قابل‌اقدام طراحی شد. این پلتفرم حرکات لحظه‌ای بازار، معیارهای عملکرد، اطلاعات پورتفولیو و فعالیت‌های معاملاتی را در یک داشبورد متمرکز در اختیار کاربر قرار می‌دهد. رابط کاربری با تمرکز بر سرعت، خوانایی و سلسله‌مراتب بصری طراحی شده تا معامله‌گران بتوانند بدون حواس‌پرتی‌های غیرضروری تصمیم‌گیری کنند.",
-        "highlights": [
+        "link": "/imgs/nexus.png",
+        "card": [
           {
-            "title": "تحلیل لحظه‌ای",
-            "description": "اطلاعات زنده بازار و معیارهای عملکرد در قالب کامپوننت‌های بصری و خوانا سازمان‌دهی شده‌اند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAwjMTxAzp6X7Hu75T-OPdiDym2bLRYAjIJbiKJddfNvPr8BMC34b4NTAy7JHcYedxJT5IlvYPyfcm5i41YHUWvImU7ps3B8N7z630rW7eOXfkJcMctBz9Ei_kSs7wwcLc7WTVWbCeR3v59y6EUTJY9hdpE5Yai2UXRiTaQ3Na6tS8XRa9LLbISWuy4g-Mf8cwX4E8Ge_5TZDFcOE5r21NY65nUHtBhPvv8pBsCRMLvXrLMyYD2r_nd"
+            "label": "مشتری",
+            "value": "Lumina Financial Group"
           },
           {
-            "title": "نمای کلی معاملات",
-            "description": "یک داشبورد متمرکز، نمای کاملی از فعالیت‌های فعلی بازار و عملکرد پورتفولیو در اختیار معامله‌گران قرار می‌دهد.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuAwjMTxAzp6X7Hu75T-OPdiDym2bLRYAjIJbiKJddfNvPr8BMC34b4NTAy7JHcYedxJT5IlvYPyfcm5i41YHUWvImU7ps3B8N7z630rW7eOXfkJcMctBz9Ei_kSs7wwcLc7WTVWbCeR3v59y6EUTJY9hdpE5Yai2UXRiTaQ3Na6tS8XRa9LLbISWuy4g-Mf8cwX4E8Ge_5TZDFcOE5r21NY65nUHtBhPvv8pBsCRMLvXrLMyYD2r_nd"
+            "label": "نقش",
+            "value": "طراحی UI/UX، توسعه Frontend"
+          },
+          {
+            "label": "سال",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "تکنولوژی‌ها",
+          "items": ["React", "Tailwind CSS", "Framer Motion", "WebGL"]
+        },
+        "overview": {
+          "title": "معرفی پروژه",
+          "paragraphs": [
+            "Lumina Wealth به یک تحول کامل دیجیتال نیاز داشت تا پلتفرم مدیریت سرمایه خود را با انتظارات افراد دارای سرمایه بالا هماهنگ کند. هدف این پروژه تبدیل داده‌های پیچیده مالی به تجربه‌ای ساده، آرام و قابل فهم بود. در این پروژه از سبک مینیمال گلس‌مورفیسم استفاده کردیم تا رابطی ایجاد کنیم که بیشتر شبیه یک ابزار حرفه‌ای و پیشرفته باشد تا یک جدول مالی معمولی.",
+            "چالش اصلی، بازطراحی معماری قدیمی داده‌ها و هم‌زمان ایجاد یک ظاهر مدرن با حالت تاریک بود که خستگی چشم را در زمان تحلیل‌های طولانی کاهش دهد. همچنین از درخشش‌های ظریف و فضایی برای برجسته کردن تغییرات مهم در سبد سرمایه‌گذاری استفاده شد."
+          ],
+          "button": {
+            "text": "مشاهده وب‌سایت",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "ویژگی‌های طراحی",
+          "links": [
+            "/imgs/nextus-highlight-1.png",
+            "/imgs/nextus-highlight-2.png"
+          ]
+        }
       },
 
       {
         "id": 3,
         "slug": "aura-timepieces",
         "title": "Aura Timepieces",
-        "description": "تجربه فروشگاه دیجیتال لوکس.",
-        "detail": "یک فروشگاه دیجیتال حرفه‌ای و لوکس برای یک برند ساعت که با ترکیب ارائه بصری جذاب، تایپوگرافی ظریف و تجربه روان در مرور محصولات، یک مسیر خرید ممتاز را در دستگاه‌های مختلف ایجاد می‌کند.",
+        "description": "تجربه دیجیتال لوکس برای یک فروشگاه ساعت.",
+        "detail": "یک فروشگاه دیجیتال sophisticated برای یک برند لوکس ساعت. این تجربه با ترکیب ارائه بصری ظریف، تایپوگرافی حرفه‌ای و مرور روان محصولات، یک مسیر خرید لوکس و یکپارچه را در تمامی دستگاه‌ها ایجاد می‌کند.",
         "category": "ecommerce",
         "technology": "Next.js",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b",
-        "client": "Aura Watches",
-        "role": "طراحی UI/UX، توسعه فرانت‌اند",
-        "year": "2025",
-        "techStack": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-        "overview": "Aura Timepieces یک تجربه دیجیتال لوکس برای یک برند مدرن ساعت است. طراحی با تمرکز بر ایجاد حس انحصاری بودن از طریق تایپوگرافی حرفه‌ای، تصاویر جذاب محصولات، فضای تنفس مناسب و زبان بصری مینیمال انجام شده است. تجربه مرور محصولات به‌گونه‌ای طراحی شده که هر ساعت بیشتر شبیه یک قطعه کلکسیونی به نظر برسد تا یک محصول معمولی فروشگاهی.",
-        "highlights": [
+        "link": "/imgs/timepieces.png",
+        "card": [
           {
-            "title": "تجربه لوکس محصول",
-            "description": "تصاویر بزرگ محصولات و تایپوگرافی ظریف، ارائه‌ای جذاب و لوکس برای هر ساعت ایجاد می‌کنند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b"
+            "label": "مشتری",
+            "value": "Aura Watches"
           },
           {
-            "title": "مرور روان محصولات",
-            "description": "یک سیستم ناوبری ساده به کاربران اجازه می‌دهد مجموعه‌ها و ساعت‌های مختلف را بدون پیچیدگی و اصطکاک اضافی بررسی کنند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b"
+            "label": "نقش",
+            "value": "طراحی UI/UX، توسعه Frontend"
+          },
+          {
+            "label": "سال",
+            "value": "2025"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "تکنولوژی‌ها",
+          "items": ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]
+        },
+        "overview": {
+          "title": "معرفی پروژه",
+          "paragraphs": [
+            "Aura Timepieces یک تجربه دیجیتال لوکس است که برای یک برند مدرن ساعت‌های لوکس طراحی شده است. تمرکز اصلی طراحی بر ایجاد حس انحصار و خاص بودن از طریق تایپوگرافی ظریف، تصاویر فراگیر محصولات، فضای تنفس زیاد و زبان بصری مینیمال بوده است.",
+            "تجربه مرور محصولات به‌گونه‌ای طراحی شده که هر ساعت بیشتر شبیه یک قطعه کلکسیونی و ارزشمند به نظر برسد، نه یک محصول معمولی در یک فروشگاه اینترنتی."
+          ],
+          "button": {
+            "text": "مشاهده وب‌سایت",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "ویژگی‌های طراحی",
+          "links": [
+            "/imgs/timepieces-highlight-1.png",
+            "/imgs/timepieces-highlight-2.png"
+          ]
+        }
       },
 
       {
         "id": 4,
         "slug": "void-architecture",
         "title": "Void Architecture",
-        "description": "تجربه تعاملی سه‌بعدی برای معماری.",
-        "detail": "یک وب‌سایت معماری تعاملی که ارائه سنتی سازه‌ها را به یک تجربه سه‌بعدی پویا تبدیل می‌کند. کاربران می‌توانند مفاهیم فضایی، فرم‌های معماری و جزئیات بصری را در یک محیط دیجیتال پویا کشف و بررسی کنند.",
+        "description": "تجربه سه‌بعدی و تعاملی برای کاوش معماری.",
+        "detail": "یک وب‌سایت معماری تعاملی که ارائه سنتی سازه‌ها را به یک تجربه سه‌بعدی و پویا تبدیل می‌کند. کاربران می‌توانند مفاهیم فضایی، فرم‌های معماری و جزئیات ساختاری را در یک محیط دیجیتال تعاملی و زنده کاوش کنند.",
         "category": "websites",
         "technology": "Three.js",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
-        "client": "Void Architects",
-        "role": "توسعه خلاقانه، تعاملات سه‌بعدی",
-        "year": "2024",
-        "techStack": ["Three.js", "React", "TypeScript", "WebGL"],
-        "overview": "Void Architecture بررسی می‌کند که چگونه تجربه‌های دیجیتال می‌توانند شیوه ارائه مفاهیم معماری را تغییر دهند. به جای استفاده از گالری‌های سنتی و چیدمان‌های ثابت، این پروژه یک محیط سه‌بعدی تعاملی ایجاد می‌کند که کاربران می‌توانند در آن فرم‌ها، فضاها و جزئیات سازه‌های معماری را کشف کنند. این تجربه با ترکیب تصاویر سینمایی و تعاملات ظریف، حس عمق و کشف را ایجاد می‌کند.",
-        "highlights": [
+        "card": [
           {
-            "title": "محیط سه‌بعدی تعاملی",
-            "description": "عناصر معماری سه‌بعدی یک محیط فراگیر ایجاد می‌کنند که کاربران می‌توانند به‌صورت تعاملی در آن کاوش کنند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+            "label": "مشتری",
+            "value": "Void Architects"
           },
           {
-            "title": "داستان‌گویی فضایی",
-            "description": "رابط کاربری از حرکت، عمق و ترکیب‌بندی برای انتقال مفاهیم معماری فراتر از تصاویر ثابت استفاده می‌کند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+            "label": "نقش",
+            "value": "توسعه خلاقانه، تعاملات سه‌بعدی"
+          },
+          {
+            "label": "سال",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "تکنولوژی‌ها",
+          "items": ["Three.js", "React", "TypeScript", "WebGL"]
+        },
+        "overview": {
+          "title": "معرفی پروژه",
+          "paragraphs": [
+            "Void Architecture بررسی می‌کند که چگونه تجربه‌های دیجیتال می‌توانند شیوه ارائه مفاهیم معماری را متحول کنند. به‌جای استفاده از گالری‌های سنتی و چیدمان‌های ثابت، این پروژه یک محیط سه‌بعدی تعاملی ایجاد می‌کند که در آن کاربران می‌توانند فرم‌های معماری، فضاها و جزئیات ساختاری را به‌صورت آزادانه کاوش کنند.",
+            "این تجربه با ترکیب تصاویر سینمایی و تعاملات ظریف، حس عمق، کشف و کنجکاوی را در کاربر ایجاد می‌کند."
+          ],
+          "button": {
+            "text": "مشاهده وب‌سایت",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "ویژگی‌های طراحی",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+          ]
+        }
       },
 
       {
         "id": 5,
         "slug": "lumina-smart-app",
         "title": "Lumina Smart App",
-        "description": "رابط کنترل محیط هوشمند.",
-        "detail": "یک رابط کاربری خانه هوشمند که با هدف ساده و کاربردی کردن مدیریت محیط طراحی شده است. این اپلیکیشن کنترل نورپردازی، دما، مصرف انرژی و سایر امکانات خانه را در یک تجربه مدرن و یکپارچه گرد هم می‌آورد.",
+        "description": "رابط کاربری کنترل محیط هوشمند.",
+        "detail": "یک رابط کاربری برای کنترل خانه هوشمند که مدیریت محیط را ساده و کاربردی می‌کند. این اپلیکیشن کنترل روشنایی، دما، مصرف انرژی و سایر بخش‌های خانه را در یک تجربه مدرن و یکپارچه گرد هم می‌آورد.",
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-        "client": "Lumina Home",
-        "role": "طراحی محصول، طراحی UI/UX",
-        "year": "2024",
-        "techStack": ["Figma", "Prototyping", "UI/UX Design", "Design System"],
-        "overview": "Lumina Smart App یک تجربه مدرن برای کنترل خانه هوشمند است که کنترل‌های روزمره محیط را در یک رابط کاربری ساده و یکپارچه قرار می‌دهد. کاربران می‌توانند نورپردازی، دما، مصرف انرژی و دستگاه‌های متصل را بدون نیاز به جست‌وجو در منوهای پیچیده مدیریت کنند. سیستم بصری پروژه با ترکیب یک رابط آرام و سلسله‌مراتب اطلاعاتی واضح، تعاملات روزمره را ساده و روان می‌کند.",
-        "highlights": [
+        "card": [
           {
-            "title": "کنترل خانه هوشمند",
-            "description": "نورپردازی، دما، مصرف انرژی و دستگاه‌های متصل در یک تجربه کنترلی یکپارچه سازمان‌دهی شده‌اند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "مشتری",
+            "value": "Lumina Home"
           },
           {
-            "title": "سلسله‌مراتب اطلاعاتی واضح",
-            "description": "اطلاعات مهم محیطی با استفاده از الگوهای بصری ساده ارائه می‌شوند تا کاربران بتوانند آن‌ها را در یک نگاه به‌راحتی درک کنند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "نقش",
+            "value": "طراحی محصول، طراحی UI/UX"
+          },
+          {
+            "label": "سال",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "تکنولوژی‌ها",
+          "items": ["Figma", "Prototyping", "UI/UX Design", "Design System"]
+        },
+        "overview": {
+          "title": "معرفی پروژه",
+          "paragraphs": [
+            "Lumina Smart App یک تجربه مدرن برای کنترل خانه هوشمند است که کنترل‌های روزمره محیط را در یک رابط کاربری ساده و کاربردی گرد هم می‌آورد. کاربران می‌توانند روشنایی، دما، مصرف انرژی و دستگاه‌های متصل را بدون نیاز به جست‌وجو در منوهای پیچیده مدیریت کنند.",
+            "سیستم بصری این محصول ترکیبی از یک رابط آرام و مینیمال با سلسله‌مراتب اطلاعاتی واضح است تا تعاملات روزمره تا حد ممکن ساده و بدون دردسر باشند."
+          ],
+          "button": {
+            "text": "مشاهده وب‌سایت",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "ویژگی‌های طراحی",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+          ]
+        }
       },
 
       {
         "id": 7,
         "slug": "lumina-smart-app1",
         "title": "Lumina Smart App",
-        "description": "رابط کنترل محیط هوشمند.",
-        "detail": "یک تجربه پیشرفته برای محیط هوشمند که بر کنترل آسان و بدون دردسر محیط اطراف تمرکز دارد. رابط کاربری با تأکید بر دسترس‌پذیری، سلسله‌مراتب اطلاعاتی واضح و تعاملات روان برای استفاده روزمره طراحی شده است.",
+        "description": "رابط کاربری کنترل محیط هوشمند.",
+        "detail": "یک تجربه هوشمند و ظریف برای کنترل محیط که بر ایجاد امکان مدیریت ساده و بدون دردسر فضای اطراف تمرکز دارد. رابط کاربری با تأکید بر دسترسی‌پذیری، سلسله‌مراتب واضح اطلاعات و تعاملات روان برای استفاده روزمره طراحی شده است.",
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-        "client": "Lumina Living",
-        "role": "طراحی UX، طراحی تعامل",
-        "year": "2024",
-        "techStack": ["Figma", "Prototyping", "UI/UX Design", "Accessibility"],
-        "overview": "این نسخه از Lumina Smart App بر دسترس‌پذیری و تعامل آسان تمرکز دارد. هدف این بود که رابط کاربری برای کاربران با سطوح مختلف آشنایی با فناوری، سریع و قابل درک باشد. کنترل‌های واضح، سلسله‌مراتب بصری قوی، اطلاعات خوانا و تعاملات قابل پیش‌بینی، پایه‌های اصلی این تجربه را تشکیل می‌دهند.",
-        "highlights": [
+        "card": [
           {
-            "title": "رابط کاربری دسترس‌پذیر",
-            "description": "رابط کاربری با استفاده از کنترل‌های واضح، تایپوگرافی خوانا و الگوهای تعاملی قابل پیش‌بینی، تجربه کاربری را بهبود می‌دهد.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "مشتری",
+            "value": "Lumina Living"
           },
           {
-            "title": "تعاملات آسان",
-            "description": "عملیات رایج خانه هوشمند به کنترل‌های ساده و قابل فهم تبدیل شده‌اند که به حداقل جابه‌جایی بین صفحات نیاز دارند.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "نقش",
+            "value": "طراحی UX، طراحی تعامل"
+          },
+          {
+            "label": "سال",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "تکنولوژی‌ها",
+          "items": ["Figma", "Prototyping", "UI/UX Design", "Accessibility"]
+        },
+        "overview": {
+          "title": "معرفی پروژه",
+          "paragraphs": [
+            "این نسخه از Lumina Smart App بر دسترسی‌پذیری و تعامل ساده و بدون دردسر تمرکز دارد. هدف این بود که رابطی طراحی شود که کاربران با سطوح مختلف آشنایی با تکنولوژی بتوانند آن را به‌سرعت درک و استفاده کنند.",
+            "کنترل‌های واضح، سلسله‌مراتب بصری قوی، اطلاعات خوانا و تعاملات قابل پیش‌بینی، پایه اصلی این تجربه را تشکیل می‌دهند."
+          ],
+          "button": {
+            "text": "مشاهده وب‌سایت",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "ویژگی‌های طراحی",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+          ]
+        }
       },
 
       {
         "id": 6,
         "slug": "lumina-smart-app2",
         "title": "Lumina Smart App",
-        "description": "رابط کنترل محیط هوشمند.",
-        "detail": "یک کانسپت مدرن برای رابط موبایل با هدف کنترل هوشمند محیط. طراحی بر ایجاد تجربه‌ای آرام، واکنش‌گرا و منظم تمرکز دارد تا کاربران بتوانند محیط خود را با کمترین تلاش مشاهده و مدیریت کنند.",
+        "description": "رابط کاربری کنترل محیط هوشمند.",
+        "detail": "یک رابط کاربری مدرن موبایل برای کنترل هوشمند محیط. طراحی بر ایجاد تجربه‌ای آرام، واکنش‌گرا و منظم تمرکز دارد که کاربران بتوانند با کمترین تلاش محیط خود را بررسی و مدیریت کنند.",
         "category": "uiux",
         "technology": "Figma",
         "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-        "client": "Lumina Technologies",
-        "role": "طراحی UI/UX موبایل",
-        "year": "2024",
-        "techStack": ["Figma", "Mobile Design", "Prototyping", "UI/UX Design"],
-        "overview": "Lumina Smart App یک رویکرد موبایل‌محور برای مدیریت هوشمند محیط را بررسی می‌کند. تجربه کاربری بر اساس تعاملات سریع طراحی شده تا کاربران بتوانند محیط اطراف خود را مشاهده و دستگاه‌های متصل را بدون انجام مراحل غیرضروری کنترل کنند. جهت‌گیری بصری پروژه ترکیبی از زیبایی آرام، کامپوننت‌های واکنش‌گرا و تمرکز ویژه بر کاربردپذیری است.",
-        "highlights": [
+        "card": [
           {
-            "title": "تجربه موبایل‌محور",
-            "description": "رابط کاربری با تمرکز بر تعاملات لمسی و دسترسی سریع به مهم‌ترین کنترل‌ها طراحی شده است.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "مشتری",
+            "value": "Lumina Technologies"
           },
           {
-            "title": "سیستم بصری آرام",
-            "description": "یک زبان بصری تمیز، بار شناختی را کاهش می‌دهد و در عین حال اطلاعات محیطی را به‌راحتی قابل درک نگه می‌دارد.",
-            "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "label": "نقش",
+            "value": "طراحی رابط و تجربه کاربری موبایل"
+          },
+          {
+            "label": "سال",
+            "value": "2024"
           }
-        ]
+        ],
+        "techStack": {
+          "label": "تکنولوژی‌ها",
+          "items": ["Figma", "Mobile Design", "Prototyping", "UI/UX Design"]
+        },
+        "overview": {
+          "title": "معرفی پروژه",
+          "paragraphs": [
+            "Lumina Smart App یک رویکرد Mobile-First برای مدیریت هوشمند محیط را بررسی می‌کند. تجربه کاربری بر اساس تعاملات سریع طراحی شده تا کاربران بتوانند محیط اطراف خود را بررسی کرده و دستگاه‌های متصل را بدون انجام مراحل غیرضروری کنترل کنند.",
+            "جهت‌گیری بصری پروژه ترکیبی از یک ظاهر آرام و مینیمال، کامپوننت‌های واکنش‌گرا و تمرکز ویژه بر کاربردپذیری است."
+          ],
+          "button": {
+            "text": "مشاهده وب‌سایت",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "ویژگی‌های طراحی",
+          "links": [
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+          ]
+        }
       }
     ],
     "btn": "دیدن پروژه"

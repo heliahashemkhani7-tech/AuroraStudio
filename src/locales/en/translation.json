@@ -98,7 +98,7 @@
         "highlights": {
           "title": "Design Highlights",
           "links": [
-            "/imgs/nextus-highlight1.png",
+            "/imgs/nextus-highlight-1.png",
             "/imgs/nextus-highlight-2.png"
           ]
         }
@@ -112,7 +112,7 @@
         "detail": "A sophisticated digital boutique created for a luxury watch brand. The experience combines elegant visual presentation, refined typography, and seamless product browsing to create a premium shopping journey across devices.",
         "category": "ecommerce",
         "technology": "Next.js",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b",
+        "link": "/imgs/timepieces.png",
         "card": [
           {
             "label": "CLIENT",
@@ -145,8 +145,8 @@
         "highlights": {
           "title": "Design Highlights",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuBtDmVhR18P_fxY9N8N1gmlQjuT-i3S3DpCQwPsgywGNXSOUcesH9GOj3TMhoxbCxqYlhcZH4_TBRy__vlL6swztLHvWcWwOAaqRBpD2ILoVO1WknG00HVgfvVTFEvZp9sz-dCPxMK8hGjFM3pS42xN2O90x_sudQtFPp0Neq-MREZFoyHGaF1Ss7sGwdR09oMCBt_tBFChIt7JRVE6lCNhPxhZaPI62B4bly3ysMM7OYJb_8SafX7b"
+            "/imgs/timepieces-highlight-1.png",
+            "/imgs/timepieces-highlight-2.png"
           ]
         }
       },

@@ -25,5 +25,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "@/components/ui/hover-card.tsx"]
+  "include": ["src", "@/components/ui/hover-card.tsx", "src/components/skeleton/ProjectDetailsSkeleton.tsx"]
 }
