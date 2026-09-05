@@ -158,7 +158,7 @@
         "detail": "یک وب‌سایت معماری تعاملی که ارائه سنتی سازه‌ها را به یک تجربه سه‌بعدی و پویا تبدیل می‌کند. کاربران می‌توانند مفاهیم فضایی، فرم‌های معماری و جزئیات ساختاری را در یک محیط دیجیتال تعاملی و زنده کاوش کنند.",
         "category": "websites",
         "technology": "Three.js",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
+        "link": "/imgs/architecture.png",
         "card": [
           {
             "label": "مشتری",
@@ -191,8 +191,8 @@
         "highlights": {
           "title": "ویژگی‌های طراحی",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+            "/imgs/architecture-highlight-1.png",
+            "/imgs/architecture-highlight-2.png"
           ]
         }
       },
@@ -205,7 +205,7 @@
         "detail": "یک رابط کاربری برای کنترل خانه هوشمند که مدیریت محیط را ساده و کاربردی می‌کند. این اپلیکیشن کنترل روشنایی، دما، مصرف انرژی و سایر بخش‌های خانه را در یک تجربه مدرن و یکپارچه گرد هم می‌آورد.",
         "category": "uiux",
         "technology": "Figma",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+        "link": "/imgs/lumina.png",
         "card": [
           {
             "label": "مشتری",
@@ -238,8 +238,8 @@
         "highlights": {
           "title": "ویژگی‌های طراحی",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "/imgs/lumina-highlight-1.png",
+            "/imgs/lumina-highlight-2.png"
           ]
         }
       },
@@ -252,7 +252,7 @@
         "detail": "یک تجربه هوشمند و ظریف برای کنترل محیط که بر ایجاد امکان مدیریت ساده و بدون دردسر فضای اطراف تمرکز دارد. رابط کاربری با تأکید بر دسترسی‌پذیری، سلسله‌مراتب واضح اطلاعات و تعاملات روان برای استفاده روزمره طراحی شده است.",
         "category": "uiux",
         "technology": "Figma",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+        "link": "/imgs/lumina.png",
         "card": [
           {
             "label": "مشتری",
@@ -285,8 +285,8 @@
         "highlights": {
           "title": "ویژگی‌های طراحی",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "/imgs/lumina-highlight-1.png",
+            "/imgs/lumina-highlight-2.png"
           ]
         }
       },
@@ -299,7 +299,7 @@
         "detail": "یک رابط کاربری مدرن موبایل برای کنترل هوشمند محیط. طراحی بر ایجاد تجربه‌ای آرام، واکنش‌گرا و منظم تمرکز دارد که کاربران بتوانند با کمترین تلاش محیط خود را بررسی و مدیریت کنند.",
         "category": "uiux",
         "technology": "Figma",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+        "link": "/imgs/lumina.png",
         "card": [
           {
             "label": "مشتری",
@@ -332,8 +332,8 @@
         "highlights": {
           "title": "ویژگی‌های طراحی",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "/imgs/lumina-highlight-1.png",
+            "/imgs/lumina-highlight-2.png"
           ]
         }
       }

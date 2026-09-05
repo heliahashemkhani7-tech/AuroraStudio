@@ -159,7 +159,7 @@
         "detail": "An immersive architectural website that transforms traditional structure presentation into an interactive 3D experience. Users can explore spatial concepts, architectural forms, and visual details through a dynamic digital environment.",
         "category": "websites",
         "technology": "Three.js",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
+        "link": "/imgs/architecture.png",
         "card": [
           {
             "label": "CLIENT",
@@ -192,8 +192,8 @@
         "highlights": {
           "title": "Design Highlights",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuBsOY1AiVl4YlhsWsCtfmP0brNE5mEaOY5sCaV0pMX8q9qq96bhLvx0mdKrw-GBFQzzjX5yIsjHuRbf4qcnsLNRLNDIdcrfmGlXiapcJLkAZCjOyW0hd5KW5wCETLvxbxiF019p6ITXM-OdDH4Uav0hcQICMN97ilsrVx2Oa3LijJRZdQ0ITHTA-ci9L-iuI1xvsoEzfPCNhLN-SZcvUIMK7LHosmk1LPHWQnohGI7mOygOukz0Pe0n"
+            "/imgs/architecture-highlight-1.png",
+            "/imgs/architecture-highlight-2.png"
           ]
         }
       },
@@ -206,7 +206,7 @@
         "detail": "A smart home control interface designed to make environmental management simple and intuitive. The application brings lighting, temperature, energy usage, and other home controls together in a clean and modern experience.",
         "category": "uiux",
         "technology": "Figma",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+        "link": "/imgs/lumina.png",
         "card": [
           {
             "label": "CLIENT",
@@ -239,76 +239,28 @@
         "highlights": {
           "title": "Design Highlights",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "/imgs/lumina-highlight-1.png",
+            "/imgs/lumina-highlight-2.png"
           ]
         }
       },
-
-      {
-        "id": 7,
-        "slug": "lumina-smart-app1",
-        "title": "Lumina Smart App",
-        "description": "Environmental control interface.",
-        "detail": "A refined smart environment experience focused on giving users effortless control over their surroundings. The interface emphasizes accessibility, clear information hierarchy, and smooth interactions for everyday use.",
-        "category": "uiux",
-        "technology": "Figma",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-        "card": [
-          {
-            "label": "CLIENT",
-            "value": "Lumina Living"
-          },
-          {
-            "label": "ROLE",
-            "value": "UX Design, Interaction Design"
-          },
-          {
-            "label": "YEAR",
-            "value": "2024"
-          }
-        ],
-        "techStack": {
-          "label": "TECH STACK",
-          "items": ["Figma", "Prototyping", "UI/UX Design", "Accessibility"]
-        },
-        "overview": {
-          "title": "Project Overview",
-          "paragraphs": [
-            "This version of the Lumina Smart App focuses on accessibility and effortless interaction. The goal was to create an interface that could be understood quickly by users with different levels of technical familiarity.",
-            "Clear controls, strong visual hierarchy, readable information, and predictable interactions form the foundation of the experience."
-          ],
-          "button": {
-            "text": "VISIT LIVE WEBSITE",
-            "link": "#"
-          }
-        },
-        "highlights": {
-          "title": "Design Highlights",
-          "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
-          ]
-        }
-      },
-
       {
         "id": 6,
-        "slug": "lumina-smart-app2",
+        "slug": "lumina-smart-app",
         "title": "Lumina Smart App",
         "description": "Environmental control interface.",
-        "detail": "A modern mobile interface concept for intelligent environmental control. The design focuses on creating a calm, responsive, and visually organized experience where users can monitor and manage their environment with minimal effort.",
+        "detail": "A smart home control interface designed to make environmental management simple and intuitive. The application brings lighting, temperature, energy usage, and other home controls together in a clean and modern experience.",
         "category": "uiux",
         "technology": "Figma",
-        "link": "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
+        "link": "/imgs/lumina.png",
         "card": [
           {
             "label": "CLIENT",
-            "value": "Lumina Technologies"
+            "value": "Lumina Home"
           },
           {
             "label": "ROLE",
-            "value": "Mobile UI/UX Design"
+            "value": "Product Design, UI/UX Design"
           },
           {
             "label": "YEAR",
@@ -317,13 +269,13 @@
         ],
         "techStack": {
           "label": "TECH STACK",
-          "items": ["Figma", "Mobile Design", "Prototyping", "UI/UX Design"]
+          "items": ["Figma", "Prototyping", "UI/UX Design", "Design System"]
         },
         "overview": {
           "title": "Project Overview",
           "paragraphs": [
-            "Lumina Smart App explores a mobile-first approach to intelligent environmental management. The experience was designed around quick interactions, allowing users to monitor their surroundings and control connected devices without unnecessary steps.",
-            "The visual direction combines a calm aesthetic with responsive components and a strong focus on usability."
+            "Lumina Smart App is a modern smart home control experience designed to bring everyday environmental controls into one intuitive interface. The product allows users to manage lighting, temperature, energy consumption, and connected devices without navigating through complicated menus.",
+            "The visual system combines a calm interface with clear information hierarchy to make everyday interactions feel effortless."
           ],
           "button": {
             "text": "VISIT LIVE WEBSITE",
@@ -333,8 +285,54 @@
         "highlights": {
           "title": "Design Highlights",
           "links": [
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV",
-            "https://lh3.googleusercontent.com/aida-public/AB6AXuCSBUkFqmn6DWevVxfAF4KMEF23644lTcIGtz4zlIxkFGMnwyD7M6cSAH3GnXdLCS9osbcL2rzf1WfFqq5SF2pn0rAuy5oIJJ4s7anaOxU4sZ3H-YElI_ms8hemE-7DRrs7kU37dWHmH5zUG-fWd8kWwKlqoTfM2VIBKAERTobGE4FZv2k5VKrBISJHA_bgdBFtCR-hHYkCuTl9_WD7BxFrTqVYtQnRb1t87vVIKqlNq3r0ffrMCQUV"
+            "/imgs/lumina-highlight-1.png",
+            "/imgs/lumina-highlight-2.png"
+          ]
+        }
+      },
+      {
+        "id": 7,
+        "slug": "lumina-smart-app",
+        "title": "Lumina Smart App",
+        "description": "Environmental control interface.",
+        "detail": "A smart home control interface designed to make environmental management simple and intuitive. The application brings lighting, temperature, energy usage, and other home controls together in a clean and modern experience.",
+        "category": "uiux",
+        "technology": "Figma",
+        "link": "/imgs/lumina.png",
+        "card": [
+          {
+            "label": "CLIENT",
+            "value": "Lumina Home"
+          },
+          {
+            "label": "ROLE",
+            "value": "Product Design, UI/UX Design"
+          },
+          {
+            "label": "YEAR",
+            "value": "2024"
+          }
+        ],
+        "techStack": {
+          "label": "TECH STACK",
+          "items": ["Figma", "Prototyping", "UI/UX Design", "Design System"]
+        },
+        "overview": {
+          "title": "Project Overview",
+          "paragraphs": [
+            "Lumina Smart App is a modern smart home control experience designed to bring everyday environmental controls into one intuitive interface. The product allows users to manage lighting, temperature, energy consumption, and connected devices without navigating through complicated menus.",
+            "The visual system combines a calm interface with clear information hierarchy to make everyday interactions feel effortless."
+          ],
+          "button": {
+            "text": "VISIT LIVE WEBSITE",
+            "link": "#"
+          }
+        },
+        "highlights": {
+          "title": "Design Highlights",
+          "links": [
+            "/imgs/lumina-highlight-1.png",
+            "/imgs/lumina-highlight-2.png"
           ]
         }
       }
