@@ -1,5 +1,5 @@
 import Aurora from "@/components/animiations/Aurora";
-import Hero from "@/components/home/HomeHero";
+import HomeHero from "@/components/home/HomeHero";
 import Container from "@/components/layout/Container";
 
 function Home() {
@@ -17,8 +17,8 @@ function Home() {
           speed={0.9}
         />
       </div>
-      <Container className="container mx-auto max-w-7xl flex items-cente justify-center">
-        <Hero />
+      <Container className="flex items-cente justify-center">
+        <HomeHero />
       </Container>
     </main>
   );

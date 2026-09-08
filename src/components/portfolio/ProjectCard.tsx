@@ -66,7 +66,7 @@ export default function ProjectCard({ project, index }: Props) {
     <Link to={`/portfolio/${project.slug}`}>
       <div
         className="
-      
+ 
       relative
       h-[250px]
       lg:h-full
@@ -87,7 +87,11 @@ export default function ProjectCard({ project, index }: Props) {
         >
           {/* ================= FRONT ================= */}
           <ElectricBorder
-            className={`my-2 cursor-pointer max-w-xs mx-5 md:max-w-xl ${getHeight()}`}
+            className={`       bg-glass-bg
+      lg:min-w-[calc((70vw-40px)/3)]
+      md:min-w-[calc((90vw-40px)/3)]
+      min-w-xs
+ my-2 cursor-pointer max-w-xs mx-5 md:max-w-xl ${getHeight()}`}
             color="var(--text)"
             chaos={0.03}
           >
