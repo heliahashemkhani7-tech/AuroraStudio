@@ -1,5 +1,7 @@
 import type { Project } from "../portfolio/ProjectCard";
+
 import SpotlightCard from "../ui/SpotlightCard";
+import { getProjectImage } from "@/features/api";
 
 type Props = {
   project: Project;
@@ -12,14 +14,14 @@ export default function ProjectHighlights({ project }: Props) {
         {project.highlights.title}
       </h3>
 
-      <div className="flex sm:flex-row flex-col  gap-4 justify-between w-full">
+      <div className="flex sm:flex-row flex-col gap-4 justify-between w-full">
         {project.highlights.links.map((link) => (
           <SpotlightCard
             key={link}
             className="bg-none w-full overflow-hidden rounded-2xl"
           >
             <img
-              src={link}
+              src={getProjectImage(link)}
               className="w-full h-full object-cover border rounded-2xl"
               alt=""
             />

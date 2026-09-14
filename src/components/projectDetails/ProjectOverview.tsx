@@ -6,6 +6,7 @@ import { Badge } from "../ui/badge";
 type Props = {
   project: Project;
 };
+
 export default function ProjectOverview({ project }: Props) {
   return (
     <section className="flex flex-col md:flex-row py-4 gap-4 justify-between">
@@ -13,13 +14,20 @@ export default function ProjectOverview({ project }: Props) {
         <h3 className="text-2xl md:text-3xl text-span font-bold">
           {project.overview.title}
         </h3>
-        <p className="md:leading-7 text-text max-w-xl md:text-[15px] text-xs">{project.overview.paragraphs}</p>
+
+        <div className="md:leading-7 text-text max-w-xl md:text-[15px] text-xs">
+          <p>{project.overview.paragraphs}</p>
+        </div>
+
         <Button className="text-white">{project.overview.button.text}</Button>
       </div>
 
       <Card className="ring-0 border-2 border-span text-text bg-glass-bg justify-around">
         {project.card.map((item) => (
-          <CardContent className="flex flex-col text-text gap-2">
+          <CardContent
+            key={item.label}
+            className="flex flex-col text-text gap-2"
+          >
             <span className="text-span">{item.label}</span>
             <p className="text-text">{item.value}</p>
           </CardContent>
