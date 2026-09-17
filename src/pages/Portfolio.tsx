@@ -60,7 +60,6 @@ export default function Portfolio() {
   const [supabaseProjects, setSupabaseProjects] = useState<SupabaseProject[]>(
     []
   );
-
   useEffect(() => {
     async function loadProjects() {
       setLoading(true);

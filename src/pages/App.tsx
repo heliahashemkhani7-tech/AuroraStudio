@@ -8,6 +8,10 @@ import AboutSkeleton from "@/components/skeleton/AboutSkeleton";
 import ContactSkeleton from "@/components/skeleton/ContactSkeleton";
 import PortfolioSkeleton from "@/components/skeleton/PortfolioSkeleton";
 import ProjectDetailsSkeleton from "@/components/skeleton/ProjectDetailsSkeleton";
+import AdminLogin from "./admin/AdminLogin";
+import ProtectedRoute from "./admin/ProtectedRoute";
+import AdminDashboard from "./admin/AdminDashboard";
+import AdminLayout from "@/components/layout/AdminLayout";
 
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
@@ -27,7 +31,6 @@ export default function App() {
             </Suspense>
           }
         />
-
         <Route
           path="/about"
           element={
@@ -36,7 +39,6 @@ export default function App() {
             </Suspense>
           }
         />
-
         <Route
           path="/contact"
           element={
@@ -45,7 +47,6 @@ export default function App() {
             </Suspense>
           }
         />
-
         <Route
           path="/portfolio"
           element={
@@ -54,7 +55,6 @@ export default function App() {
             </Suspense>
           }
         />
-
         <Route
           path="/portfolio/:slug"
           element={
@@ -63,7 +63,13 @@ export default function App() {
             </Suspense>
           }
         />
+        <Route path="/admin/login" element={<AdminLogin />} />
       </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+          </Route>
+        </Route>
     </Routes>
   );
 }
