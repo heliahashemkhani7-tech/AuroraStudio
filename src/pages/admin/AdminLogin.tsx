@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/lib/supabace";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function AdminLogin() {
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,7 +26,7 @@ export default function AdminLogin() {
     setLoading(false);
 
     if (error) {
-      setError("ایمیل یا رمز عبور اشتباه است.");
+      setError(t("admin.login.invalidCredentials"));
       return;
     }
 
@@ -30,32 +34,38 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="z-5 text-text flex flex-col items-center h-screen justify-center">
-      <h1>Admin Login</h1>
+    <div className="z-5 flex min-h-screen items-center justify-center p-4">
+      <Card className="w-full max-w-md border-2 border-border bg-glass-bg text-text">
+        <CardContent className="flex flex-col items-center gap-6 p-6">
+          <h1 className="text-2xl font-semibold">{t("admin.login.title")}</h1>
 
-      <form onSubmit={handleLogin} className="flex flex-col gap-4">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border"
-        />
+          <form onSubmit={handleLogin} className="flex w-full flex-col gap-4">
+            <input
+              type="email"
+              placeholder={t("admin.login.emailPlaceholder")}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-md border border-border px-3 py-2"
+            />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border"
-        />
+            <input
+              type="password"
+              placeholder={t("admin.login.passwordPlaceholder")}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-md border border-border px-3 py-2"
+            />
 
-        {error && <p>{error}</p>}
+            {error && <p className="text-sm text-red-500">{error}</p>}
 
-        <Button variant="secondary" type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </Button>
-      </form>
+            <Button type="submit" disabled={loading}>
+              {loading
+                ? t("admin.login.loggingIn")
+                : t("admin.login.loginButton")}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

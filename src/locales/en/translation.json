@@ -142,5 +142,18 @@
         "twitter": "Twitter"
       }
     }
+  },
+
+  "admin": {
+    "login": {
+      "title": "Admin Login",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "loginButton": "Login",
+      "loggingIn": "Logging in...",
+      "invalidCredentials": "Invalid email or password."
+    }
   }
 }
