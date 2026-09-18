@@ -86,6 +86,7 @@
       ]
     }
   },
+
   "contact": {
     "hero": {
       "title": "بیایید چیزی شگفت‌انگیز خلق کنیم",
@@ -139,6 +140,19 @@
         "telegram": "تلگرام",
         "twitter": "توییتر"
       }
+    }
+  },
+
+  "admin": {
+    "login": {
+      "title": "ورود مدیر",
+      "email": "ایمیل",
+      "emailPlaceholder": "ایمیل خود را وارد کنید",
+      "password": "رمز عبور",
+      "passwordPlaceholder": "رمز عبور خود را وارد کنید",
+      "loginButton": "ورود",
+      "loggingIn": "در حال ورود...",
+      "invalidCredentials": "ایمیل یا رمز عبور اشتباه است."
     }
   }
 }
