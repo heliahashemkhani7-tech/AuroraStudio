@@ -12,6 +12,7 @@ import AdminLogin from "./admin/AdminLogin";
 import ProtectedRoute from "./admin/ProtectedRoute";
 import AdminDashboard from "./admin/AdminDashboard";
 import AdminLayout from "@/components/layout/AdminLayout";
+import AdminProjects from "./admin/AdminProjects";
 
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
@@ -63,13 +64,14 @@ export default function App() {
             </Suspense>
           }
         />
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/account/auth" element={<AdminLogin />} />
       </Route>
-        <Route element={<ProtectedRoute />}>
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboard />} />
-          </Route>
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashbord" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="/dashbord/projects" element={<AdminProjects />} />
         </Route>
+      </Route>
     </Routes>
   );
 }

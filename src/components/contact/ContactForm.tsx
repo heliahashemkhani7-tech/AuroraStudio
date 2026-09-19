@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
 
 import { Input } from "../ui/input";
 import {
@@ -7,7 +8,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
@@ -15,11 +15,20 @@ import ElectricBorder from "../animiations/ElectricBorder";
 
 export default function ContactForm() {
   const { t } = useTranslation();
+  const [projectType, setProjectType] = useState("");
+
+  const projectTypeLabels = {
+    "web-design": t("contact.form.projectType.options.webDesign"),
+    "web-development": t(
+      "contact.form.projectType.options.webDevelopment",
+    ),
+    branding: t("contact.form.projectType.options.branding"),
+    "ui-ux": t("contact.form.projectType.options.uiUx"),
+    other: t("contact.form.projectType.options.other"),
+  };
 
   return (
-    <ElectricBorder 
-    className="bg-glass-bg "
-    chaos={0.02}>
+    <ElectricBorder className="bg-glass-bg " chaos={0.02}>
       <div className="p-6 md:p-7">
         <form className="space-y-5">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -64,38 +73,40 @@ export default function ContactForm() {
               {t("contact.form.projectType.label")}
             </label>
 
-            <Select>
+            <Select
+              value={projectType}
+              onValueChange={setProjectType}
+            >
               <SelectTrigger
                 id="projectType"
                 className="h-10 w-full border-primary border-2 bg-background text-text"
               >
-                <SelectValue
-                  placeholder={t("contact.form.projectType.placeholder")}
-                />
+                {projectType
+                  ? projectTypeLabels[
+                      projectType as keyof typeof projectTypeLabels
+                    ]
+                  : t("contact.form.projectType.placeholder")}
               </SelectTrigger>
 
-              <SelectContent className="bg-primary  text-white">
-                <SelectItem
-                  value={t("contact.form.projectType.options.webDesign")}
-                  className="h-10 w-full border-primary border-2 bg-background text-text"
-                >
+              <SelectContent className="bg-primary text-white">
+                <SelectItem value="web-design">
                   {t("contact.form.projectType.options.webDesign")}
                 </SelectItem>
 
-                <SelectItem
-                  value={t("contact.form.projectType.options.webDevelopment")}
-                >
+                <SelectItem value="web-development">
                   {t("contact.form.projectType.options.webDevelopment")}
                 </SelectItem>
 
-                <SelectItem
-                  value={t("contact.form.projectType.options.branding")}
-                >
+                <SelectItem value="branding">
                   {t("contact.form.projectType.options.branding")}
                 </SelectItem>
 
-                <SelectItem value={t("contact.form.projectType.options.uiUx")}>
+                <SelectItem value="ui-ux">
                   {t("contact.form.projectType.options.uiUx")}
+                </SelectItem>
+
+                <SelectItem value="other">
+                  {t("contact.form.projectType.options.other")}
                 </SelectItem>
               </SelectContent>
             </Select>

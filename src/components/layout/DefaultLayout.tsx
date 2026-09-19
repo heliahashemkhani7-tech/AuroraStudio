@@ -8,11 +8,11 @@ export default function DefaultLayout() {
   const location = useLocation();
 
   const isHome = location.pathname === "/";
-  const isAdminLogin = location.pathname === "/admin/login";
+  const isAdminLogin = location.pathname === "/account/auth";
 
   return (
     <div className="flex flex-col gap-50">
-      <Nav />
+      {!isAdminLogin && <Nav />}
 
       <Outlet />
 

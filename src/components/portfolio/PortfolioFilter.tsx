@@ -51,7 +51,9 @@ export default function PortfolioFilter({
           <ToggleGroupItem
             className="rounded-xl px-5 py-2 data-[pressed]:bg-border data-[pressed]:text-text data-[pressed]:border-border"
             key={filter.category_id}
-            value={filter.categories[0]?.slug ?? ""}
+            value={
+              filter.category_id === 1 ? "all" : String(filter.category_id)
+            }
           >
             {filter.label}
           </ToggleGroupItem>

@@ -26,11 +26,11 @@ export default function AdminLogin() {
     setLoading(false);
 
     if (error) {
-      setError(t("admin.login.invalidCredentials"));
+      setError("admin.login.invalidCredentials");
       return;
     }
 
-    window.location.href = "/admin";
+    window.location.href = "/dashbord";
   };
 
   return (
@@ -56,7 +56,7 @@ export default function AdminLogin() {
               className="w-full rounded-md border border-border px-3 py-2"
             />
 
-            {error && <p className="text-sm text-red-500">{error}</p>}
+            {error && <p className="text-sm text-red-500">{t(error)}</p>}
 
             <Button type="submit" disabled={loading}>
               {loading
