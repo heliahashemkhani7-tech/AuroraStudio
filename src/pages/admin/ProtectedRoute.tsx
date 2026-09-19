@@ -24,7 +24,7 @@ export default function ProtectedRoute() {
   }
 
   if (!authenticated) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/account/auth" replace />;
   }
 
   return <Outlet />;

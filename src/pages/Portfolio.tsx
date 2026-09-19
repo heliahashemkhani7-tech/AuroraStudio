@@ -60,6 +60,13 @@ export default function Portfolio() {
   const [supabaseProjects, setSupabaseProjects] = useState<SupabaseProject[]>(
     []
   );
+
+  const filteredProjects =
+    activeFilter === "all"
+      ? supabaseProjects
+      : supabaseProjects.filter(
+          (project) => String(project.category_id) === activeFilter
+        );
   useEffect(() => {
     async function loadProjects() {
       setLoading(true);
@@ -113,7 +120,7 @@ export default function Portfolio() {
         />
 
         <section className="grid grid-cols-1 md:grid-cols-3 gap-y-7 p-4 gap-x-0 overflow-hidden justify-items-center mt-8 w-full mx-auto items-center">
-          {supabaseProjects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={{

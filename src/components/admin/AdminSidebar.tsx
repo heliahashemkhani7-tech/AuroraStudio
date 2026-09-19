@@ -6,7 +6,7 @@ export default function AdminSidebar() {
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate("/admin/login");
+    navigate("/account/auth");
   };
 
   return (
@@ -14,9 +14,9 @@ export default function AdminSidebar() {
       <h2 className="text-xl font-bold mb-8">Aurora Admin</h2>
 
       <nav className="flex flex-col gap-4">
-        <Link to="/admin">Dashboard</Link>
+        <Link to="/dashbord">Dashboard</Link>
 
-        <Link to="/admin/projects">Projects</Link>
+        <Link to="/dashbord/projects">Projects</Link>
 
         <button type="button" onClick={handleLogout} className="text-left">
           Logout
