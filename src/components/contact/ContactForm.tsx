@@ -3,12 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 import { Input } from "../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-} from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import ElectricBorder from "../animiations/ElectricBorder";
@@ -19,9 +14,7 @@ export default function ContactForm() {
 
   const projectTypeLabels = {
     "web-design": t("contact.form.projectType.options.webDesign"),
-    "web-development": t(
-      "contact.form.projectType.options.webDevelopment",
-    ),
+    "web-development": t("contact.form.projectType.options.webDevelopment"),
     branding: t("contact.form.projectType.options.branding"),
     "ui-ux": t("contact.form.projectType.options.uiUx"),
     other: t("contact.form.projectType.options.other"),
@@ -75,7 +68,7 @@ export default function ContactForm() {
 
             <Select
               value={projectType}
-              onValueChange={setProjectType}
+              onValueChange={(value) => setProjectType(value ?? "")}
             >
               <SelectTrigger
                 id="projectType"

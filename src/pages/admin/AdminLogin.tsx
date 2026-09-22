@@ -30,7 +30,7 @@ export default function AdminLogin() {
       return;
     }
 
-    window.location.href = "/dashbord";
+    window.location.href = "/dashboard";
   };
 
   return (
