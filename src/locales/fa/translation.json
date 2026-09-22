@@ -154,5 +154,12 @@
       "loggingIn": "در حال ورود...",
       "invalidCredentials": "ایمیل یا رمز عبور اشتباه است."
     }
+  },
+
+  "dashboard": {
+    "admin": "پنل مدیریت",
+    "dashboard": "داشبورد",
+    "projects": "پروژه‌ها",
+    "logout": "خروج"
   }
 }

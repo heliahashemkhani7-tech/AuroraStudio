@@ -37,7 +37,6 @@
     "btn": "View Project"
   },
 
-
   "nav": {
     "home": "Home",
     "about": "About",
@@ -155,5 +154,12 @@
       "loggingIn": "Logging in...",
       "invalidCredentials": "Invalid email or password."
     }
+  },
+
+  "dashboard": {
+    "admin": "Aurora Admin",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "logout": "Logout"
   }
 }

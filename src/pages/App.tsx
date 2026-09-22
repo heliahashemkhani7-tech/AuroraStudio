@@ -67,9 +67,9 @@ export default function App() {
         <Route path="/account/auth" element={<AdminLogin />} />
       </Route>
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashbord" element={<AdminLayout />}>
+        <Route path="/dashboard" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
-          <Route path="/dashbord/projects" element={<AdminProjects />} />
+          <Route path="/dashboard/projects" element={<AdminProjects />} />
         </Route>
       </Route>
     </Routes>
