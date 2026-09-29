@@ -8,6 +8,25 @@ type Filter = {
   }[];
 };
 
+export type BlogTranslation = {
+  id: number;
+  blog_id: number;
+  language_id: number;
+  title: string;
+  excerpt: string;
+  content: string;
+};
+
+export type Blog = {
+  id: number;
+  slug: string;
+  cover_image: string;
+  author: string;
+  published_at: string;
+  category_blog_id: number;
+  blog_translations: BlogTranslation[];
+};
+
 export async function getCategories(languageId: number): Promise<Filter[]> {
   const { data, error } = await supabase
     .from("category_translations")
@@ -104,4 +123,34 @@ export async function getProjectCard(projectId: number, languageId: number) {
   }
 
   return data;
+}
+
+export async function getBlogs(languageId: number) {
+  const { data, error } = await supabase
+    .from("blog")
+    .select(
+      `
+      id,
+      slug,
+      cover_image,
+      author,
+      published_at,
+      category_blog_id,
+      blog_translations (
+        id,
+        blog_id,
+        language_id,
+        title,
+        excerpt,
+        content
+      )
+    `
+    )
+    .eq("blog_translations.language_id", languageId);
+
+  if (error) {
+    throw error;
+  }
+
+  return data as Blog[];
 }

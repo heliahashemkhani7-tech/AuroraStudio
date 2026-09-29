@@ -41,7 +41,8 @@
     "home": "Home",
     "about": "About",
     "portfolio": "Portfolio",
-    "contact": "Contact"
+    "contact": "Contact",
+    "blog": "Blog"
   },
 
   "about": {
@@ -161,5 +162,11 @@
     "dashboard": "Dashboard",
     "projects": "Projects",
     "logout": "Logout"
+  },
+
+  "blog": {
+    "label": "Blog",
+    "title": "Insights & Ideas",
+    "description": "Discover articles, insights, and ideas about design, development, technology, and digital experiences."
   }
 }
