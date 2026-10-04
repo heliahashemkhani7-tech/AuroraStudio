@@ -15,8 +15,6 @@ const Blog = () => {
 
         const data = await getBlogs(languageId);
 
-        console.log("BLOGS:", data);
-
         setBlogs(data);
       } catch (error) {
         console.error("Error loading blogs:", error);
@@ -26,7 +24,7 @@ const Blog = () => {
     loadBlogs();
   }, [i18n.language]);
   return (
-    <Container className="z-4 text-text">
+    <Container className="z-4 text-text mt-30">
       <section className="">
         <p className="mb-3 text-sm uppercase">{t("blog.label")}</p>
 

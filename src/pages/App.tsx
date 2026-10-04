@@ -17,6 +17,7 @@ import AdminProjects from "./admin/AdminProjects";
 
 import AdminLayout from "@/components/layout/AdminLayout";
 import Blog from "./Blog";
+import BlogDetails from "./BlogDetails";
 
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
@@ -55,7 +56,7 @@ export default function App() {
           }
         />
 
-<Route
+        <Route
           path="/portfolio"
           element={
             <Suspense fallback={<PortfolioSkeleton />}>
@@ -63,7 +64,7 @@ export default function App() {
             </Suspense>
           }
         />
-          <Route
+        <Route
           path="/blog"
           element={
             <Suspense fallback={<PortfolioSkeleton />}>
@@ -71,6 +72,8 @@ export default function App() {
             </Suspense>
           }
         />
+
+        <Route path="/blog/:slug" element={<BlogDetails />} />
 
         <Route
           path="/portfolio/:slug"

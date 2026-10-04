@@ -154,3 +154,39 @@ export async function getBlogs(languageId: number) {
 
   return data as Blog[];
 }
+
+export const getBlogBySlug = async (
+  slug: string,
+  languageId: number
+): Promise<Blog | null> => {
+  const { data, error } = await supabase
+    .from("blog")
+    .select(
+      `
+      id,
+      slug,
+      cover_image,
+      author,
+      published_at,
+      category_blog_id,
+      blog_translations (
+        id,
+        blog_id,
+        language_id,
+        title,
+        excerpt,
+        content
+      )
+    `
+    )
+    .eq("slug", slug)
+    .eq("blog_translations.language_id", languageId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching blog:", error);
+    return null;
+  }
+
+  return data;
+};
