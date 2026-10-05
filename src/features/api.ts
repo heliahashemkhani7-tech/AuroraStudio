@@ -190,3 +190,56 @@ export const getBlogBySlug = async (
 
   return data;
 };
+
+export async function getAdminProjects() {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
+      id,
+      category_id,
+      name,
+      technology,
+live_url,
+      tech_stack,
+      overview_button_link,
+      highlight_links
+    `
+    )
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching admin projects:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function getDashboardStats() {
+  const [projectsResult, blogsResult, categoriesResult] = await Promise.all([
+    supabase.from("projects").select("id", { count: "exact", head: true }),
+
+    supabase.from("blog").select("id", { count: "exact", head: true }),
+
+    supabase.from("categories").select("id", { count: "exact", head: true }),
+  ]);
+
+  if (projectsResult.error) {
+    throw projectsResult.error;
+  }
+
+  if (blogsResult.error) {
+    throw blogsResult.error;
+  }
+
+  if (categoriesResult.error) {
+    throw categoriesResult.error;
+  }
+
+  return {
+    projects: projectsResult.count ?? 0,
+    blogs: blogsResult.count ?? 0,
+    categories: categoriesResult.count ?? 0,
+  };
+}

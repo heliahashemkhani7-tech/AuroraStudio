@@ -161,7 +161,22 @@
     "admin": "Aurora Admin",
     "dashboard": "Dashboard",
     "projects": "Projects",
-    "logout": "Logout"
+    "logout": "Logout",
+
+    "manageProjects": "Manage your portfolio projects.",
+    "addProject": "Add Project",
+    "noProjects": "No projects found.",
+    "projectsLoading": "Loading projects...",
+    "projectsError": "Failed to load projects.",
+    "editProject": "Edit project",
+    "deleteProject": "Delete project",
+
+    "loading": "Loading dashboard...",
+    "statsError": "Failed to load dashboard statistics.",
+    "dashboardDescription": "Overview of your website content.",
+    "totalProjects": "Total Projects",
+    "totalBlogs": "Total Blogs",
+    "totalCategories": "Total Categories"
   },
 
   "blog": {

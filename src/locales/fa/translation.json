@@ -158,10 +158,23 @@
   },
 
   "dashboard": {
-    "admin": "پنل مدیریت",
+    "admin": "مدیریت",
     "dashboard": "داشبورد",
     "projects": "پروژه‌ها",
-    "logout": "خروج"
+    "logout": "خروج",
+    "manageProjects": "پروژه‌های نمونه‌کار خود را مدیریت کنید.",
+    "addProject": "افزودن پروژه",
+    "noProjects": "پروژه‌ای پیدا نشد.",
+    "projectsLoading": "در حال بارگذاری پروژه‌ها...",
+    "projectsError": "بارگذاری پروژه‌ها با خطا مواجه شد.",
+    "editProject": "ویرایش پروژه",
+    "deleteProject": "حذف پروژه",
+    "loading": "در حال بارگذاری داشبورد...",
+    "statsError": "دریافت آمار داشبورد با خطا مواجه شد.",
+    "dashboardDescription": "نمای کلی محتوای وبسایت شما.",
+    "totalProjects": "تعداد پروژه‌ها",
+    "totalBlogs": "تعداد مقالات",
+    "totalCategories": "تعداد دسته‌بندی‌ها"
   },
 
   "blog": {
