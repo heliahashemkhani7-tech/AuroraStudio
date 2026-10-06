@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+
 import { Routes, Route } from "react-router-dom";
 
 import DefaultLayout from "@/components/layout/DefaultLayout";
@@ -8,11 +9,16 @@ import AboutSkeleton from "@/components/skeleton/AboutSkeleton";
 import ContactSkeleton from "@/components/skeleton/ContactSkeleton";
 import PortfolioSkeleton from "@/components/skeleton/PortfolioSkeleton";
 import ProjectDetailsSkeleton from "@/components/skeleton/ProjectDetailsSkeleton";
+
 import AdminLogin from "./admin/AdminLogin";
 import ProtectedRoute from "./admin/ProtectedRoute";
 import AdminDashboard from "./admin/AdminDashboard";
-import AdminLayout from "@/components/layout/AdminLayout";
 import AdminProjects from "./admin/AdminProjects";
+
+import AdminLayout from "@/components/layout/AdminLayout";
+import Blog from "./Blog";
+import BlogDetails from "./BlogDetails";
+import AdminProjectsForm from "./admin/AdminProjectsForm";
 
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
@@ -32,6 +38,7 @@ export default function App() {
             </Suspense>
           }
         />
+
         <Route
           path="/about"
           element={
@@ -40,6 +47,7 @@ export default function App() {
             </Suspense>
           }
         />
+
         <Route
           path="/contact"
           element={
@@ -48,6 +56,7 @@ export default function App() {
             </Suspense>
           }
         />
+
         <Route
           path="/portfolio"
           element={
@@ -57,6 +66,17 @@ export default function App() {
           }
         />
         <Route
+          path="/blog"
+          element={
+            <Suspense fallback={<PortfolioSkeleton />}>
+              <Blog />
+            </Suspense>
+          }
+        />
+
+        <Route path="/blog/:slug" element={<BlogDetails />} />
+
+        <Route
           path="/portfolio/:slug"
           element={
             <Suspense fallback={<ProjectDetailsSkeleton />}>
@@ -64,12 +84,15 @@ export default function App() {
             </Suspense>
           }
         />
+
         <Route path="/account/auth" element={<AdminLogin />} />
       </Route>
+
       <Route element={<ProtectedRoute />}>
         <Route path="/dashboard" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
-          <Route path="/dashboard/projects" element={<AdminProjects />} />
+          <Route path="projects" element={<AdminProjects />} />
+          <Route path="projects/new" element={<AdminProjectsForm />} />
         </Route>
       </Route>
     </Routes>

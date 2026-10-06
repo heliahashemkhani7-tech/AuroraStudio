@@ -17,6 +17,7 @@ export default function Nav() {
         { label: t("nav.about"), href: "/about" },
         { label: t("nav.portfolio"), href: "/portfolio" },
         { label: t("nav.contact"), href: "/contact" },
+        { label: t("nav.blog"), href: "/blog" },
       ]}
       activeHref={location.pathname}
     />

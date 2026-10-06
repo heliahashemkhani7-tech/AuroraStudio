@@ -41,7 +41,8 @@
     "home": "Home",
     "about": "About",
     "portfolio": "Portfolio",
-    "contact": "Contact"
+    "contact": "Contact",
+    "blog": "Blog"
   },
 
   "about": {
@@ -160,6 +161,27 @@
     "admin": "Aurora Admin",
     "dashboard": "Dashboard",
     "projects": "Projects",
-    "logout": "Logout"
+    "logout": "Logout",
+
+    "manageProjects": "Manage your portfolio projects.",
+    "addProject": "Add Project",
+    "noProjects": "No projects found.",
+    "projectsLoading": "Loading projects...",
+    "projectsError": "Failed to load projects.",
+    "editProject": "Edit project",
+    "deleteProject": "Delete project",
+
+    "loading": "Loading dashboard...",
+    "statsError": "Failed to load dashboard statistics.",
+    "dashboardDescription": "Overview of your website content.",
+    "totalProjects": "Total Projects",
+    "totalBlogs": "Total Blogs",
+    "totalCategories": "Total Categories"
+  },
+
+  "blog": {
+    "label": "Blog",
+    "title": "Insights & Ideas",
+    "description": "Discover articles, insights, and ideas about design, development, technology, and digital experiences."
   }
 }

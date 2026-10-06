@@ -8,6 +8,25 @@ type Filter = {
   }[];
 };
 
+export type BlogTranslation = {
+  id: number;
+  blog_id: number;
+  language_id: number;
+  title: string;
+  excerpt: string;
+  content: string;
+};
+
+export type Blog = {
+  id: number;
+  slug: string;
+  cover_image: string;
+  author: string;
+  published_at: string;
+  category_blog_id: number;
+  blog_translations: BlogTranslation[];
+};
+
 export async function getCategories(languageId: number): Promise<Filter[]> {
   const { data, error } = await supabase
     .from("category_translations")
@@ -104,4 +123,123 @@ export async function getProjectCard(projectId: number, languageId: number) {
   }
 
   return data;
+}
+
+export async function getBlogs(languageId: number) {
+  const { data, error } = await supabase
+    .from("blog")
+    .select(
+      `
+      id,
+      slug,
+      cover_image,
+      author,
+      published_at,
+      category_blog_id,
+      blog_translations (
+        id,
+        blog_id,
+        language_id,
+        title,
+        excerpt,
+        content
+      )
+    `
+    )
+    .eq("blog_translations.language_id", languageId);
+
+  if (error) {
+    throw error;
+  }
+
+  return data as Blog[];
+}
+
+export const getBlogBySlug = async (
+  slug: string,
+  languageId: number
+): Promise<Blog | null> => {
+  const { data, error } = await supabase
+    .from("blog")
+    .select(
+      `
+      id,
+      slug,
+      cover_image,
+      author,
+      published_at,
+      category_blog_id,
+      blog_translations (
+        id,
+        blog_id,
+        language_id,
+        title,
+        excerpt,
+        content
+      )
+    `
+    )
+    .eq("slug", slug)
+    .eq("blog_translations.language_id", languageId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching blog:", error);
+    return null;
+  }
+
+  return data;
+};
+
+export async function getAdminProjects() {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
+      id,
+      category_id,
+      name,
+      technology,
+live_url,
+      tech_stack,
+      overview_button_link,
+      highlight_links
+    `
+    )
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching admin projects:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function getDashboardStats() {
+  const [projectsResult, blogsResult, categoriesResult] = await Promise.all([
+    supabase.from("projects").select("id", { count: "exact", head: true }),
+
+    supabase.from("blog").select("id", { count: "exact", head: true }),
+
+    supabase.from("categories").select("id", { count: "exact", head: true }),
+  ]);
+
+  if (projectsResult.error) {
+    throw projectsResult.error;
+  }
+
+  if (blogsResult.error) {
+    throw blogsResult.error;
+  }
+
+  if (categoriesResult.error) {
+    throw categoriesResult.error;
+  }
+
+  return {
+    projects: projectsResult.count ?? 0,
+    blogs: blogsResult.count ?? 0,
+    categories: categoriesResult.count ?? 0,
+  };
 }
