@@ -93,6 +93,7 @@ export default function App() {
           <Route index element={<AdminDashboard />} />
           <Route path="projects" element={<AdminProjects />} />
           <Route path="projects/new" element={<AdminProjectsForm />} />
+          <Route path="projects/:id/edit" element={<AdminProjectsForm />} />
         </Route>
       </Route>
     </Routes>

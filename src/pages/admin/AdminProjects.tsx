@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { getAdminProjects } from "@/features/api";
 
@@ -17,6 +18,7 @@ type AdminProject = {
 
 export default function AdminProjects() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [projects, setProjects] = useState<AdminProject[]>([]);
   const [loading, setLoading] = useState(true);
@@ -59,6 +61,7 @@ export default function AdminProjects() {
 
         <button
           type="button"
+          onClick={() => navigate("/dashboard/projects/new")}
           className="flex items-center gap-2 rounded-lg bg-border px-4 py-2 text-sm font-medium text-text"
         >
           <Plus size={18} />
@@ -68,7 +71,7 @@ export default function AdminProjects() {
 
       <div className="overflow-hidden rounded-xl border border-border">
         {projects.length === 0 ? (
-          <div className="p-8 text-center text-muted-foreground">
+          <div className="p-8 text-center">
             {t("dashboard.noProjects")}
           </div>
         ) : (
@@ -81,7 +84,7 @@ export default function AdminProjects() {
                 <div className="min-w-0">
                   <h2 className="font-medium">{project.name}</h2>
 
-                  <p className="mt-1 text-sm ">
+                  <p className="mt-1 text-sm">
                     {project.technology}
                   </p>
                 </div>
@@ -89,7 +92,10 @@ export default function AdminProjects() {
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    className="rounded-md p-2 hover:bg-muted"
+                    onClick={() =>
+                      navigate(`/dashboard/projects/${project.id}/edit`)
+                    }
+                    className="rounded-md p-2"
                     aria-label={t("dashboard.editProject")}
                   >
                     <Pencil size={18} />

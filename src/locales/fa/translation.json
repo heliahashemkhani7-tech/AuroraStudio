@@ -158,22 +158,53 @@
   },
 
   "dashboard": {
-    "admin": "مدیریت",
+    "admin": "پنل مدیریت",
     "dashboard": "داشبورد",
     "projects": "پروژه‌ها",
     "logout": "خروج",
-    "manageProjects": "پروژه‌های نمونه‌کار خود را مدیریت کنید.",
+
+    "manageProjects": "مدیریت پروژه‌های نمونه‌کار.",
     "addProject": "افزودن پروژه",
     "noProjects": "پروژه‌ای پیدا نشد.",
     "projectsLoading": "در حال بارگذاری پروژه‌ها...",
     "projectsError": "بارگذاری پروژه‌ها با خطا مواجه شد.",
+
     "editProject": "ویرایش پروژه",
     "deleteProject": "حذف پروژه",
+
+    "backToProjects": "بازگشت به پروژه‌ها",
+    "addProjectDescription": "یک پروژه جدید به نمونه‌کارها اضافه کنید.",
+    "editProjectDescription": "اطلاعات این پروژه را ویرایش کنید.",
+
+    "projectName": "نام پروژه",
+    "projectNamePlaceholder": "نام پروژه را وارد کنید",
+
+    "category": "دسته‌بندی",
+    "categoryPlaceholder": "شناسه دسته‌بندی را وارد کنید",
+
+    "technology": "تکنولوژی",
+    "technologyPlaceholder": "دسته بندی را انتخاب کنید",
+
+    "liveUrl": "لینک وب‌سایت",
+
+    "techStack": "تکنولوژی‌های استفاده‌شده",
+    "techStackHint": "تکنولوژی‌ها را با کاما از هم جدا کنید.",
+
+    "overviewButtonLink": "لینک دکمه معرفی پروژه",
+
+    "highlightLinks": "لینک‌های بخش ویژگی‌ها",
+    "highlightLinksHint": "لینک تصاویر یا محتوا را هر کدام در یک خط وارد کنید.",
+
+    "cancel": "لغو",
+    "saving": "در حال ذخیره...",
+    "createProject": "ایجاد پروژه",
+    "updateProject": "ذخیره تغییرات",
+
     "loading": "در حال بارگذاری داشبورد...",
     "statsError": "دریافت آمار داشبورد با خطا مواجه شد.",
-    "dashboardDescription": "نمای کلی محتوای وبسایت شما.",
+    "dashboardDescription": "نمای کلی محتوای وب‌سایت.",
     "totalProjects": "تعداد پروژه‌ها",
-    "totalBlogs": "تعداد مقالات",
+    "totalBlogs": "تعداد وبلاگ‌ها",
     "totalCategories": "تعداد دسته‌بندی‌ها"
   },
 

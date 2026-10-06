@@ -243,3 +243,57 @@ export async function getDashboardStats() {
     categories: categoriesResult.count ?? 0,
   };
 }
+
+export async function createAdminProject(project: {
+  category_id: number;
+  name: string;
+  technology: string;
+  live_url: string;
+  tech_stack: string[];
+  overview_button_link: string;
+  highlight_links: string[];
+}) {
+  const { data, error } = await supabase
+    .from("projects")
+    .insert({
+      category_id: project.category_id,
+      name: project.name,
+      technology: project.technology,
+      live_url: project.live_url,
+      tech_stack: project.tech_stack,
+      overview_button_link: project.overview_button_link,
+      highlight_links: project.highlight_links,
+    })
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error creating project:", error);
+    throw error;
+  }
+
+  return data;
+}
+
+export async function getAdminCategories(languageId: number) {
+  const { data, error } = await supabase
+    .from("category_translations")
+    .select(
+      `
+      category_id,
+      name,
+      categories (
+        id,
+        slug
+      )
+    `
+    )
+    .eq("language_id", languageId);
+
+  if (error) {
+    console.error("Error fetching admin categories:", error);
+    throw error;
+  }
+
+  return data;
+}
