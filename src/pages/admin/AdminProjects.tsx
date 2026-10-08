@@ -3,7 +3,7 @@ import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { getAdminProjects } from "@/features/api";
+import { deleteAdminProject, getAdminProjects } from "@/features/api";
 
 type AdminProject = {
   id: number;
@@ -39,7 +39,21 @@ export default function AdminProjects() {
 
     loadProjects();
   }, [t]);
+  const handleDelete = async (id: number) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this project?"
+    );
 
+    if (!confirmed) return;
+
+    try {
+      await deleteAdminProject(id);
+
+      setProjects((prev) => prev.filter((project) => project.id !== id));
+    } catch (error) {
+      console.error("Failed to delete project:", error);
+    }
+  };
   if (loading) {
     return <div className="text-text">{t("dashboard.projectsLoading")}</div>;
   }
@@ -71,9 +85,7 @@ export default function AdminProjects() {
 
       <div className="overflow-hidden rounded-xl border border-border">
         {projects.length === 0 ? (
-          <div className="p-8 text-center">
-            {t("dashboard.noProjects")}
-          </div>
+          <div className="p-8 text-center">{t("dashboard.noProjects")}</div>
         ) : (
           <div className="divide-y divide-border">
             {projects.map((project) => (
@@ -84,9 +96,7 @@ export default function AdminProjects() {
                 <div className="min-w-0">
                   <h2 className="font-medium">{project.name}</h2>
 
-                  <p className="mt-1 text-sm">
-                    {project.technology}
-                  </p>
+                  <p className="mt-1 text-sm">{project.technology}</p>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -105,6 +115,7 @@ export default function AdminProjects() {
                     type="button"
                     className="rounded-md p-2 text-red-500"
                     aria-label={t("dashboard.deleteProject")}
+                    onClick={() => handleDelete(project.id)}
                   >
                     <Trash2 size={18} />
                   </button>

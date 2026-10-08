@@ -154,6 +154,18 @@
       "loginButton": "ورود",
       "loggingIn": "در حال ورود...",
       "invalidCredentials": "ایمیل یا رمز عبور اشتباه است."
+    },
+
+    "projects": {
+      "form": {
+        "projectHighlights": {
+          "title": "ویژگی‌های پروژه",
+          "description": "مسیر تصاویر یا لینک‌های مربوط به ویژگی‌های پروژه را اضافه کنید.",
+          "placeholder": "nexus/nexus-highlight-1.png",
+          "add": "افزودن ویژگی",
+          "remove": "حذف ویژگی"
+        }
+      }
     }
   },
 

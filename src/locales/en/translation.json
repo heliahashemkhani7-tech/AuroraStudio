@@ -154,59 +154,70 @@
       "loginButton": "Login",
       "loggingIn": "Logging in...",
       "invalidCredentials": "Invalid email or password."
+    },
+    "projects": {
+      "form": {
+        "projectHighlights": {
+          "title": "Project Highlights",
+          "description": "Add highlight image paths or links.",
+          "placeholder": "nexus/nexus-highlight-1.png",
+          "add": "Add highlight",
+          "remove": "Remove highlight"
+        }
+      }
     }
   },
 
- "dashboard": {
-  "admin": "Aurora Admin",
-  "dashboard": "Dashboard",
-  "projects": "Projects",
-  "logout": "Logout",
+  "dashboard": {
+    "admin": "Aurora Admin",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "logout": "Logout",
 
-  "manageProjects": "Manage your portfolio projects.",
-  "addProject": "Add Project",
-  "noProjects": "No projects found.",
-  "projectsLoading": "Loading projects...",
-  "projectsError": "Failed to load projects.",
+    "manageProjects": "Manage your portfolio projects.",
+    "addProject": "Add Project",
+    "noProjects": "No projects found.",
+    "projectsLoading": "Loading projects...",
+    "projectsError": "Failed to load projects.",
 
-  "editProject": "Edit project",
-  "deleteProject": "Delete project",
+    "editProject": "Edit project",
+    "deleteProject": "Delete project",
 
-  "backToProjects": "Back to projects",
-  "addProjectDescription": "Create a new project for your portfolio.",
-  "editProjectDescription": "Update the information of this project.",
+    "backToProjects": "Back to projects",
+    "addProjectDescription": "Create a new project for your portfolio.",
+    "editProjectDescription": "Update the information of this project.",
 
-  "projectName": "Project Name",
-  "projectNamePlaceholder": "Enter project name",
+    "projectName": "Project Name",
+    "projectNamePlaceholder": "Enter project name",
 
-  "category": "Category",
-  "categoryPlaceholder": "Select category",
+    "category": "Category",
+    "categoryPlaceholder": "Select category",
 
-  "technology": "Technology",
-  "technologyPlaceholder": "e.g. Web Design, Web Development",
+    "technology": "Technology",
+    "technologyPlaceholder": "e.g. Web Design, Web Development",
 
-  "liveUrl": "Live URL",
+    "liveUrl": "Live URL",
 
-  "techStack": "Tech Stack",
-  "techStackHint": "Separate technologies with commas.",
+    "techStack": "Tech Stack",
+    "techStackHint": "Separate technologies with commas.",
 
-  "overviewButtonLink": "Overview Button Link",
+    "overviewButtonLink": "Overview Button Link",
 
-  "highlightLinks": "Highlight Links",
-  "highlightLinksHint": "Enter image or content links, one per line.",
+    "highlightLinks": "Highlight Links",
+    "highlightLinksHint": "Enter image or content links, one per line.",
 
-  "cancel": "Cancel",
-  "saving": "Saving...",
-  "createProject": "Create Project",
-  "updateProject": "Update Project",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "createProject": "Create Project",
+    "updateProject": "Update Project",
 
-  "loading": "Loading dashboard...",
-  "statsError": "Failed to load dashboard statistics.",
-  "dashboardDescription": "Overview of your website content.",
-  "totalProjects": "Total Projects",
-  "totalBlogs": "Total Blogs",
-  "totalCategories": "Total Categories"
-},
+    "loading": "Loading dashboard...",
+    "statsError": "Failed to load dashboard statistics.",
+    "dashboardDescription": "Overview of your website content.",
+    "totalProjects": "Total Projects",
+    "totalBlogs": "Total Blogs",
+    "totalCategories": "Total Categories"
+  },
 
   "blog": {
     "label": "Blog",

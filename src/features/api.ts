@@ -297,3 +297,109 @@ export async function getAdminCategories(languageId: number) {
 
   return data;
 }
+
+export async function getAdminProjectById(projectId: number) {
+  const [projectResult, translationsResult, cardsResult] = await Promise.all([
+    supabase
+      .from("projects")
+      .select(
+        `
+          id,
+          slug,
+          category_id,
+          live_url,
+          name,
+          technology,
+          tech_stack,
+          overview_button_link,
+          highlight_links
+        `
+      )
+      .eq("id", projectId)
+      .single(),
+
+    supabase
+      .from("project_translations")
+      .select(
+        `
+          id,
+          project_id,
+          language_id,
+          description,
+          detail,
+          overview_paragraphs
+        `
+      )
+      .eq("project_id", projectId),
+
+    supabase
+      .from("project_card")
+      .select(
+        `
+          id,
+          project_id,
+          language_id,
+          label,
+          value
+        `
+      )
+      .eq("project_id", projectId),
+  ]);
+
+  if (projectResult.error) throw projectResult.error;
+  if (translationsResult.error) throw translationsResult.error;
+  if (cardsResult.error) throw cardsResult.error;
+
+  return {
+    ...projectResult.data,
+    project_translations: translationsResult.data ?? [],
+    project_card: cardsResult.data ?? [],
+  };
+}
+
+export async function deleteAdminProject(projectId: number) {
+  const { error } = await supabase
+    .from("projects")
+    .delete()
+    .eq("id", projectId);
+
+  if (error) {
+    console.error("Error deleting project:", error);
+    throw error;
+  }
+}
+
+export async function updateAdminProject(
+  projectId: number,
+  project: {
+    category_id: number;
+    name: string;
+    technology: string;
+    live_url: string;
+    tech_stack: string[];
+    overview_button_link: string;
+    highlight_links: string[];
+  }
+) {
+  const { data, error } = await supabase
+    .from("projects")
+    .update({
+      category_id: project.category_id,
+      name: project.name,
+      technology: project.technology,
+      live_url: project.live_url,
+      tech_stack: project.tech_stack,
+      overview_button_link: project.overview_button_link,
+      highlight_links: project.highlight_links,
+    })
+    .eq("id", projectId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error updating project:", error);
+    throw error;
+  }
+
+  return data;
+}

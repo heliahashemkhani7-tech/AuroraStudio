@@ -1,39 +1,20 @@
 import { useEffect, useState } from "react";
-
-import { ArrowLeft, Plus, Trash2 } from "lucide-react";
-
+import type { ChangeEvent, FormEvent } from "react";
+import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import { useTranslation } from "react-i18next";
 
-import { createAdminProject, getAdminCategories } from "@/features/api";
+import {
+  createAdminProject,
+  getAdminCategories,
+  getAdminProjectById,
+  updateAdminProject,
+} from "@/features/api";
 
-type Category = {
-  category_id: number;
-  name: string;
-};
-
-type ProjectFormData = {
-  name: string;
-  category_id: string;
-  technology: string;
-  live_url: string;
-  tech_stack: string[];
-  overview_button_link: string;
-  description_en: string;
-  detail_en: string;
-  overview_paragraphs_en: string;
-  client_en: string;
-  role_en: string;
-  year_en: string;
-  description_fa: string;
-  detail_fa: string;
-  overview_paragraphs_fa: string;
-  client_fa: string;
-  role_fa: string;
-  year_fa: string;
-  highlight_links: string[];
-};
+import ProjectBasicInfo from "./ProjectBasicInfo";
+import ProjectContent from "./ProjectContent";
+import ProjectHighlights from "./ProjectHighlights";
+import type { Category, ProjectFormData } from "./types";
 
 const initialFormData: ProjectFormData = {
   name: "",
@@ -42,18 +23,21 @@ const initialFormData: ProjectFormData = {
   live_url: "",
   tech_stack: [],
   overview_button_link: "",
+
   description_en: "",
   detail_en: "",
   overview_paragraphs_en: "",
   client_en: "",
   role_en: "",
   year_en: "",
+
   description_fa: "",
   detail_fa: "",
   overview_paragraphs_fa: "",
   client_fa: "",
   role_fa: "",
   year_fa: "",
+
   highlight_links: [],
 };
 
@@ -72,16 +56,21 @@ export default function AdminProjectsForm() {
   const [techInput, setTechInput] = useState("");
   const [highlightInput, setHighlightInput] = useState("");
 
+  // -------------------------
+  // Categories
+  // -------------------------
+
   useEffect(() => {
     async function loadCategories() {
       try {
         const languageId = i18n.language === "fa" ? 2 : 1;
+
         const data = await getAdminCategories(languageId);
 
         setCategories(
           data.map((category) => ({
             category_id: category.category_id,
-            name: category.name,
+            name: category.label,
           }))
         );
       } catch (error) {
@@ -92,8 +81,99 @@ export default function AdminProjectsForm() {
     loadCategories();
   }, [i18n.language]);
 
+  // -------------------------
+  // Edit project
+  // -------------------------
+
+  useEffect(() => {
+    if (!isEditMode || !id) return;
+
+    async function loadProject() {
+      try {
+        setLoading(true);
+
+        const project = await getAdminProjectById(Number(id));
+
+        const englishTranslation = project.project_translations.find(
+          (translation) => translation.language_id === 1
+        );
+
+        const persianTranslation = project.project_translations.find(
+          (translation) => translation.language_id === 2
+        );
+
+        const englishCards = project.project_card.filter(
+          (card) => card.language_id === 1
+        );
+
+        const persianCards = project.project_card.filter(
+          (card) => card.language_id === 2
+        );
+
+        const getCardValue = (cards: typeof englishCards, label: string) => {
+          return (
+            cards.find(
+              (card) => card.label.toLowerCase() === label.toLowerCase()
+            )?.value ?? ""
+          );
+        };
+
+        setFormData({
+          name: project.name ?? "",
+          category_id: String(project.category_id ?? ""),
+          technology: project.technology ?? "",
+          live_url: project.live_url ?? "",
+
+          tech_stack:
+            Array.isArray(project.tech_stack) &&
+            project.tech_stack.every(
+              (item): item is string => typeof item === "string"
+            )
+              ? project.tech_stack
+              : [],
+
+          overview_button_link: project.overview_button_link ?? "",
+
+          description_en: englishTranslation?.description ?? "",
+          detail_en: englishTranslation?.detail ?? "",
+          overview_paragraphs_en: englishTranslation?.overview_paragraphs ?? "",
+
+          client_en: getCardValue(englishCards, "CLIENT"),
+          role_en: getCardValue(englishCards, "ROLE"),
+          year_en: getCardValue(englishCards, "YEAR"),
+
+          description_fa: persianTranslation?.description ?? "",
+          detail_fa: persianTranslation?.detail ?? "",
+          overview_paragraphs_fa: persianTranslation?.overview_paragraphs ?? "",
+
+          client_fa: getCardValue(persianCards, "مشتری"),
+          role_fa: getCardValue(persianCards, "نقش"),
+          year_fa: getCardValue(persianCards, "سال"),
+
+          highlight_links:
+            Array.isArray(project.highlight_links) &&
+            project.highlight_links.every(
+              (item): item is string => typeof item === "string"
+            )
+              ? project.highlight_links
+              : [],
+        });
+      } catch (error) {
+        console.error("Error loading project:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProject();
+  }, [id, isEditMode]);
+
+  // -------------------------
+  // Input handlers
+  // -------------------------
+
   function handleChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const { name, value } = event.target;
 
@@ -103,12 +183,16 @@ export default function AdminProjectsForm() {
     }));
   }
 
-  function handleCategoryChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
     setFormData((prev) => ({
       ...prev,
       category_id: event.target.value,
     }));
   }
+
+  // -------------------------
+  // Tech stack
+  // -------------------------
 
   function addTechStack() {
     const value = techInput.trim();
@@ -126,9 +210,13 @@ export default function AdminProjectsForm() {
   function removeTechStack(index: number) {
     setFormData((prev) => ({
       ...prev,
-      tech_stack: prev.tech_stack.filter((_, i) => i !== index),
+      tech_stack: prev.tech_stack.filter((_, itemIndex) => itemIndex !== index),
     }));
   }
+
+  // -------------------------
+  // Highlights
+  // -------------------------
 
   function addHighlight() {
     const value = highlightInput.trim();
@@ -146,17 +234,23 @@ export default function AdminProjectsForm() {
   function removeHighlight(index: number) {
     setFormData((prev) => ({
       ...prev,
-      highlight_links: prev.highlight_links.filter((_, i) => i !== index),
+      highlight_links: prev.highlight_links.filter(
+        (_, itemIndex) => itemIndex !== index
+      ),
     }));
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  // -------------------------
+  // Submit
+  // -------------------------
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
       setLoading(true);
 
-      await createAdminProject({
+      const projectData = {
         category_id: Number(formData.category_id),
         name: formData.name,
         technology: formData.technology,
@@ -164,429 +258,99 @@ export default function AdminProjectsForm() {
         tech_stack: formData.tech_stack,
         overview_button_link: formData.overview_button_link,
         highlight_links: formData.highlight_links,
-      });
+      };
+
+      if (isEditMode && id) {
+        await updateAdminProject(Number(id), projectData);
+      } else {
+        await createAdminProject(projectData);
+      }
 
       navigate("/dashboard/projects");
     } catch (error) {
-      console.error("Error creating project:", error);
+      console.error(
+        isEditMode ? "Error updating project:" : "Error creating project:",
+        error
+      );
     } finally {
       setLoading(false);
     }
   }
 
+  // -------------------------
+  // Render
+  // -------------------------
+
   return (
-    <section className="space-y-8">
+    <div className="space-y-6">
       <div className="flex items-center gap-3">
         <button
           type="button"
           onClick={() => navigate("/dashboard/projects")}
-          className="rounded-md p-2 hover:bg-muted"
-          aria-label={t("dashboard.backToProjects")}
+          className="rounded-lg border border-border p-2"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={18} />
         </button>
 
         <div>
           <h1 className="text-2xl font-semibold">
             {isEditMode
-              ? t("dashboard.editProject")
-              : t("dashboard.addProject")}
+              ? t("admin.projects.form.editTitle")
+              : t("admin.projects.form.createTitle")}
           </h1>
 
           <p className="mt-1 text-sm text-muted-foreground">
             {isEditMode
-              ? t("dashboard.editProjectDescription")
-              : t("dashboard.addProjectDescription")}
+              ? t("admin.projects.form.editDescription")
+              : t("admin.projects.form.createDescription")}
           </p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="space-y-6 rounded-xl border border-border p-6">
-          <div>
-            <h2 className="text-lg font-semibold">Project Information</h2>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <ProjectBasicInfo
+          formData={formData}
+          categories={categories}
+          techInput={techInput}
+          onChange={handleChange}
+          onCategoryChange={handleCategoryChange}
+          onTechInputChange={setTechInput}
+          onAddTechStack={addTechStack}
+          onRemoveTechStack={removeTechStack}
+        />
 
-            <p className="mt-1 text-sm text-muted-foreground">
-              Basic information about the project.
-            </p>
-          </div>
+        <ProjectContent formData={formData} onChange={handleChange} />
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-medium">
-                {t("dashboard.projectName")}
-              </label>
+        <ProjectHighlights
+          formData={formData}
+          highlightInput={highlightInput}
+          onHighlightInputChange={setHighlightInput}
+          onAddHighlight={addHighlight}
+          onRemoveHighlight={removeHighlight}
+        />
 
-              <input
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder={t("dashboard.projectNamePlaceholder")}
-                className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-                required
-              />
-            </div>
-
-            {/* Category */}
-            <div className="space-y-2">
-              <label htmlFor="category_id" className="text-sm font-medium">
-                {t("dashboard.category")}
-              </label>
-
-              <select
-                id="category_id"
-                value={formData.category_id}
-                onChange={handleCategoryChange}
-                className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-                required
-              >
-                <option value="">{t("dashboard.categoryPlaceholder")}</option>
-
-                {categories.map((category) => (
-                  <option
-                    key={category.category_id}
-                    value={category.category_id}
-                  >
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="technology" className="text-sm font-medium">
-                {t("dashboard.technology")}
-              </label>
-
-              <input
-                id="technology"
-                name="technology"
-                value={formData.technology}
-                onChange={handleChange}
-                placeholder={t("dashboard.technologyPlaceholder")}
-                className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="live_url" className="text-sm font-medium">
-                {t("dashboard.liveUrl")}
-              </label>
-
-              <input
-                id="live_url"
-                name="live_url"
-                type="url"
-                value={formData.live_url}
-                onChange={handleChange}
-                placeholder="https://example.com"
-                className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-          </div>
-
-          {/* Overview Link */}
-          <div className="space-y-2">
-            <label
-              htmlFor="overview_button_link"
-              className="text-sm font-medium"
-            >
-              {t("dashboard.overviewButtonLink")}
-            </label>
-
-            <input
-              id="overview_button_link"
-              name="overview_button_link"
-              type="url"
-              value={formData.overview_button_link}
-              onChange={handleChange}
-              placeholder="https://example.com"
-              className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-            />
-          </div>
-
-          {/* Tech Stack */}
-          <div className="space-y-3">
-            <label className="text-sm font-medium">
-              {t("dashboard.techStack")}
-            </label>
-
-            <div className="flex gap-2">
-              <input
-                value={techInput}
-                onChange={(event) => setTechInput(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    event.preventDefault();
-                    addTechStack();
-                  }
-                }}
-                placeholder="React"
-                className="flex-1 rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-
-              <button
-                type="button"
-                onClick={addTechStack}
-                className="rounded-lg border border-border px-3"
-              >
-                <Plus size={18} />
-              </button>
-            </div>
-
-            {formData.tech_stack.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {formData.tech_stack.map((tech, index) => (
-                  <div
-                    key={`${tech}-${index}`}
-                    className="flex items-center gap-2 rounded-full border border-border px-3 py-1 text-sm"
-                  >
-                    <span>{tech}</span>
-
-                    <button
-                      type="button"
-                      onClick={() => removeTechStack(index)}
-                    >
-                      <Trash2 size={14} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="space-y-6 rounded-xl border border-border p-6">
-          <div>
-            <h2 className="text-lg font-semibold">English Content</h2>
-          </div>
-
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <label htmlFor="description_en" className="text-sm font-medium">
-                Description
-              </label>
-
-              <textarea
-                id="description_en"
-                name="description_en"
-                value={formData.description_en}
-                onChange={handleChange}
-                rows={3}
-                className="w-full resize-none rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="detail_en" className="text-sm font-medium">
-                Detail
-              </label>
-
-              <textarea
-                id="detail_en"
-                name="detail_en"
-                value={formData.detail_en}
-                onChange={handleChange}
-                rows={5}
-                className="w-full resize-none rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label
-                htmlFor="overview_paragraphs_en"
-                className="text-sm font-medium"
-              >
-                Overview Paragraphs
-              </label>
-
-              <textarea
-                id="overview_paragraphs_en"
-                name="overview_paragraphs_en"
-                value={formData.overview_paragraphs_en}
-                onChange={handleChange}
-                rows={6}
-                className="w-full resize-none rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              <input
-                name="client_en"
-                value={formData.client_en}
-                onChange={handleChange}
-                placeholder="Client"
-                className="rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-
-              <input
-                name="role_en"
-                value={formData.role_en}
-                onChange={handleChange}
-                placeholder="Role"
-                className="rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-
-              <input
-                name="year_en"
-                value={formData.year_en}
-                onChange={handleChange}
-                placeholder="Year"
-                className="rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-6 rounded-xl border border-border p-6">
-          <div>
-            <h2 className="text-lg font-semibold">Persian Content</h2>
-          </div>
-
-          <div className="space-y-6" dir="rtl">
-            <div className="space-y-2">
-              <label htmlFor="description_fa" className="text-sm font-medium">
-                توضیح کوتاه
-              </label>
-
-              <textarea
-                id="description_fa"
-                name="description_fa"
-                value={formData.description_fa}
-                onChange={handleChange}
-                rows={3}
-                className="w-full resize-none rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label htmlFor="detail_fa" className="text-sm font-medium">
-                جزئیات
-              </label>
-
-              <textarea
-                id="detail_fa"
-                name="detail_fa"
-                value={formData.detail_fa}
-                onChange={handleChange}
-                rows={5}
-                className="w-full resize-none rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label
-                htmlFor="overview_paragraphs_fa"
-                className="text-sm font-medium"
-              >
-                پاراگراف‌های معرفی
-              </label>
-
-              <textarea
-                id="overview_paragraphs_fa"
-                name="overview_paragraphs_fa"
-                value={formData.overview_paragraphs_fa}
-                onChange={handleChange}
-                rows={6}
-                className="w-full resize-none rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              <input
-                name="client_fa"
-                value={formData.client_fa}
-                onChange={handleChange}
-                placeholder="مشتری"
-                className="rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-
-              <input
-                name="role_fa"
-                value={formData.role_fa}
-                onChange={handleChange}
-                placeholder="نقش"
-                className="rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-
-              <input
-                name="year_fa"
-                value={formData.year_fa}
-                onChange={handleChange}
-                placeholder="سال"
-                className="rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="space-y-6 rounded-xl border border-border p-6">
-          <div>
-            <h2 className="text-lg font-semibold">Project Highlights</h2>
-
-            <p className="mt-1 text-sm text-muted-foreground">
-              Add highlight image paths or links.
-            </p>
-          </div>
-
-          <div className="flex gap-2">
-            <input
-              value={highlightInput}
-              onChange={(event) => setHighlightInput(event.target.value)}
-              placeholder="nexus/nexus-highlight-1.png"
-              className="flex-1 rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
-            />
-
-            <button
-              type="button"
-              onClick={addHighlight}
-              className="rounded-lg border border-border px-3"
-            >
-              <Plus size={18} />
-            </button>
-          </div>
-
-          {formData.highlight_links.length > 0 && (
-            <div className="space-y-2">
-              {formData.highlight_links.map((link, index) => (
-                <div
-                  key={`${link}-${index}`}
-                  className="flex items-center justify-between rounded-lg border border-border px-3 py-2 text-sm"
-                >
-                  <span className="truncate">{link}</span>
-
-                  <button type="button" onClick={() => removeHighlight(index)}>
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="flex justify-end gap-3 border-t border-border pt-6">
+        <div className="flex justify-end gap-3">
           <button
             type="button"
             onClick={() => navigate("/dashboard/projects")}
-            className="rounded-lg border border-border px-4 py-2 text-sm"
+            className="rounded-lg border border-border px-5 py-2.5"
           >
-            {t("dashboard.cancel")}
+            {t("common.cancel")}
           </button>
 
           <button
             type="submit"
             disabled={loading}
-            className="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-primary-foreground disabled:opacity-50"
+            className="rounded-lg bg-primary px-5 py-2.5 text-primary-foreground disabled:opacity-50"
           >
             {loading
-              ? t("dashboard.saving")
+              ? t("common.saving")
               : isEditMode
-              ? t("dashboard.updateProject")
-              : t("dashboard.createProject")}
+              ? t("common.update")
+              : t("common.create")}
           </button>
         </div>
       </form>
-    </section>
+    </div>
   );
 }
