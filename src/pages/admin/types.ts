@@ -9,7 +9,7 @@ export type ProjectFormData = {
   technology: string;
   live_url: string;
   tech_stack: string[];
-  overview_button_link: string[];
+  overview_button_link: string;
 
   description_en: string;
   detail_en: string;

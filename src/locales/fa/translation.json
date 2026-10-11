@@ -217,7 +217,15 @@
     "dashboardDescription": "نمای کلی محتوای وب‌سایت.",
     "totalProjects": "تعداد پروژه‌ها",
     "totalBlogs": "تعداد وبلاگ‌ها",
-    "totalCategories": "تعداد دسته‌بندی‌ها"
+    "totalCategories": "تعداد دسته‌بندی‌ها",
+
+    "blog": "وبلاگ",
+    "blogList": "لیست مطالب",
+    "newBlog": "مطلب جدید",
+    "blogCategories": "دسته‌بندی‌ها",
+    "projectList": "لیست پروژه‌ها",
+    "newProject": "پروژه جدید",
+    "projectCategories": "دسته‌بندی‌ها"
   },
 
   "blog": {

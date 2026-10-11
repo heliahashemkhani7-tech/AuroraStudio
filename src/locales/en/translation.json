@@ -216,7 +216,15 @@
     "dashboardDescription": "Overview of your website content.",
     "totalProjects": "Total Projects",
     "totalBlogs": "Total Blogs",
-    "totalCategories": "Total Categories"
+    "totalCategories": "Total Categories",
+    
+    "blog": "Blog",
+    "blogList": "All Posts",
+    "newBlog": "New Post",
+    "blogCategories": "Categories",
+    "projectList": "All Projects",
+    "newProject": "New Project",
+    "projectCategories": "Categories"
   },
 
   "blog": {

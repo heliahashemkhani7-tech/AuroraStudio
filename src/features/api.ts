@@ -245,6 +245,7 @@ export async function getDashboardStats() {
 }
 
 export async function createAdminProject(project: {
+  slug: string;
   category_id: number;
   name: string;
   technology: string;
@@ -256,6 +257,7 @@ export async function createAdminProject(project: {
   const { data, error } = await supabase
     .from("projects")
     .insert({
+      slug: project.slug,
       category_id: project.category_id,
       name: project.name,
       technology: project.technology,
@@ -283,7 +285,6 @@ export async function getAdminCategories(languageId: number) {
       category_id,
       name,
       categories (
-        id,
         slug
       )
     `
@@ -297,7 +298,6 @@ export async function getAdminCategories(languageId: number) {
 
   return data;
 }
-
 export async function getAdminProjectById(projectId: number) {
   const [projectResult, translationsResult, cardsResult] = await Promise.all([
     supabase
@@ -372,6 +372,7 @@ export async function deleteAdminProject(projectId: number) {
 export async function updateAdminProject(
   projectId: number,
   project: {
+    slug: string;
     category_id: number;
     name: string;
     technology: string;
@@ -384,6 +385,7 @@ export async function updateAdminProject(
   const { data, error } = await supabase
     .from("projects")
     .update({
+      slug: project.slug,
       category_id: project.category_id,
       name: project.name,
       technology: project.technology,

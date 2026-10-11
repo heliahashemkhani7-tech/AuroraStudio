@@ -15,6 +15,7 @@ import ProjectBasicInfo from "./ProjectBasicInfo";
 import ProjectContent from "./ProjectContent";
 import ProjectHighlights from "./ProjectHighlights";
 import type { Category, ProjectFormData } from "./types";
+import { slugify } from "@/lib/slugify";
 
 const initialFormData: ProjectFormData = {
   name: "",
@@ -56,10 +57,6 @@ export default function AdminProjectsForm() {
   const [techInput, setTechInput] = useState("");
   const [highlightInput, setHighlightInput] = useState("");
 
-  // -------------------------
-  // Categories
-  // -------------------------
-
   useEffect(() => {
     async function loadCategories() {
       try {
@@ -70,7 +67,7 @@ export default function AdminProjectsForm() {
         setCategories(
           data.map((category) => ({
             category_id: category.category_id,
-            name: category.label,
+            name: category.name,
           }))
         );
       } catch (error) {
@@ -80,10 +77,6 @@ export default function AdminProjectsForm() {
 
     loadCategories();
   }, [i18n.language]);
-
-  // -------------------------
-  // Edit project
-  // -------------------------
 
   useEffect(() => {
     if (!isEditMode || !id) return;
@@ -168,10 +161,6 @@ export default function AdminProjectsForm() {
     loadProject();
   }, [id, isEditMode]);
 
-  // -------------------------
-  // Input handlers
-  // -------------------------
-
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
@@ -189,10 +178,6 @@ export default function AdminProjectsForm() {
       category_id: event.target.value,
     }));
   }
-
-  // -------------------------
-  // Tech stack
-  // -------------------------
 
   function addTechStack() {
     const value = techInput.trim();
@@ -213,10 +198,6 @@ export default function AdminProjectsForm() {
       tech_stack: prev.tech_stack.filter((_, itemIndex) => itemIndex !== index),
     }));
   }
-
-  // -------------------------
-  // Highlights
-  // -------------------------
 
   function addHighlight() {
     const value = highlightInput.trim();
@@ -240,10 +221,6 @@ export default function AdminProjectsForm() {
     }));
   }
 
-  // -------------------------
-  // Submit
-  // -------------------------
-
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -251,6 +228,7 @@ export default function AdminProjectsForm() {
       setLoading(true);
 
       const projectData = {
+        slug: slugify(formData.name),
         category_id: Number(formData.category_id),
         name: formData.name,
         technology: formData.technology,
@@ -295,14 +273,14 @@ export default function AdminProjectsForm() {
         <div>
           <h1 className="text-2xl font-semibold">
             {isEditMode
-              ? t("admin.projects.form.editTitle")
-              : t("admin.projects.form.createTitle")}
+              ? t("dashboard.editProject")
+              : t("dashboard.addProject")}
           </h1>
 
           <p className="mt-1 text-sm text-muted-foreground">
             {isEditMode
-              ? t("admin.projects.form.editDescription")
-              : t("admin.projects.form.createDescription")}
+              ? t("dashboard.editProjectDescription")
+              : t("dashboard.addProjectDescription")}
           </p>
         </div>
       </div>
@@ -335,7 +313,7 @@ export default function AdminProjectsForm() {
             onClick={() => navigate("/dashboard/projects")}
             className="rounded-lg border border-border px-5 py-2.5"
           >
-            {t("common.cancel")}
+            {t("dashboard.cancel")}
           </button>
 
           <button
@@ -344,10 +322,10 @@ export default function AdminProjectsForm() {
             className="rounded-lg bg-primary px-5 py-2.5 text-primary-foreground disabled:opacity-50"
           >
             {loading
-              ? t("common.saving")
+              ? t("dashboard.saving")
               : isEditMode
-              ? t("common.update")
-              : t("common.create")}
+              ? t("dashboard.updateProject")
+              : t("dashboard.createProject")}
           </button>
         </div>
       </form>
