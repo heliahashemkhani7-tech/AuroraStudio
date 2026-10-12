@@ -1,16 +1,25 @@
+import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, LoaderCircle } from "lucide-react";
 
+import { submitContactMessage } from "@/features/api";
 import { Input } from "../ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import ElectricBorder from "../animiations/ElectricBorder";
 
+type ContactFormStatus = "success" | "error" | null;
+
 export default function ContactForm() {
   const { t } = useTranslation();
+
   const [projectType, setProjectType] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<ContactFormStatus>(null);
 
   const projectTypeLabels = {
     "web-design": t("contact.form.projectType.options.webDesign"),
@@ -20,47 +29,86 @@ export default function ContactForm() {
     other: t("contact.form.projectType.options.other"),
   };
 
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setStatus(null);
+
+    try {
+      await submitContactMessage({
+        name,
+        email,
+        project_type: projectType,
+        message,
+      });
+
+      setName("");
+      setEmail("");
+      setProjectType("");
+      setMessage("");
+      setStatus("success");
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
+      setStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
-    <ElectricBorder className="bg-glass-bg " chaos={0.02}>
+    <ElectricBorder className="bg-glass-bg" chaos={0.02}>
       <div className="p-6 md:p-7">
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             <div className="space-y-2">
               <label
-                htmlFor="name"
+                htmlFor="contact-name"
                 className="block text-xs tracking-wider text-text"
               >
                 {t("contact.form.name.label")}
               </label>
 
               <Input
-                id="name"
+                id="contact-name"
                 type="text"
+                autoComplete="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
                 placeholder={t("contact.form.name.placeholder")}
                 className="h-10 border-primary border-2 bg-background text-text placeholder:text-muted-foreground"
+                required
+                maxLength={100}
               />
             </div>
 
             <div className="space-y-2">
               <label
-                htmlFor="email"
+                htmlFor="contact-email"
                 className="block text-xs tracking-wider text-text"
               >
                 {t("contact.form.email.label")}
               </label>
 
               <Input
-                id="email"
+                id="contact-email"
                 type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
                 placeholder={t("contact.form.email.placeholder")}
                 className="h-10 border-primary border-2 bg-background text-text placeholder:text-muted-foreground"
+                required
+                maxLength={254}
               />
             </div>
           </div>
 
           <div className="space-y-2">
             <label
-              htmlFor="projectType"
+              htmlFor="contact-project-type"
               className="block text-xs tracking-wider text-text"
             >
               {t("contact.form.projectType.label")}
@@ -69,9 +117,10 @@ export default function ContactForm() {
             <Select
               value={projectType}
               onValueChange={(value) => setProjectType(value ?? "")}
+              required
             >
               <SelectTrigger
-                id="projectType"
+                id="contact-project-type"
                 className="h-10 w-full border-primary border-2 bg-background text-text"
               >
                 {projectType
@@ -107,25 +156,49 @@ export default function ContactForm() {
 
           <div className="space-y-2">
             <label
-              htmlFor="message"
+              htmlFor="contact-message"
               className="block text-xs tracking-wider text-text"
             >
               {t("contact.form.message.label")}
             </label>
 
             <Textarea
-              id="message"
+              id="contact-message"
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
               placeholder={t("contact.form.message.placeholder")}
               className="min-h-[101px] resize-none border-primary border-2 bg-background text-text placeholder:text-muted-foreground"
+              required
+              maxLength={5000}
             />
           </div>
 
+          {status === "success" && (
+            <p role="status" className="text-sm text-green-600">
+              {t("contact.form.success")}
+            </p>
+          )}
+
+          {status === "error" && (
+            <p role="alert" className="text-sm text-red-400">
+              {t("contact.form.error")}
+            </p>
+          )}
+
           <Button
             type="submit"
+            disabled={isSubmitting}
             className="mt-2 h-10 rounded-md border-2 border-primary bg-transparent px-7 text-xs tracking-wider text-text shadow-[0_0_18px_rgba(139,92,246,0.2)] transition-all hover:bg-primary/30"
           >
-            {t("contact.form.submit")}
-            <ArrowRight className="ml-2 size-3.5" />
+            {isSubmitting
+              ? t("contact.form.submitting")
+              : t("contact.form.submit")}
+
+            {isSubmitting ? (
+              <LoaderCircle className="ml-2 size-3.5 animate-spin" />
+            ) : (
+              <ArrowRight className="ml-2 size-3.5" />
+            )}
           </Button>
         </form>
       </div>

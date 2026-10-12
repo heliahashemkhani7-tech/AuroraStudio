@@ -118,7 +118,10 @@
         "label": "Message",
         "placeholder": "Tell us about your vision..."
       },
-      "submit": "Send Message"
+      "submit": "Send Message",
+      "success": "Your message was sent successfully.",
+      "error": "We couldn't send your message. Please try again.",
+      "submitting": "Sending..."
     },
     "info": {
       "email": {
@@ -154,6 +157,17 @@
       "loginButton": "Login",
       "loggingIn": "Logging in...",
       "invalidCredentials": "Invalid email or password."
+    },
+    "projects": {
+      "form": {
+        "projectHighlights": {
+          "title": "Project Highlights",
+          "description": "Add highlight image paths or links.",
+          "placeholder": "nexus/nexus-highlight-1.png",
+          "add": "Add highlight",
+          "remove": "Remove highlight"
+        }
+      }
     }
   },
 
@@ -168,15 +182,64 @@
     "noProjects": "No projects found.",
     "projectsLoading": "Loading projects...",
     "projectsError": "Failed to load projects.",
+
     "editProject": "Edit project",
     "deleteProject": "Delete project",
+
+    "backToProjects": "Back to projects",
+    "addProjectDescription": "Create a new project for your portfolio.",
+    "editProjectDescription": "Update the information of this project.",
+
+    "projectName": "Project Name",
+    "projectNamePlaceholder": "Enter project name",
+
+    "category": "Category",
+    "categoryPlaceholder": "Select category",
+
+    "technology": "Technology",
+    "technologyPlaceholder": "e.g. Web Design, Web Development",
+
+    "liveUrl": "Live URL",
+
+    "techStack": "Tech Stack",
+    "techStackHint": "Separate technologies with commas.",
+
+    "overviewButtonLink": "Overview Button Link",
+
+    "highlightLinks": "Highlight Links",
+    "highlightLinksHint": "Enter image or content links, one per line.",
+
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "createProject": "Create Project",
+    "updateProject": "Update Project",
 
     "loading": "Loading dashboard...",
     "statsError": "Failed to load dashboard statistics.",
     "dashboardDescription": "Overview of your website content.",
     "totalProjects": "Total Projects",
     "totalBlogs": "Total Blogs",
-    "totalCategories": "Total Categories"
+    "totalCategories": "Total Categories",
+
+    "blog": "Blog",
+    "blogList": "All Posts",
+    "newBlog": "New Post",
+    "blogCategories": "Categories",
+    "projectList": "All Projects",
+    "newProject": "New Project",
+    "projectCategories": "Categories",
+
+    "basicInformation": "Basic Information",
+    "projectCoverImage": "Project Cover Image",
+    "chooseImage": "Choose Image",
+    "changeImageHint": "Choose another image to replace the current preview.",
+    "uploadImageHint": "Choose an image. It will be uploaded when you save the project.",
+    "imageOnlyError": "Please select a valid image file.",
+    "addTechnology": "Add",
+    "english": "English Content",
+    "persian": "Persian Content",
+
+    "noImageSelected": "No image selected"
   },
 
   "blog": {

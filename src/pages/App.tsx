@@ -19,6 +19,8 @@ import AdminLayout from "@/components/layout/AdminLayout";
 import Blog from "./Blog";
 import BlogDetails from "./BlogDetails";
 import AdminProjectsForm from "./admin/AdminProjectsForm";
+import BlogSkeleton from "@/components/skeleton/BlogSkeleton";
+import AdminProjectCategories from "./admin/AdminProjectCategories";
 
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
@@ -65,10 +67,11 @@ export default function App() {
             </Suspense>
           }
         />
+
         <Route
           path="/blog"
           element={
-            <Suspense fallback={<PortfolioSkeleton />}>
+            <Suspense fallback={<BlogSkeleton />}>
               <Blog />
             </Suspense>
           }
@@ -92,7 +95,12 @@ export default function App() {
         <Route path="/dashboard" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="projects" element={<AdminProjects />} />
+          <Route
+            path="projects/categories"
+            element={<AdminProjectCategories />}
+          />
           <Route path="projects/new" element={<AdminProjectsForm />} />
+          <Route path="projects/:id/edit" element={<AdminProjectsForm />} />
         </Route>
       </Route>
     </Routes>
