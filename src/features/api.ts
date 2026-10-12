@@ -46,15 +46,21 @@ export async function getCategories(languageId: number): Promise<Filter[]> {
 
   return data as Filter[];
 }
+
 export async function getProjects() {
-  const { data, error } = await supabase.from("projects").select(`
+  const { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
       *,
       project_translations (*),
       categories (
         *,
         category_translations (*)
       )
-    `);
+    `
+    )
+    .eq("is_deleted", false);
 
   if (error) {
     console.error("Error fetching projects:", error);
@@ -218,9 +224,15 @@ live_url,
 
 export async function getDashboardStats() {
   const [projectsResult, blogsResult, categoriesResult] = await Promise.all([
-    supabase.from("projects").select("id", { count: "exact", head: true }),
+    supabase
+      .from("projects")
+      .select("id", { count: "exact", head: true })
+      .eq("is_deleted", false),
 
-    supabase.from("blog").select("id", { count: "exact", head: true }),
+    supabase
+      .from("blog")
+      .select("id", { count: "exact", head: true })
+      .eq("is_deleted", false),
 
     supabase.from("categories").select("id", { count: "exact", head: true }),
   ]);
@@ -357,39 +369,22 @@ export async function getAdminProjectById(projectId: number) {
   };
 }
 
-export async function deleteAdminProject(projectId: number) {
-  const { data: project, error: fetchError } = await supabase
+export async function deleteAdminProject(projectId: number): Promise<void> {
+  const { data, error } = await supabase
     .from("projects")
-    .select("live_url")
+    .update({ is_deleted: true })
     .eq("id", projectId)
-    .single();
+    .eq("is_deleted", false)
+    .select("id")
+    .maybeSingle();
 
-  if (fetchError) {
-    console.error("Error fetching project:", fetchError);
-    throw fetchError;
+  if (error) {
+    console.error("Error soft deleting project:", error);
+    throw error;
   }
 
-  const imagePath = project.live_url;
-
-  if (imagePath) {
-    const { error: storageError } = await supabase.storage
-      .from("project-images")
-      .remove([imagePath]);
-
-    if (storageError) {
-      console.error("Error deleting project image:", storageError);
-      throw storageError;
-    }
-  }
-
-  const { error: deleteError } = await supabase
-    .from("projects")
-    .delete()
-    .eq("id", projectId);
-
-  if (deleteError) {
-    console.error("Error deleting project:", deleteError);
-    throw deleteError;
+  if (!data) {
+    throw new Error("PROJECT_NOT_FOUND_OR_ALREADY_DELETED");
   }
 }
 
@@ -1087,18 +1082,20 @@ export async function updateAdminBlog(
 }
 
 export async function deleteAdminBlog(blogId: number): Promise<void> {
-  const { error } = await supabase.rpc("delete_admin_blog", {
-    p_blog_id: blogId,
-  });
+  const { data, error } = await supabase
+    .from("blog")
+    .update({ is_deleted: true })
+    .eq("id", blogId)
+    .eq("is_deleted", false)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
-    console.error("Error deleting blog:", {
-      message: error.message,
-      code: error.code,
-      details: error.details,
-      hint: error.hint,
-    });
-
+    console.error("Error soft deleting blog:", error);
     throw error;
+  }
+
+  if (!data) {
+    throw new Error("BLOG_NOT_FOUND_OR_ALREADY_DELETED");
   }
 }
