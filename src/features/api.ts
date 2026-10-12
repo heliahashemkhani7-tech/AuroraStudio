@@ -614,8 +614,6 @@ export async function deleteAdminCategory(categoryId: number) {
   }
 }
 
-
-
 export type ContactMessageInput = {
   name: string;
   email: string;
@@ -635,6 +633,472 @@ export async function submitContactMessage(
 
   if (error) {
     console.error("Error submitting contact message:", error);
+    throw error;
+  }
+}
+
+export type AdminBlogCategory = {
+  id: number;
+  slug: string;
+  blog_category_translations: {
+    id: number;
+    category_blog_id: number;
+    language_id: number;
+    name: string;
+  }[];
+};
+
+export async function getAdminBlogCategories(): Promise<AdminBlogCategory[]> {
+  const { data, error } = await supabase
+    .from("blog_categories")
+    .select(
+      `
+      id,
+      slug,
+      blog_category_translations (
+        id,
+        category_blog_id,
+        language_id,
+        name
+      )
+    `
+    )
+    .order("id", { ascending: true });
+
+  if (error) {
+    console.error("Error fetching blog categories:", error);
+    throw error;
+  }
+
+  return data as AdminBlogCategory[];
+}
+
+export async function createAdminBlogCategory(category: {
+  slug: string;
+  nameEn: string;
+  nameFa: string;
+}) {
+  const slug = category.slug.trim();
+  const nameEn = category.nameEn.trim();
+  const nameFa = category.nameFa.trim();
+
+  if (!slug || !nameEn || !nameFa) {
+    throw new Error("BLOG_CATEGORY_FIELDS_REQUIRED");
+  }
+
+  const { data: createdCategory, error: categoryError } = await supabase
+    .from("blog_categories")
+    .insert({ slug })
+    .select("id, slug")
+    .single();
+
+  if (categoryError) throw categoryError;
+
+  const { error: translationsError } = await supabase
+    .from("blog_category_translations")
+    .insert([
+      {
+        category_blog_id: createdCategory.id,
+        language_id: 1,
+        name: nameEn,
+      },
+      {
+        category_blog_id: createdCategory.id,
+        language_id: 2,
+        name: nameFa,
+      },
+    ]);
+
+  if (translationsError) {
+    const { error: rollbackError } = await supabase
+      .from("blog_categories")
+      .delete()
+      .eq("id", createdCategory.id);
+
+    if (rollbackError) {
+      console.error("Failed to roll back blog category:", rollbackError);
+    }
+
+    throw translationsError;
+  }
+
+  return createdCategory;
+}
+
+export async function updateAdminBlogCategory(category: {
+  id: number;
+  slug: string;
+  nameEn: string;
+  nameFa: string;
+}) {
+  const slug = category.slug.trim();
+  const nameEn = category.nameEn.trim();
+  const nameFa = category.nameFa.trim();
+
+  if (!slug || !nameEn || !nameFa) {
+    throw new Error("BLOG_CATEGORY_FIELDS_REQUIRED");
+  }
+
+  const { error: categoryError } = await supabase
+    .from("blog_categories")
+    .update({ slug })
+    .eq("id", category.id);
+
+  if (categoryError) throw categoryError;
+
+  for (const translation of [
+    { language_id: 1, name: nameEn },
+    { language_id: 2, name: nameFa },
+  ]) {
+    const { data: existing, error: fetchError } = await supabase
+      .from("blog_category_translations")
+      .select("id")
+      .eq("category_blog_id", category.id)
+      .eq("language_id", translation.language_id)
+      .maybeSingle();
+
+    if (fetchError) throw fetchError;
+
+    if (existing) {
+      const { error } = await supabase
+        .from("blog_category_translations")
+        .update({ name: translation.name })
+        .eq("id", existing.id);
+
+      if (error) throw error;
+    } else {
+      const { error } = await supabase
+        .from("blog_category_translations")
+        .insert({
+          category_blog_id: category.id,
+          language_id: translation.language_id,
+          name: translation.name,
+        });
+
+      if (error) throw error;
+    }
+  }
+}
+
+export async function deleteAdminBlogCategory(categoryId: number) {
+  const { count, error: blogsError } = await supabase
+    .from("blog")
+    .select("id", { count: "exact", head: true })
+    .eq("category_blog_id", categoryId);
+
+  if (blogsError) throw blogsError;
+
+  if ((count ?? 0) > 0) {
+    throw new Error("BLOG_CATEGORY_HAS_POSTS");
+  }
+
+  const { error: translationsError } = await supabase
+    .from("blog_category_translations")
+    .delete()
+    .eq("category_blog_id", categoryId);
+
+  if (translationsError) throw translationsError;
+
+  const { error } = await supabase
+    .from("blog_categories")
+    .delete()
+    .eq("id", categoryId);
+
+  if (error) throw error;
+}
+
+export type AdminBlog = {
+  id: number;
+  slug: string;
+  cover_image: string;
+  author: string;
+  published_at: string;
+  category_blog_id: number;
+  blog_translations: BlogTranslation[];
+  blog_categories: {
+    id: number;
+    slug: string;
+    blog_category_translations: {
+      id: number;
+      category_blog_id: number;
+      language_id: number;
+      name: string;
+    }[];
+  } | null;
+};
+
+export async function getAdminBlogs(): Promise<AdminBlog[]> {
+  const { data, error } = await supabase
+    .from("blog")
+    .select(
+      `
+      id,
+      slug,
+      cover_image,
+      author,
+      published_at,
+      category_blog_id,
+      blog_translations (
+        id,
+        blog_id,
+        language_id,
+        title,
+        excerpt,
+        content
+      ),
+      blog_categories (
+        id,
+        slug,
+        blog_category_translations (
+          id,
+          category_blog_id,
+          language_id,
+          name
+        )
+      )
+    `
+    )
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching admin blogs:", error);
+    throw error;
+  }
+
+  return data as unknown as AdminBlog[];
+}
+
+export type AdminBlogTranslationInput = {
+  title: string;
+  excerpt: string;
+  content: string;
+};
+
+export type AdminBlogInput = {
+  slug: string;
+  cover_image: string;
+  author: string;
+  published_at: string;
+  category_blog_id: number;
+  translations: {
+    en: AdminBlogTranslationInput;
+    fa: AdminBlogTranslationInput;
+  };
+};
+
+export function getBlogImage(path: string) {
+  const { data } = supabase.storage.from("blog-images").getPublicUrl(path);
+
+  return data.publicUrl;
+}
+
+export async function uploadBlogImage(
+  file: File,
+  slug = "blog"
+): Promise<{ path: string; publicUrl: string }> {
+  if (!file.type.startsWith("image/")) {
+    throw new Error("INVALID_BLOG_IMAGE");
+  }
+
+  const safeName = file.name.normalize("NFKD").replace(/[^a-zA-Z0-9.-]/g, "-");
+
+  const safeSlug = slug.trim().replace(/[^a-zA-Z0-9-]/g, "-") || "blog";
+
+  const filePath = `${safeSlug}/${Date.now()}-${safeName}`;
+
+  const { data, error } = await supabase.storage
+    .from("blog-images")
+    .upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+  if (error) {
+    console.error("Error uploading blog image:", error);
+    throw error;
+  }
+
+  return {
+    path: data.path,
+    publicUrl: getBlogImage(data.path),
+  };
+}
+
+export async function getAdminBlogById(blogId: number): Promise<AdminBlog> {
+  const { data, error } = await supabase
+    .from("blog")
+    .select(
+      `
+      id,
+      slug,
+      cover_image,
+      author,
+      published_at,
+      category_blog_id,
+      blog_translations (
+        id,
+        blog_id,
+        language_id,
+        title,
+        excerpt,
+        content
+      ),
+      blog_categories (
+        id,
+        slug,
+        blog_category_translations (
+          id,
+          category_blog_id,
+          language_id,
+          name
+        )
+      )
+    `
+    )
+    .eq("id", blogId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching blog:", error);
+    throw error;
+  }
+
+  return data as unknown as AdminBlog;
+}
+
+export async function createAdminBlog(blog: AdminBlogInput): Promise<number> {
+  const { data: createdBlog, error: blogError } = await supabase
+    .from("blog")
+    .insert({
+      slug: blog.slug,
+      cover_image: blog.cover_image,
+      author: blog.author,
+      published_at: blog.published_at,
+      category_blog_id: blog.category_blog_id,
+    })
+    .select("id")
+    .single();
+
+  if (blogError) {
+    console.error("Error creating blog:", blogError);
+    throw blogError;
+  }
+
+  const { error: translationsError } = await supabase
+    .from("blog_translations")
+    .insert([
+      {
+        blog_id: createdBlog.id,
+        language_id: 1,
+        title: blog.translations.en.title,
+        excerpt: blog.translations.en.excerpt,
+        content: blog.translations.en.content,
+      },
+      {
+        blog_id: createdBlog.id,
+        language_id: 2,
+        title: blog.translations.fa.title,
+        excerpt: blog.translations.fa.excerpt,
+        content: blog.translations.fa.content,
+      },
+    ]);
+
+  if (translationsError) {
+    console.error("Error creating blog translations:", translationsError);
+
+    // Roll back the article if its translations could not be saved.
+    const { error: rollbackError } = await supabase
+      .from("blog")
+      .delete()
+      .eq("id", createdBlog.id);
+
+    if (rollbackError) {
+      console.error("Failed to roll back blog:", rollbackError);
+    }
+
+    throw translationsError;
+  }
+
+  return createdBlog.id;
+}
+
+export async function updateAdminBlog(
+  blogId: number,
+  blog: AdminBlogInput
+): Promise<void> {
+  const { error: blogError } = await supabase
+    .from("blog")
+    .update({
+      slug: blog.slug,
+      cover_image: blog.cover_image,
+      author: blog.author,
+      published_at: blog.published_at,
+      category_blog_id: blog.category_blog_id,
+    })
+    .eq("id", blogId);
+
+  if (blogError) {
+    console.error("Error updating blog:", blogError);
+    throw blogError;
+  }
+
+  for (const translation of [
+    {
+      language_id: 1,
+      ...blog.translations.en,
+    },
+    {
+      language_id: 2,
+      ...blog.translations.fa,
+    },
+  ]) {
+    const { data: existing, error: fetchError } = await supabase
+      .from("blog_translations")
+      .select("id")
+      .eq("blog_id", blogId)
+      .eq("language_id", translation.language_id)
+      .maybeSingle();
+
+    if (fetchError) throw fetchError;
+
+    if (existing) {
+      const { error } = await supabase
+        .from("blog_translations")
+        .update({
+          title: translation.title,
+          excerpt: translation.excerpt,
+          content: translation.content,
+        })
+        .eq("id", existing.id);
+
+      if (error) throw error;
+    } else {
+      const { error } = await supabase.from("blog_translations").insert({
+        blog_id: blogId,
+        language_id: translation.language_id,
+        title: translation.title,
+        excerpt: translation.excerpt,
+        content: translation.content,
+      });
+
+      if (error) throw error;
+    }
+  }
+}
+
+export async function deleteAdminBlog(blogId: number): Promise<void> {
+  const { error } = await supabase.rpc("delete_admin_blog", {
+    p_blog_id: blogId,
+  });
+
+  if (error) {
+    console.error("Error deleting blog:", {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint,
+    });
+
     throw error;
   }
 }
