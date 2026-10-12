@@ -299,7 +299,7 @@ export default function AdminProjectsForm() {
         <button
           type="button"
           onClick={() => navigate("/dashboard/projects")}
-          className="rounded-lg border border-border p-2"
+          className="rounded-lg border-2 border-span p-2"
         >
           <ArrowLeft size={18} />
         </button>
@@ -347,7 +347,7 @@ export default function AdminProjectsForm() {
           <button
             type="button"
             onClick={() => navigate("/dashboard/projects")}
-            className="rounded-lg border border-border px-5 py-2.5"
+            className="rounded-lg border border-span px-5 py-2.5"
           >
             {t("dashboard.cancel")}
           </button>

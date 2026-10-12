@@ -613,3 +613,28 @@ export async function deleteAdminCategory(categoryId: number) {
     throw error;
   }
 }
+
+
+
+export type ContactMessageInput = {
+  name: string;
+  email: string;
+  project_type: string;
+  message: string;
+};
+
+export async function submitContactMessage(
+  contactMessage: ContactMessageInput
+): Promise<void> {
+  const { error } = await supabase.from("contact_messages").insert({
+    name: contactMessage.name.trim(),
+    email: contactMessage.email.trim(),
+    project_type: contactMessage.project_type,
+    message: contactMessage.message.trim(),
+  });
+
+  if (error) {
+    console.error("Error submitting contact message:", error);
+    throw error;
+  }
+}

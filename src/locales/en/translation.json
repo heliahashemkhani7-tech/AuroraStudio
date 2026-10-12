@@ -118,7 +118,10 @@
         "label": "Message",
         "placeholder": "Tell us about your vision..."
       },
-      "submit": "Send Message"
+      "submit": "Send Message",
+      "success": "Your message was sent successfully.",
+      "error": "We couldn't send your message. Please try again.",
+      "submitting": "Sending..."
     },
     "info": {
       "email": {
@@ -234,7 +237,9 @@
     "imageOnlyError": "Please select a valid image file.",
     "addTechnology": "Add",
     "english": "English Content",
-    "persian": "Persian Content"
+    "persian": "Persian Content",
+
+    "noImageSelected": "No image selected"
   },
 
   "blog": {
