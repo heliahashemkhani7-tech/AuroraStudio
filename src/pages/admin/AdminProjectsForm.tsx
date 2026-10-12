@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,11 +9,13 @@ import {
   getAdminCategories,
   getAdminProjectById,
   updateAdminProject,
+  uploadProjectImage,
+  getProjectImage,
 } from "@/features/api";
 
-import ProjectBasicInfo from "./ProjectBasicInfo";
-import ProjectContent from "./ProjectContent";
-import ProjectHighlights from "./ProjectHighlights";
+import ProjectBasicInfo from "../../components/admin/ProjectBasicInfo";
+import ProjectContent from "../../components/admin/ProjectContent";
+import ProjectHighlights from "../../components/admin/ProjectHighlights";
 import type { Category, ProjectFormData } from "./types";
 import { slugify } from "@/lib/slugify";
 
@@ -51,17 +53,16 @@ export default function AdminProjectsForm() {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
-
   const [formData, setFormData] = useState<ProjectFormData>(initialFormData);
 
   const [techInput, setTechInput] = useState("");
   const [highlightInput, setHighlightInput] = useState("");
 
+  const [imageFile, setImageFile] = useState<File | null>(null);
   useEffect(() => {
     async function loadCategories() {
       try {
         const languageId = i18n.language === "fa" ? 2 : 1;
-
         const data = await getAdminCategories(languageId);
 
         setCategories(
@@ -103,13 +104,9 @@ export default function AdminProjectsForm() {
           (card) => card.language_id === 2
         );
 
-        const getCardValue = (cards: typeof englishCards, label: string) => {
-          return (
-            cards.find(
-              (card) => card.label.toLowerCase() === label.toLowerCase()
-            )?.value ?? ""
-          );
-        };
+        const getCardValue = (cards: typeof englishCards, label: string) =>
+          cards.find((card) => card.label.toLowerCase() === label.toLowerCase())
+            ?.value ?? "";
 
         setFormData({
           name: project.name ?? "",
@@ -161,6 +158,20 @@ export default function AdminProjectsForm() {
     loadProject();
   }, [id, isEditMode]);
 
+  const imagePreview = useMemo(() => {
+    if (!imageFile) return "";
+
+    return URL.createObjectURL(imageFile);
+  }, [imageFile]);
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
   function handleChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
@@ -179,9 +190,22 @@ export default function AdminProjectsForm() {
     }));
   }
 
+  function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      console.error("Please select an image file.");
+      event.target.value = "";
+      return;
+    }
+
+    setImageFile(file);
+  }
+
   function addTechStack() {
     const value = techInput.trim();
-
     if (!value) return;
 
     setFormData((prev) => ({
@@ -201,7 +225,6 @@ export default function AdminProjectsForm() {
 
   function addHighlight() {
     const value = highlightInput.trim();
-
     if (!value) return;
 
     setFormData((prev) => ({
@@ -227,12 +250,23 @@ export default function AdminProjectsForm() {
     try {
       setLoading(true);
 
+      let imagePath = formData.live_url;
+
+      if (imageFile) {
+        const uploadedImage = await uploadProjectImage(
+          imageFile,
+          slugify(formData.name) || "projects"
+        );
+
+        imagePath = uploadedImage.path;
+      }
+
       const projectData = {
         slug: slugify(formData.name),
         category_id: Number(formData.category_id),
         name: formData.name,
         technology: formData.technology,
-        live_url: formData.live_url,
+        live_url: imagePath,
         tech_stack: formData.tech_stack,
         overview_button_link: formData.overview_button_link,
         highlight_links: formData.highlight_links,
@@ -255,9 +289,9 @@ export default function AdminProjectsForm() {
     }
   }
 
-  // -------------------------
-  // Render
-  // -------------------------
+  const currentImageUrl = formData.live_url
+    ? getProjectImage(formData.live_url)
+    : "";
 
   return (
     <div className="space-y-6">
@@ -295,6 +329,8 @@ export default function AdminProjectsForm() {
           onTechInputChange={setTechInput}
           onAddTechStack={addTechStack}
           onRemoveTechStack={removeTechStack}
+          imagePreview={imagePreview || currentImageUrl}
+          onImageChange={handleImageChange}
         />
 
         <ProjectContent formData={formData} onChange={handleChange} />

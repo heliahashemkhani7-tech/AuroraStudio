@@ -217,14 +217,24 @@
     "totalProjects": "Total Projects",
     "totalBlogs": "Total Blogs",
     "totalCategories": "Total Categories",
-    
+
     "blog": "Blog",
     "blogList": "All Posts",
     "newBlog": "New Post",
     "blogCategories": "Categories",
     "projectList": "All Projects",
     "newProject": "New Project",
-    "projectCategories": "Categories"
+    "projectCategories": "Categories",
+
+    "basicInformation": "Basic Information",
+    "projectCoverImage": "Project Cover Image",
+    "chooseImage": "Choose Image",
+    "changeImageHint": "Choose another image to replace the current preview.",
+    "uploadImageHint": "Choose an image. It will be uploaded when you save the project.",
+    "imageOnlyError": "Please select a valid image file.",
+    "addTechnology": "Add",
+    "english": "English Content",
+    "persian": "Persian Content"
   },
 
   "blog": {

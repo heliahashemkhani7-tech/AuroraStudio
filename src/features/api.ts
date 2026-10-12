@@ -358,14 +358,38 @@ export async function getAdminProjectById(projectId: number) {
 }
 
 export async function deleteAdminProject(projectId: number) {
-  const { error } = await supabase
+  const { data: project, error: fetchError } = await supabase
+    .from("projects")
+    .select("live_url")
+    .eq("id", projectId)
+    .single();
+
+  if (fetchError) {
+    console.error("Error fetching project:", fetchError);
+    throw fetchError;
+  }
+
+  const imagePath = project.live_url;
+
+  if (imagePath) {
+    const { error: storageError } = await supabase.storage
+      .from("project-images")
+      .remove([imagePath]);
+
+    if (storageError) {
+      console.error("Error deleting project image:", storageError);
+      throw storageError;
+    }
+  }
+
+  const { error: deleteError } = await supabase
     .from("projects")
     .delete()
     .eq("id", projectId);
 
-  if (error) {
-    console.error("Error deleting project:", error);
-    throw error;
+  if (deleteError) {
+    console.error("Error deleting project:", deleteError);
+    throw deleteError;
   }
 }
 
@@ -404,4 +428,188 @@ export async function updateAdminProject(
   }
 
   return data;
+}
+
+export async function uploadProjectImage(
+  file: File,
+  folder = "projects"
+): Promise<{ path: string; publicUrl: string }> {
+  const safeName = file.name.normalize("NFKD").replace(/[^a-zA-Z0-9.-]/g, "-");
+
+  const filePath = `${folder}/${Date.now()}-${safeName}`;
+
+  const { data, error } = await supabase.storage
+    .from("project-images")
+    .upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
+
+  if (error) {
+    console.error("Error uploading project image:", error);
+    throw error;
+  }
+
+  const { data: publicData } = supabase.storage
+    .from("project-images")
+    .getPublicUrl(data.path);
+
+  return {
+    path: data.path,
+    publicUrl: publicData.publicUrl,
+  };
+}
+
+export type AdminCategory = {
+  id: number;
+  slug: string;
+  category_translations: {
+    id: number;
+    name: string;
+    category_id: number;
+    language_id: number;
+  }[];
+};
+
+export async function getAdminCategoriesWithTranslations(): Promise<
+  AdminCategory[]
+> {
+  const { data, error } = await supabase
+    .from("categories")
+    .select(
+      `
+      id,
+      slug,
+      category_translations (
+        id,
+        name,
+        category_id,
+        language_id
+      )
+    `
+    )
+    .order("id", { ascending: true });
+
+  if (error) {
+    console.error("Category fetch error:", {
+      message: error.message,
+      code: error.code,
+      details: error.details,
+      hint: error.hint,
+    });
+
+    throw error;
+  }
+
+  return data as AdminCategory[];
+}
+
+export async function createAdminCategory(category: {
+  slug: string;
+  nameEn: string;
+  nameFa: string;
+}) {
+  const { data: createdCategory, error: categoryError } = await supabase
+    .from("categories")
+    .insert({ slug: category.slug })
+    .select("id, slug")
+    .single();
+
+  if (categoryError) {
+    throw categoryError;
+  }
+
+  const { error: translationsError } = await supabase
+    .from("category_translations")
+    .insert([
+      {
+        category_id: createdCategory.id,
+        language_id: 1,
+        name: category.nameEn,
+      },
+      {
+        category_id: createdCategory.id,
+        language_id: 2,
+        name: category.nameFa,
+      },
+    ]);
+
+  if (translationsError) {
+    const { error: rollbackError } = await supabase
+      .from("categories")
+      .delete()
+      .eq("id", createdCategory.id);
+
+    if (rollbackError) {
+      console.error("Failed to roll back category creation:", rollbackError);
+    }
+
+    throw translationsError;
+  }
+
+  return createdCategory;
+}
+
+export async function updateAdminCategory(category: {
+  id: number;
+  slug: string;
+  nameEn: string;
+  nameFa: string;
+}) {
+  const { error: categoryError } = await supabase
+    .from("categories")
+    .update({ slug: category.slug })
+    .eq("id", category.id);
+
+  if (categoryError) {
+    throw categoryError;
+  }
+
+  for (const translation of [
+    { language_id: 1, name: category.nameEn },
+    { language_id: 2, name: category.nameFa },
+  ]) {
+    const { error } = await supabase
+      .from("category_translations")
+      .update({ name: translation.name })
+      .eq("category_id", category.id)
+      .eq("language_id", translation.language_id);
+
+    if (error) {
+      throw error;
+    }
+  }
+}
+
+export async function deleteAdminCategory(categoryId: number) {
+  const { count, error: projectsError } = await supabase
+    .from("projects")
+    .select("id", { count: "exact", head: true })
+    .eq("category_id", categoryId);
+
+  if (projectsError) {
+    throw projectsError;
+  }
+
+  if ((count ?? 0) > 0) {
+    throw new Error("CATEGORY_HAS_PROJECTS");
+  }
+
+  const { error: translationsError } = await supabase
+    .from("category_translations")
+    .delete()
+    .eq("category_id", categoryId);
+
+  if (translationsError) {
+    throw translationsError;
+  }
+
+  const { error } = await supabase
+    .from("categories")
+    .delete()
+    .eq("id", categoryId);
+
+  if (error) {
+    throw error;
+  }
 }

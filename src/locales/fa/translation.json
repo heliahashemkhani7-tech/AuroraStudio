@@ -225,7 +225,17 @@
     "blogCategories": "دسته‌بندی‌ها",
     "projectList": "لیست پروژه‌ها",
     "newProject": "پروژه جدید",
-    "projectCategories": "دسته‌بندی‌ها"
+    "projectCategories": "دسته‌بندی‌ها",
+
+    "basicInformation": "اطلاعات پایه",
+    "projectCoverImage": "تصویر کاور پروژه",
+    "chooseImage": "انتخاب تصویر",
+    "changeImageHint": "برای جایگزینی تصویر فعلی، تصویر دیگری انتخاب کنید.",
+    "uploadImageHint": "تصویر را انتخاب کنید؛ هنگام ذخیره پروژه بارگذاری می‌شود.",
+    "imageOnlyError": "لطفاً یک فایل تصویری معتبر انتخاب کنید.",
+    "addTechnology": "افزودن",
+    "english": "محتوای انگلیسی",
+    "persian": "محتوای فارسی"
   },
 
   "blog": {

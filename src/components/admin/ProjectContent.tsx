@@ -1,6 +1,7 @@
 import type { ChangeEvent } from "react";
 
-import type { ProjectFormData } from "./types";
+import type { ProjectFormData } from "../../pages/admin/types";
+import { useTranslation } from "react-i18next";
 
 type ProjectContentProps = {
   formData: ProjectFormData;
@@ -13,12 +14,13 @@ export default function ProjectContent({
   formData,
   onChange,
 }: ProjectContentProps) {
+  const { t } = useTranslation();
+
   return (
     <>
-      {/* English Content */}
       <div className="space-y-6 rounded-xl border border-border p-6">
         <div>
-          <h2 className="text-lg font-semibold">English Content</h2>
+          <h2 className="text-lg font-semibold"> {t("dashboard.english")}</h2>
         </div>
 
         <div className="space-y-6">
@@ -98,10 +100,9 @@ export default function ProjectContent({
         </div>
       </div>
 
-      {/* Persian Content */}
       <div className="space-y-6 rounded-xl border border-border p-6">
         <div>
-          <h2 className="text-lg font-semibold">Persian Content</h2>
+          <h2 className="text-lg font-semibold"> {t("dashboard.persian")}</h2>
         </div>
 
         <div className="space-y-6" dir="rtl">

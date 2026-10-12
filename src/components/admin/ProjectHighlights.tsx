@@ -1,7 +1,7 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import type { ProjectFormData } from "./types";
+import type { ProjectFormData } from "../../pages/admin/types";
 
 type ProjectHighlightsProps = {
   formData: ProjectFormData;
