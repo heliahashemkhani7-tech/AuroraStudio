@@ -10,7 +10,6 @@ body {
   overflow-x: hidden !important;
 }
 
-
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -170,4 +169,39 @@ body {
 
 .float-animation {
   animation: float 5s ease-in-out infinite;
+}
+
+.tiptap p {
+  margin: 0.75rem 0;
+}
+
+.tiptap h2 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.tiptap ul {
+  list-style: disc;
+  padding-inline-start: 1.5rem;
+}
+
+.tiptap ol {
+  list-style: decimal;
+  padding-inline-start: 1.5rem;
+}
+
+.tiptap blockquote {
+  border-inline-start: 3px solid hsl(var(--span));
+  padding-inline-start: 1rem;
+  margin: 1rem 0;
+  opacity: 0.85;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: hsl(var(--muted-foreground));
+  content: attr(data-placeholder);
+  float: inline-start;
+  height: 0;
+  pointer-events: none;
 }
