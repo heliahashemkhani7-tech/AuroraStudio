@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   createAdminCategory,
   deleteAdminCategory,
@@ -24,6 +25,30 @@ const emptyForm: CategoryForm = {
   nameFa: "",
 };
 
+function CategoriesLoadingSkeleton() {
+  return (
+    <div className="divide-y divide-border">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <div
+          key={index}
+          className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="min-w-0 flex-1 space-y-2">
+            <Skeleton className="h-5 w-40 max-w-full" />
+            <Skeleton className="h-4 w-56 max-w-full" />
+            <Skeleton className="h-3 w-32 max-w-full" />
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <Skeleton className="h-9 w-9 rounded-md" />
+            <Skeleton className="h-9 w-9 rounded-md" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function AdminProjectCategories() {
   const { i18n } = useTranslation();
   const isPersian = i18n.language.startsWith("fa");
@@ -32,8 +57,9 @@ export default function AdminProjectCategories() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<number | null>(null);
-  const [pendingDelete, setPendingDelete] =
-    useState<AdminCategory | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<AdminCategory | null>(
+    null
+  );
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -50,6 +76,7 @@ export default function AdminProjectCategories() {
         setCategories(data);
       } catch (err) {
         console.error("Failed to load project categories:", err);
+
         toast.error(
           isPersian
             ? "دریافت دسته‌بندی‌ها ناموفق بود."
@@ -172,8 +199,8 @@ export default function AdminProjectCategories() {
             ? "دسته‌بندی با موفقیت اضافه شد."
             : "دسته‌بندی با موفقیت ویرایش شد."
           : isCreating
-            ? "Category created successfully."
-            : "Category updated successfully."
+          ? "Category created successfully."
+          : "Category updated successfully."
       );
 
       await loadCategories(false);
@@ -222,8 +249,8 @@ export default function AdminProjectCategories() {
             ? "این دسته‌بندی به پروژه متصل است؛ ابتدا دسته‌بندی پروژه را تغییر بده."
             : "This category is assigned to projects. Reassign them before deleting it."
           : isPersian
-            ? "حذف دسته‌بندی ناموفق بود."
-            : "Failed to delete category."
+          ? "حذف دسته‌بندی ناموفق بود."
+          : "Failed to delete category."
       );
     } finally {
       setDeletingId(null);
@@ -242,6 +269,7 @@ export default function AdminProjectCategories() {
         <h1 className="text-2xl font-semibold">
           {isPersian ? "دسته‌بندی پروژه‌ها" : "Project Categories"}
         </h1>
+
         <p className="mt-1 text-sm text-muted-foreground">
           {isPersian
             ? "دسته‌بندی‌ها و نام فارسی و انگلیسی آن‌ها را مدیریت کن."
@@ -277,8 +305,8 @@ export default function AdminProjectCategories() {
               ? "افزودن دسته‌بندی"
               : "Add Category"
             : isPersian
-              ? "ویرایش دسته‌بندی"
-              : "Edit Category"}
+            ? "ویرایش دسته‌بندی"
+            : "Edit Category"}
         </h2>
 
         <div className="grid gap-4 md:grid-cols-3">
@@ -346,12 +374,12 @@ export default function AdminProjectCategories() {
                 ? "در حال ذخیره..."
                 : "Saving..."
               : editingId === null
-                ? isPersian
-                  ? "افزودن"
-                  : "Add"
-                : isPersian
-                  ? "ذخیره تغییرات"
-                  : "Save Changes"}
+              ? isPersian
+                ? "افزودن"
+                : "Add"
+              : isPersian
+              ? "ذخیره تغییرات"
+              : "Save Changes"}
           </button>
 
           {editingId !== null && (
@@ -369,11 +397,7 @@ export default function AdminProjectCategories() {
 
       <div className="overflow-hidden rounded-xl border border-border">
         {loading ? (
-          <p className="p-6 text-sm text-muted-foreground">
-            {isPersian
-              ? "در حال دریافت دسته‌بندی‌ها..."
-              : "Loading categories..."}
-          </p>
+          <CategoriesLoadingSkeleton />
         ) : categories.length === 0 ? (
           <p className="p-6 text-center text-sm text-muted-foreground">
             {isPersian ? "دسته‌بندی‌ای وجود ندارد." : "No categories found."}
@@ -384,6 +408,7 @@ export default function AdminProjectCategories() {
               const english = category.category_translations.find(
                 (item) => item.language_id === 1
               )?.name;
+
               const persian = category.category_translations.find(
                 (item) => item.language_id === 2
               )?.name;
@@ -397,9 +422,11 @@ export default function AdminProjectCategories() {
                     <p className="font-medium">
                       {isPersian ? persian || english : english || persian}
                     </p>
+
                     <p className="text-sm text-muted-foreground">
                       {english || "—"} / {persian || "—"}
                     </p>
+
                     <p dir="ltr" className="text-xs text-muted-foreground">
                       {category.slug} · ID: {category.id}
                     </p>

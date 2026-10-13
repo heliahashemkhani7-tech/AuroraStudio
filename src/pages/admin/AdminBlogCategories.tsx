@@ -1,9 +1,11 @@
+
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pencil, Plus, Trash2, X, Save } from "lucide-react";
 import { toast } from "sonner";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   createAdminBlogCategory,
   deleteAdminBlogCategory,
@@ -37,6 +39,30 @@ function getErrorKey(error: unknown): string {
   }
 
   return "genericError";
+}
+
+function BlogCategoriesLoadingSkeleton() {
+  return (
+    <div className="divide-y divide-border">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <div
+          key={index}
+          className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="min-w-0 flex-1 space-y-2">
+            <Skeleton className="h-5 w-40 max-w-full" />
+            <Skeleton className="h-4 w-32 max-w-full" />
+            <Skeleton className="h-3 w-28 max-w-full" />
+          </div>
+
+          <div className="flex shrink-0 items-center gap-2">
+            <Skeleton className="h-9 w-9 rounded-md" />
+            <Skeleton className="h-9 w-9 rounded-md" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default function AdminBlogCategories() {
@@ -330,7 +356,7 @@ export default function AdminBlogCategories() {
 
       <div className="overflow-hidden rounded-xl border border-border">
         {loading ? (
-          <div className="p-8 text-center text-sm">{tr("loading")}</div>
+          <BlogCategoriesLoadingSkeleton />
         ) : categories.length === 0 ? (
           <div className="p-8 text-center text-sm">{tr("empty")}</div>
         ) : (
