@@ -206,12 +206,13 @@ export async function getAdminProjects() {
       category_id,
       name,
       technology,
-live_url,
+      live_url,
       tech_stack,
       overview_button_link,
       highlight_links
     `
     )
+    .eq("is_deleted", false)
     .order("id", { ascending: false });
 
   if (error) {
@@ -221,6 +222,8 @@ live_url,
 
   return data;
 }
+
+
 
 export async function getDashboardStats() {
   const [projectsResult, blogsResult, categoriesResult] = await Promise.all([
@@ -881,11 +884,21 @@ export type AdminBlogInput = {
   };
 };
 
+
 export function getBlogImage(path: string) {
-  const { data } = supabase.storage.from("blog-images").getPublicUrl(path);
+  if (!path) return "";
+
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+
+  const { data } = supabase.storage
+    .from("blog-images")
+    .getPublicUrl(path);
 
   return data.publicUrl;
 }
+
 
 export async function uploadBlogImage(
   file: File,

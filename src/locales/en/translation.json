@@ -27,16 +27,13 @@
       }
     ]
   },
-
   "portfolio": {
     "header": {
       "title": "Selected Works",
       "description": "A curated selection of our most impactful digital experiences. We believe in quality over quantity, focusing on projects that demand architectural precision and atmospheric depth."
     },
-
     "btn": "View Project"
   },
-
   "nav": {
     "home": "Home",
     "about": "About",
@@ -44,14 +41,12 @@
     "contact": "Contact",
     "blog": "Blog"
   },
-
   "about": {
     "hero": {
       "eyebrow": "OUR PHILOSOPHY",
       "title": "Crafting Excellence",
       "description": "We believe in the power of digital architecture. Every pixel, every interaction, and every line of code is an opportunity to build something enduring. We don't just design interfaces; we engineer digital atmospheres that resonate."
     },
-
     "story": {
       "title": "The Intersection of Design and Technology",
       "paragraphs": [
@@ -59,7 +54,6 @@
         "Our journey began in the spaces between disciplines. We are a collective of designers who code and engineers who obsess over typography. We build for the discerning client who understands that true luxury lies in the flawless execution of invisible details."
       ]
     },
-
     "process": {
       "eyebrow": "METHODOLOGY",
       "title": "Our Process",
@@ -87,7 +81,6 @@
       ]
     }
   },
-
   "contact": {
     "hero": {
       "title": "Let's Build Something Great.",
@@ -146,7 +139,6 @@
       }
     }
   },
-
   "admin": {
     "login": {
       "title": "Admin Login",
@@ -170,84 +162,67 @@
       }
     }
   },
-
   "dashboard": {
-    "admin": "Aurora Admin",
+    "admin": "Admin Panel",
     "dashboard": "Dashboard",
     "projects": "Projects",
-    "logout": "Logout",
-
-    "manageProjects": "Manage your portfolio projects.",
+    "logout": "Log out",
+    "manageProjects": "Manage portfolio projects.",
     "addProject": "Add Project",
     "noProjects": "No projects found.",
     "projectsLoading": "Loading projects...",
     "projectsError": "Failed to load projects.",
-
-    "editProject": "Edit project",
-    "deleteProject": "Delete project",
-
-    "backToProjects": "Back to projects",
-    "addProjectDescription": "Create a new project for your portfolio.",
-    "editProjectDescription": "Update the information of this project.",
-
+    "editProject": "Edit Project",
+    "deleteProject": "Delete Project",
+    "backToProjects": "Back to Projects",
+    "addProjectDescription": "Add a new project to your portfolio.",
+    "editProjectDescription": "Edit this project's information.",
     "projectName": "Project Name",
     "projectNamePlaceholder": "Enter project name",
-
     "category": "Category",
-    "categoryPlaceholder": "Select category",
-
+    "categoryPlaceholder": "Enter category ID",
     "technology": "Technology",
-    "technologyPlaceholder": "e.g. Web Design, Web Development",
-
-    "liveUrl": "Live URL",
-
-    "techStack": "Tech Stack",
+    "technologyPlaceholder": "Select a category",
+    "liveUrl": "Website URL",
+    "techStack": "Technologies Used",
     "techStackHint": "Separate technologies with commas.",
-
-    "overviewButtonLink": "Overview Button Link",
-
-    "highlightLinks": "Highlight Links",
-    "highlightLinksHint": "Enter image or content links, one per line.",
-
+    "overviewButtonLink": "Project Overview Button Link",
+    "highlightLinks": "Highlight Section Links",
+    "highlightLinksHint": "Enter each image or content link on a separate line.",
     "cancel": "Cancel",
     "saving": "Saving...",
     "createProject": "Create Project",
-    "updateProject": "Update Project",
-
+    "updateProject": "Save Changes",
     "loading": "Loading dashboard...",
     "statsError": "Failed to load dashboard statistics.",
-    "dashboardDescription": "Overview of your website content.",
+    "dashboardDescription": "Overview of website content.",
     "totalProjects": "Total Projects",
-    "totalBlogs": "Total Blogs",
+    "totalBlogs": "Total Blog Posts",
     "totalCategories": "Total Categories",
-
     "blog": "Blog",
-    "blogList": "All Posts",
-    "newBlog": "New Post",
+    "blogList": "Blog Posts",
+    "newBlog": "New Blog Post",
     "blogCategories": "Categories",
-    "projectList": "All Projects",
+    "projectList": "Project List",
     "newProject": "New Project",
     "projectCategories": "Categories",
-
     "basicInformation": "Basic Information",
     "projectCoverImage": "Project Cover Image",
     "chooseImage": "Choose Image",
-    "changeImageHint": "Choose another image to replace the current preview.",
+    "changeImageHint": "Select another image to replace the current one.",
     "uploadImageHint": "Choose an image. It will be uploaded when you save the project.",
     "imageOnlyError": "Please select a valid image file.",
     "addTechnology": "Add",
     "english": "English Content",
     "persian": "Persian Content",
-
     "noImageSelected": "No image selected",
-
     "blogCategoriesManagement": {
       "title": "Manage Blog Categories",
-      "description": "Create and manage blog categories in English and Persian.",
+      "description": "Add, edit, and manage English and Persian categories.",
       "add": "Add Category",
       "edit": "Edit Category",
       "addNew": "Add New Category",
-      "closeForm": "Close form",
+      "closeForm": "Close Form",
       "nameEn": "English Name",
       "nameFa": "Persian Name",
       "slug": "Slug",
@@ -261,53 +236,52 @@
       "empty": "No categories have been created yet.",
       "editLabel": "Edit {{name}}",
       "deleteLabel": "Delete {{name}}",
-      "confirmDelete": "Delete category \"{{name}}\"?",
+      "confirmDelete": "Are you sure you want to delete the category \"{{name}}\"?",
       "created": "Category created successfully.",
       "updated": "Category updated successfully.",
       "deleted": "Category deleted successfully.",
       "fieldsRequired": "Please fill in all fields.",
-      "hasPosts": "This category contains blog posts. Move them to another category first.",
+      "hasPosts": "This category contains blog posts. Move the posts to another category first.",
       "genericError": "Something went wrong. Please try again."
     },
-
     "blogForm": {
       "addTitle": "Add Blog Post",
       "editTitle": "Edit Blog Post",
       "addDescription": "Create a new blog post in English and Persian.",
-      "editDescription": "Update the blog post information.",
+      "editDescription": "Edit the blog post information.",
       "backToBlog": "Back to Blog",
       "basicInformation": "Basic Information",
       "author": "Author",
-      "authorPlaceholder": "Enter author name",
+      "authorPlaceholder": "Enter the author's name",
       "category": "Category",
       "categoryPlaceholder": "Select a category",
       "slug": "Slug",
-      "slugHint": "Generated from the English title. You can edit it.",
+      "slugHint": "Generated from the English title; you can edit it.",
       "publishedAt": "Publication Date and Time",
-      "coverImage": "Cover Image",
-      "previewAlt": "Blog cover preview",
+      "coverImage": "Blog Cover Image",
+      "previewAlt": "Blog cover image preview",
       "changeImage": "Change Image",
-      "cancelImage": "Cancel selected image",
+      "cancelImage": "Cancel Selected Image",
       "selectImage": "Click to select a cover image",
-      "imageUploadHint": "The image will be uploaded to the blog-images bucket.",
+      "imageUploadHint": "The image will be uploaded to the blog-images bucket when saved.",
       "englishContent": "English Content",
       "persianContent": "Persian Content",
       "englishTitle": "English Title",
       "englishExcerpt": "English Excerpt",
-      "englishBody": "English Article Content",
+      "englishBody": "Article Body in English",
       "persianTitle": "Persian Title",
       "persianExcerpt": "Persian Excerpt",
-      "persianBody": "Persian Article Content",
+      "persianBody": "Article Body in Persian",
       "englishTitlePlaceholder": "Article title",
-      "englishExcerptPlaceholder": "A short summary of the article",
-      "englishBodyPlaceholder": "Write your article in English...",
-      "persianTitlePlaceholder": "Article title in Persian",
+      "englishExcerptPlaceholder": "A short summary of the article in English",
+      "englishBodyPlaceholder": "Write the article in English...",
+      "persianTitlePlaceholder": "Article title",
       "persianExcerptPlaceholder": "A short summary of the article in Persian",
-      "persianBodyPlaceholder": "Write your article in Persian...",
+      "persianBodyPlaceholder": "Write the article here...",
       "invalidImage": "Please select a valid image file.",
       "requiredFields": "Please complete all required fields.",
       "coverRequired": "A cover image is required.",
-      "translationsRequired": "The title, excerpt, and content are required in both languages.",
+      "translationsRequired": "The title, excerpt, and content must be completed in both languages.",
       "loadError": "Failed to load the blog post. Check your connection and Supabase permissions.",
       "saveError": "Failed to save the blog post. Check the form data and Supabase permissions.",
       "saving": "Saving...",
@@ -315,26 +289,27 @@
       "create": "Create Blog Post",
       "cancel": "Cancel"
     },
-
-      "title": "Manage Blog",
-      "description": "View and manage your blog posts.",
-      "add": "Add Blog Post",
-      "loadingBlog": "Loading blog posts...",
-      "loadError": "Failed to load blog posts.",
-      "empty": "No blog posts have been created yet.",
-      "uncategorized": "Uncategorized",
-      "noImage": "No image",
-      "author": "Author",
-      "available": "Available",
-      "missing": "Missing",
-      "view": "View blog post",
-      "edit": "Edit blog post",
-      "delete": "Delete blog post",
-      "confirmDelete": "Delete \"{{title}}\"? This action cannot be undone.",
-      "deleteError": "Failed to delete the blog post. Please try again."
-    
+    "title": "Manage Blog",
+    "description": "View and manage blog posts.",
+    "add": "Add Blog Post",
+    "loadingBlog": "Loading blog posts...",
+    "loadError": "Failed to load blog posts.",
+    "empty": "No blog posts have been created yet.",
+    "uncategorized": "Uncategorized",
+    "noImage": "No Image",
+    "author": "Author",
+    "available": "Available",
+    "missing": "Missing",
+    "view": "View Blog Post",
+    "edit": "Edit Blog Post",
+    "delete": "Delete Blog Post",
+    "confirmDelete": "Are you sure you want to delete the blog post \"{{title}}\"? This action cannot be undone.",
+    "deleteError": "Deletion failed. Please try again.",
+    "confirmDeleteTitle": "Confirm Deletion",
+    "confirmDeleteDescription": "Are you sure you want to delete this item? This action cannot be undone.",
+    "blogDeleted": "Blog post deleted successfully.",
+    "deleting": "Deleting..."
   },
-
   "blog": {
     "label": "Blog",
     "title": "Insights & Ideas",

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import type { Blog } from "@/features/api";
+import { getBlogImage, type Blog } from "@/features/api";
 
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -18,7 +18,7 @@ const BlogCard = ({ blog }: BlogCardProps) => {
       <Link to={`/blog/${blog.slug}`}>
         <div className="aspect-video overflow-hidden">
           <img
-            src={blog.cover_image}
+            src={getBlogImage(blog.cover_image)}
             alt={translation.title}
             className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
           />

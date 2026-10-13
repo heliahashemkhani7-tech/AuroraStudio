@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pencil, Plus, Trash2, X, Save } from "lucide-react";
+import { toast } from "sonner";
 
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import {
   createAdminBlogCategory,
   deleteAdminBlogCategory,
@@ -45,6 +47,8 @@ export default function AdminBlogCategories() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [pendingDelete, setPendingDelete] =
+    useState<AdminBlogCategory | null>(null);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<CategoryForm>(emptyForm);
   const [formOpen, setFormOpen] = useState(false);
@@ -59,14 +63,12 @@ export default function AdminBlogCategories() {
       setLoading(true);
     }
 
-    setError(null);
-
     try {
       const data = await getAdminBlogCategories();
       setCategories(data);
     } catch (error) {
       console.error("Failed to load blog categories:", error);
-      setError(tr("genericError"));
+      toast.error(tr("genericError"));
     } finally {
       if (showLoading) {
         setLoading(false);
@@ -88,7 +90,7 @@ export default function AdminBlogCategories() {
         console.error("Failed to load blog categories:", error);
 
         if (!cancelled) {
-          setError(tr("genericError"));
+          toast.error(tr("genericError"));
         }
       } finally {
         if (!cancelled) {
@@ -153,37 +155,26 @@ export default function AdminBlogCategories() {
           id: editingId,
           ...form,
         });
-        setSuccess(tr("updated"));
+        toast.success(tr("updated"));
       } else {
         await createAdminBlogCategory(form);
-        setSuccess(tr("created"));
+        toast.success(tr("created"));
       }
 
       closeForm();
-      await loadCategories();
+      await loadCategories(false);
     } catch (error) {
       console.error("Failed to save blog category:", error);
-      setError(tr(getErrorKey(error)));
+      toast.error(tr(getErrorKey(error)));
     } finally {
       setSaving(false);
     }
   }
 
   async function handleDelete(category: AdminBlogCategory) {
-    const translatedName =
-      category.blog_category_translations.find(
-        (item) => item.language_id === (isRtl ? 2 : 1)
-      )?.name ?? category.slug;
-
-    const confirmed = window.confirm(
-      tr("confirmDelete", { name: translatedName })
-    );
-
-    if (!confirmed) return;
+    if (deletingId !== null) return;
 
     setDeletingId(category.id);
-    setError(null);
-    setSuccess(null);
 
     try {
       await deleteAdminBlogCategory(category.id);
@@ -191,14 +182,22 @@ export default function AdminBlogCategories() {
       setCategories((previous) =>
         previous.filter((item) => item.id !== category.id)
       );
-      setSuccess(tr("deleted"));
+
+      setPendingDelete(null);
+      toast.success(tr("deleted"));
     } catch (error) {
       console.error("Failed to delete blog category:", error);
-      setError(tr(getErrorKey(error)));
+      toast.error(tr(getErrorKey(error)));
     } finally {
       setDeletingId(null);
     }
   }
+
+  const pendingDeleteName = pendingDelete
+    ? pendingDelete.blog_category_translations.find(
+        (item) => item.language_id === (isRtl ? 2 : 1)
+      )?.name ?? pendingDelete.slug
+    : "";
 
   return (
     <section dir={isRtl ? "rtl" : "ltr"} className="space-y-6">
@@ -313,8 +312,8 @@ export default function AdminBlogCategories() {
               {saving
                 ? tr("saving")
                 : editingId !== null
-                ? tr("save")
-                : tr("create")}
+                  ? tr("save")
+                  : tr("create")}
             </button>
 
             <button
@@ -379,16 +378,12 @@ export default function AdminBlogCategories() {
 
                     <button
                       type="button"
-                      onClick={() => void handleDelete(category)}
-                      disabled={deletingId === category.id}
+                      onClick={() => setPendingDelete(category)}
+                      disabled={deletingId !== null}
                       aria-label={tr("deleteLabel", { name: displayName })}
                       className="rounded-md p-2 text-red-500 hover:bg-red-500/10 disabled:opacity-50"
                     >
-                      {deletingId === category.id ? (
-                        <span className="text-xs">...</span>
-                      ) : (
-                        <Trash2 size={18} />
-                      )}
+                      <Trash2 size={18} />
                     </button>
                   </div>
                 </div>
@@ -397,6 +392,25 @@ export default function AdminBlogCategories() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        loading={pendingDelete !== null && deletingId === pendingDelete.id}
+        title={t("dashboard.confirmDeleteTitle")}
+        description={tr("confirmDelete", { name: pendingDeleteName })}
+        confirmText={t("dashboard.delete")}
+        cancelText={t("dashboard.cancel")}
+        onCancel={() => {
+          if (deletingId === null) {
+            setPendingDelete(null);
+          }
+        }}
+        onConfirm={() => {
+          if (pendingDelete !== null && deletingId === null) {
+            void handleDelete(pendingDelete);
+          }
+        }}
+      />
     </section>
   );
 }
