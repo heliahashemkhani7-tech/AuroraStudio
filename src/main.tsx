@@ -6,6 +6,7 @@ import "./assets/css/font-face.css";
 import "./assets/css/main.css";
 import SplashCursor from "./components/animiations/SplashCursor.tsx";
 import { BrowserRouter } from "react-router-dom";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")!).render(
     />
     <BrowserRouter>
       <App />
+      <Toaster position="top-right" richColors />
     </BrowserRouter>
   </StrictMode>
 );

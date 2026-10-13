@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { Pencil, Trash2, X, Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import {
   createAdminCategory,
   deleteAdminCategory,
@@ -24,11 +26,14 @@ const emptyForm: CategoryForm = {
 
 export default function AdminProjectCategories() {
   const { i18n } = useTranslation();
-  const isPersian = i18n.language === "fa";
+  const isPersian = i18n.language.startsWith("fa");
 
   const [categories, setCategories] = useState<AdminCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [pendingDelete, setPendingDelete] =
+    useState<AdminCategory | null>(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -40,14 +45,12 @@ export default function AdminProjectCategories() {
         setLoading(true);
       }
 
-      setError("");
-
       try {
         const data = await getAdminCategoriesWithTranslations();
         setCategories(data);
       } catch (err) {
-        console.error(err);
-        setError(
+        console.error("Failed to load project categories:", err);
+        toast.error(
           isPersian
             ? "دریافت دسته‌بندی‌ها ناموفق بود."
             : "Failed to load categories."
@@ -72,10 +75,10 @@ export default function AdminProjectCategories() {
           setCategories(data);
         }
       } catch (err) {
-        console.error(err);
+        console.error("Failed to load project categories:", err);
 
         if (!cancelled) {
-          setError(
+          toast.error(
             isPersian
               ? "دریافت دسته‌بندی‌ها ناموفق بود."
               : "Failed to load categories."
@@ -148,7 +151,9 @@ export default function AdminProjectCategories() {
     setSaving(true);
 
     try {
-      if (editingId === null) {
+      const isCreating = editingId === null;
+
+      if (isCreating) {
         await createAdminCategory({ slug, nameEn, nameFa });
       } else {
         await updateAdminCategory({
@@ -160,20 +165,22 @@ export default function AdminProjectCategories() {
       }
 
       resetForm();
-      setSuccess(
-        editingId === null
-          ? isPersian
+
+      toast.success(
+        isPersian
+          ? isCreating
             ? "دسته‌بندی با موفقیت اضافه شد."
-            : "Category created successfully."
-          : isPersian
-          ? "دسته‌بندی با موفقیت ویرایش شد."
-          : "Category updated successfully."
+            : "دسته‌بندی با موفقیت ویرایش شد."
+          : isCreating
+            ? "Category created successfully."
+            : "Category updated successfully."
       );
 
-      await loadCategories();
+      await loadCategories(false);
     } catch (err) {
-      console.error(err);
-      setError(
+      console.error("Failed to save project category:", err);
+
+      toast.error(
         isPersian
           ? "ذخیره دسته‌بندی ناموفق بود. اسلاگ تکراری یا خطای دسترسی را بررسی کن."
           : "Could not save category. Check for a duplicate slug or a permission error."
@@ -184,22 +191,13 @@ export default function AdminProjectCategories() {
   };
 
   const handleDelete = async (category: AdminCategory) => {
-    const name =
-      category.category_translations.find(
-        (item) => item.language_id === (isPersian ? 2 : 1)
-      )?.name ?? category.slug;
+    if (deletingId !== null) return;
 
-    const confirmed = window.confirm(
-      isPersian ? `دسته‌بندی «${name}» حذف شود؟` : `Delete category "${name}"?`
-    );
-
-    if (!confirmed) return;
-
-    setError("");
-    setSuccess("");
+    setDeletingId(category.id);
 
     try {
       await deleteAdminCategory(category.id);
+
       setCategories((previous) =>
         previous.filter((item) => item.id !== category.id)
       );
@@ -208,22 +206,35 @@ export default function AdminProjectCategories() {
         resetForm();
       }
 
-      setSuccess(
-        isPersian ? "دسته‌بندی حذف شد." : "Category deleted successfully."
+      setPendingDelete(null);
+
+      toast.success(
+        isPersian
+          ? "دسته‌بندی با موفقیت حذف شد."
+          : "Category deleted successfully."
       );
     } catch (err) {
-      console.error(err);
-      setError(
+      console.error("Failed to delete project category:", err);
+
+      toast.error(
         err instanceof Error && err.message === "CATEGORY_HAS_PROJECTS"
           ? isPersian
             ? "این دسته‌بندی به پروژه متصل است؛ ابتدا دسته‌بندی پروژه را تغییر بده."
             : "This category is assigned to projects. Reassign them before deleting it."
           : isPersian
-          ? "حذف دسته‌بندی ناموفق بود."
-          : "Failed to delete category."
+            ? "حذف دسته‌بندی ناموفق بود."
+            : "Failed to delete category."
       );
+    } finally {
+      setDeletingId(null);
     }
   };
+
+  const pendingDeleteName = pendingDelete
+    ? pendingDelete.category_translations.find(
+        (item) => item.language_id === (isPersian ? 2 : 1)
+      )?.name ?? pendingDelete.slug
+    : "";
 
   return (
     <section className="space-y-6 text-text">
@@ -266,8 +277,8 @@ export default function AdminProjectCategories() {
               ? "افزودن دسته‌بندی"
               : "Add Category"
             : isPersian
-            ? "ویرایش دسته‌بندی"
-            : "Edit Category"}
+              ? "ویرایش دسته‌بندی"
+              : "Edit Category"}
         </h2>
 
         <div className="grid gap-4 md:grid-cols-3">
@@ -335,12 +346,12 @@ export default function AdminProjectCategories() {
                 ? "در حال ذخیره..."
                 : "Saving..."
               : editingId === null
-              ? isPersian
-                ? "افزودن"
-                : "Add"
-              : isPersian
-              ? "ذخیره تغییرات"
-              : "Save Changes"}
+                ? isPersian
+                  ? "افزودن"
+                  : "Add"
+                : isPersian
+                  ? "ذخیره تغییرات"
+                  : "Save Changes"}
           </button>
 
           {editingId !== null && (
@@ -406,9 +417,10 @@ export default function AdminProjectCategories() {
 
                     <button
                       type="button"
-                      onClick={() => void handleDelete(category)}
+                      onClick={() => setPendingDelete(category)}
+                      disabled={deletingId !== null}
                       aria-label={isPersian ? "حذف" : "Delete"}
-                      className="rounded-md border border-border p-2 text-red-500 hover:bg-red-500/10"
+                      className="rounded-md border border-border p-2 text-red-500 hover:bg-red-500/10 disabled:opacity-50"
                     >
                       <Trash2 size={17} />
                     </button>
@@ -419,6 +431,29 @@ export default function AdminProjectCategories() {
           </div>
         )}
       </div>
+
+      <ConfirmDialog
+        open={pendingDelete !== null}
+        loading={pendingDelete !== null && deletingId === pendingDelete.id}
+        title={isPersian ? "تأیید حذف دسته‌بندی" : "Confirm category deletion"}
+        description={
+          isPersian
+            ? `دسته‌بندی «${pendingDeleteName}» حذف شود؟`
+            : `Delete category "${pendingDeleteName}"?`
+        }
+        confirmText={isPersian ? "حذف" : "Delete"}
+        cancelText={isPersian ? "انصراف" : "Cancel"}
+        onCancel={() => {
+          if (deletingId === null) {
+            setPendingDelete(null);
+          }
+        }}
+        onConfirm={() => {
+          if (pendingDelete !== null && deletingId === null) {
+            void handleDelete(pendingDelete);
+          }
+        }}
+      />
     </section>
   );
 }

@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/lib/supabace";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function AdminLogin() {
   const { t } = useTranslation();
@@ -11,6 +12,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,13 +50,25 @@ export default function AdminLogin() {
               className="w-full rounded-md border border-border px-3 py-2"
             />
 
-            <input
-              type="password"
-              placeholder={t("admin.login.passwordPlaceholder")}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-md border border-border px-3 py-2"
-            />
+            <div className="relative w-full">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder={t("admin.login.passwordPlaceholder")}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded-md border border-border px-3 py-2 pe-10"
+              />
+
+              <button
+                type="button"
+                onClick={() => setShowPassword((previous) => !previous)}
+                className="absolute inset-y-0 end-0 flex items-center px-3 text-muted-foreground transition-colors hover:text-text"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                title={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
 
             {error && <p className="text-sm text-red-500">{t(error)}</p>}
 

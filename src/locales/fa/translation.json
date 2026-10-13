@@ -177,51 +177,38 @@
     "dashboard": "داشبورد",
     "projects": "پروژه‌ها",
     "logout": "خروج",
-
     "manageProjects": "مدیریت پروژه‌های نمونه‌کار.",
     "addProject": "افزودن پروژه",
     "noProjects": "پروژه‌ای پیدا نشد.",
     "projectsLoading": "در حال بارگذاری پروژه‌ها...",
     "projectsError": "بارگذاری پروژه‌ها با خطا مواجه شد.",
-
     "editProject": "ویرایش پروژه",
     "deleteProject": "حذف پروژه",
-
     "backToProjects": "بازگشت به پروژه‌ها",
     "addProjectDescription": "یک پروژه جدید به نمونه‌کارها اضافه کنید.",
     "editProjectDescription": "اطلاعات این پروژه را ویرایش کنید.",
-
     "projectName": "نام پروژه",
     "projectNamePlaceholder": "نام پروژه را وارد کنید",
-
     "category": "دسته‌بندی",
     "categoryPlaceholder": "شناسه دسته‌بندی را وارد کنید",
-
     "technology": "تکنولوژی",
-    "technologyPlaceholder": "دسته بندی را انتخاب کنید",
-
+    "technologyPlaceholder": "دسته‌بندی را انتخاب کنید",
     "liveUrl": "لینک وب‌سایت",
-
     "techStack": "تکنولوژی‌های استفاده‌شده",
     "techStackHint": "تکنولوژی‌ها را با کاما از هم جدا کنید.",
-
     "overviewButtonLink": "لینک دکمه معرفی پروژه",
-
     "highlightLinks": "لینک‌های بخش ویژگی‌ها",
     "highlightLinksHint": "لینک تصاویر یا محتوا را هر کدام در یک خط وارد کنید.",
-
     "cancel": "لغو",
     "saving": "در حال ذخیره...",
     "createProject": "ایجاد پروژه",
     "updateProject": "ذخیره تغییرات",
-
     "loading": "در حال بارگذاری داشبورد...",
     "statsError": "دریافت آمار داشبورد با خطا مواجه شد.",
     "dashboardDescription": "نمای کلی محتوای وب‌سایت.",
     "totalProjects": "تعداد پروژه‌ها",
     "totalBlogs": "تعداد وبلاگ‌ها",
     "totalCategories": "تعداد دسته‌بندی‌ها",
-
     "blog": "وبلاگ",
     "blogList": "لیست مطالب",
     "newBlog": "مطلب جدید",
@@ -229,7 +216,6 @@
     "projectList": "لیست پروژه‌ها",
     "newProject": "پروژه جدید",
     "projectCategories": "دسته‌بندی‌ها",
-
     "basicInformation": "اطلاعات پایه",
     "projectCoverImage": "تصویر کاور پروژه",
     "chooseImage": "انتخاب تصویر",
@@ -240,7 +226,6 @@
     "english": "محتوای انگلیسی",
     "persian": "محتوای فارسی",
     "noImageSelected": "تصویری انتخاب نشده",
-
     "blogCategoriesManagement": {
       "title": "مدیریت دسته‌بندی‌های بلاگ",
       "description": "افزودن، ویرایش و مدیریت دسته‌بندی‌های فارسی و انگلیسی",
@@ -269,7 +254,6 @@
       "hasPosts": "این دسته‌بندی مقاله دارد؛ ابتدا مقاله‌ها را به دسته دیگری منتقل کنید.",
       "genericError": "خطایی رخ داد. لطفاً دوباره تلاش کنید."
     },
-
     "blogForm": {
       "addTitle": "افزودن مقاله",
       "editTitle": "ویرایش مقاله",
@@ -315,7 +299,6 @@
       "create": "ایجاد مقاله",
       "cancel": "انصراف"
     },
-
     "title": "مدیریت بلاگ",
     "description": "مقاله‌های بلاگ را مشاهده و مدیریت کن.",
     "add": "افزودن مقاله",
@@ -325,14 +308,17 @@
     "uncategorized": "بدون دسته‌بندی",
     "noImage": "بدون تصویر",
     "author": "نویسنده",
-
     "available": "ثبت شده",
     "missing": "ندارد",
     "view": "مشاهده مقاله",
     "edit": "ویرایش مقاله",
     "delete": "حذف مقاله",
     "confirmDelete": "مقاله «{{title}}» حذف شود؟ این عملیات قابل بازگشت نیست.",
-    "deleteError": "حذف مقاله انجام نشد. لطفاً دوباره تلاش کن."
+    "deleteError": "حذف انجام نشد. لطفاً دوباره تلاش کن.",
+    "confirmDeleteTitle": "تأیید حذف",
+    "confirmDeleteDescription": "از حذف این مورد مطمئنی؟ این عملیات قابل بازگشت نیست.",
+    "blogDeleted": "بلاگ با موفقیت حذف شد.",
+    "deleting": "در حال حذف..."
   },
 
   "blog": {
