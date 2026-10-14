@@ -318,7 +318,8 @@
     "confirmDeleteTitle": "تأیید حذف",
     "confirmDeleteDescription": "از حذف این مورد مطمئنی؟ این عملیات قابل بازگشت نیست.",
     "blogDeleted": "بلاگ با موفقیت حذف شد.",
-    "deleting": "در حال حذف..."
+    "deleting": "در حال حذف...",
+    "projectDeleted" : "پروژه با موفقیت حذف شد."
   },
 
   "blog": {
