@@ -308,8 +308,8 @@
     "confirmDeleteTitle": "Confirm Deletion",
     "confirmDeleteDescription": "Are you sure you want to delete this item? This action cannot be undone.",
     "blogDeleted": "Blog post deleted successfully.",
-    "deleting": "Deleting..."
-  },
+    "deleting": "Deleting...",
+    "projectDeleted": "Blog post deleted successfully."  },
   "blog": {
     "label": "Blog",
     "title": "Insights & Ideas",

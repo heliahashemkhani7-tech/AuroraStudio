@@ -19,7 +19,6 @@ type AdminProject = {
   highlight_links: string[];
 };
 
-
 export default function AdminProjects() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -79,7 +78,7 @@ export default function AdminProjects() {
       toast.success(t("dashboard.projectDeleted"));
     } catch (error) {
       console.error("Failed to delete project:", error);
-      toast.error(t("dashboard.projectDeleteError"));
+      toast.error(t("dashboard.deleteError"));
     } finally {
       setDeleting(false);
     }
@@ -89,9 +88,7 @@ export default function AdminProjects() {
     <section className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">
-            {t("dashboard.projects")}
-          </h1>
+          <h1 className="text-2xl font-semibold">{t("dashboard.projects")}</h1>
 
           <p className="mt-1 text-sm text-muted-foreground">
             {t("dashboard.manageProjects")}
@@ -120,9 +117,7 @@ export default function AdminProjects() {
       ) : (
         <div className="overflow-hidden rounded-xl border border-border">
           {projects.length === 0 ? (
-            <div className="p-8 text-center">
-              {t("dashboard.noProjects")}
-            </div>
+            <div className="p-8 text-center">{t("dashboard.noProjects")}</div>
           ) : (
             <div className="divide-y divide-border">
               {projects.map((project) => (

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 
 import { submitContactMessage } from "@/features/api";
@@ -9,8 +10,6 @@ import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import ElectricBorder from "../animiations/ElectricBorder";
 
-type ContactFormStatus = "success" | "error" | null;
-
 export default function ContactForm() {
   const { t } = useTranslation();
 
@@ -19,7 +18,6 @@ export default function ContactForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<ContactFormStatus>(null);
 
   const projectTypeLabels = {
     "web-design": t("contact.form.projectType.options.webDesign"),
@@ -35,7 +33,6 @@ export default function ContactForm() {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
-    setStatus(null);
 
     try {
       await submitContactMessage({
@@ -49,10 +46,11 @@ export default function ContactForm() {
       setEmail("");
       setProjectType("");
       setMessage("");
-      setStatus("success");
+
+      toast.success(t("contact.form.success"));
     } catch (error) {
       console.error("Contact form submission failed:", error);
-      setStatus("error");
+      toast.error(t("contact.form.error"));
     } finally {
       setIsSubmitting(false);
     }
@@ -172,18 +170,6 @@ export default function ContactForm() {
               maxLength={5000}
             />
           </div>
-
-          {status === "success" && (
-            <p role="status" className="text-sm text-green-600">
-              {t("contact.form.success")}
-            </p>
-          )}
-
-          {status === "error" && (
-            <p role="alert" className="text-sm text-red-400">
-              {t("contact.form.error")}
-            </p>
-          )}
 
           <Button
             type="submit"
