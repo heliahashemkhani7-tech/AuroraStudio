@@ -4,35 +4,40 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Eye, EyeOff } from "lucide-react";
 import { supabase } from "@/hooks/lib/supabace";
+import { toast } from "sonner";
 
 export default function AdminLogin() {
   const { t } = useTranslation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setError("");
+    if (loading) return;
+
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
 
-    setLoading(false);
+      if (error) {
+        toast.error(t("admin.login.invalidCredentials"));
+        return;
+      }
 
-    if (error) {
-      setError("admin.login.invalidCredentials");
-      return;
+      window.location.href = "/dashboard";
+    } catch {
+      toast.error(t("admin.login.invalidCredentials"));
+    } finally {
+      setLoading(false);
     }
-
-    window.location.href = "/dashboard";
   };
 
   return (
@@ -47,6 +52,8 @@ export default function AdminLogin() {
               placeholder={t("admin.login.emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
+              required
               className="w-full rounded-md border border-border px-3 py-2"
             />
 
@@ -56,6 +63,8 @@ export default function AdminLogin() {
                 placeholder={t("admin.login.passwordPlaceholder")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+                required
                 className="w-full rounded-md border border-border px-3 py-2 pe-10"
               />
 
@@ -69,8 +78,6 @@ export default function AdminLogin() {
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
-
-            {error && <p className="text-sm text-red-500">{t(error)}</p>}
 
             <Button type="submit" disabled={loading}>
               {loading
