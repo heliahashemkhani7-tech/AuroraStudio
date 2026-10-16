@@ -7,12 +7,11 @@ import {
   Plus,
   Tags,
   ChevronDown,
+  Inbox,
 } from "lucide-react";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import { supabase } from "@/lib/supabace";
 
 import {
   Sidebar,
@@ -32,6 +31,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../ui/collapsible";
+import { supabase } from "@/hooks/lib/supabace";
 
 export default function AdminSidebar() {
   const navigate = useNavigate();
@@ -44,6 +44,8 @@ export default function AdminSidebar() {
   const isProjectsActive = location.pathname.startsWith("/dashboard/projects");
 
   const isBlogActive = location.pathname.startsWith("/dashboard/blog");
+
+  const isInboxActive = location.pathname === "/dashboard/inbox";
 
   const handleNavigation = () => {
     if (isMobile) {
@@ -285,13 +287,32 @@ export default function AdminSidebar() {
                   </CollapsibleContent>
                 </SidebarMenuItem>
               </Collapsible>
+
+              {/* Inbox */}
+              <SidebarMenuItem className="min-w-0">
+                <SidebarMenuButton
+                  isActive={isInboxActive}
+                  className={getMenuButtonClassName(isInboxActive)}
+                >
+                  <Link
+                    to="/dashboard/inbox"
+                    onClick={handleNavigation}
+                    className="flex min-w-0 items-center gap-2"
+                  >
+                    <Inbox className="shrink-0" />
+                    <span className="truncate">
+                      {isPersian ? "صندوق پیام‌ها" : "Inbox"}
+                    </span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
       {/* Logout */}
-      <SidebarFooter className="min-w-0  bg-sidebar-bg p-3 backdrop-blur-xl">
+      <SidebarFooter className="min-w-0 bg-sidebar-bg p-3 backdrop-blur-xl">
         <SidebarMenu className="min-w-0">
           <SidebarMenuItem className="min-w-0">
             <SidebarMenuButton

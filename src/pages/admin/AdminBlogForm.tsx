@@ -14,7 +14,7 @@ import {
   type AdminBlogCategory,
 } from "@/features/api";
 
-import { slugify } from "@/lib/slugify";
+import { slugify } from "@/hooks/lib/slugify";
 import BlogEditor from "../../components/ui/BlogEditor";
 
 type TranslationForm = {

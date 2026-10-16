@@ -1,29 +1,29 @@
 import { lazy, Suspense } from "react";
-
 import { Routes, Route } from "react-router-dom";
 
 import DefaultLayout from "@/components/layout/DefaultLayout";
+import AdminLayout from "@/components/layout/AdminLayout";
 
 import HomeSkeleton from "@/components/skeleton/HomeSkeleton";
 import AboutSkeleton from "@/components/skeleton/AboutSkeleton";
 import ContactSkeleton from "@/components/skeleton/ContactSkeleton";
 import PortfolioSkeleton from "@/components/skeleton/PortfolioSkeleton";
 import ProjectDetailsSkeleton from "@/components/skeleton/ProjectDetailsSkeleton";
+import BlogSkeleton from "@/components/skeleton/BlogSkeleton";
 
 import AdminLogin from "./admin/AdminLogin";
 import ProtectedRoute from "./admin/ProtectedRoute";
 import AdminDashboard from "./admin/AdminDashboard";
 import AdminProjects from "./admin/AdminProjects";
-
-import AdminLayout from "@/components/layout/AdminLayout";
-import Blog from "./Blog";
-import BlogDetails from "./BlogDetails";
 import AdminProjectsForm from "./admin/AdminProjectsForm";
-import BlogSkeleton from "@/components/skeleton/BlogSkeleton";
 import AdminProjectCategories from "./admin/AdminProjectCategories";
 import AdminBlogCategories from "./admin/AdminBlogCategories";
 import AdminBlog from "./admin/AdminBlog";
 import AdminBlogForm from "./admin/AdminBlogForm";
+
+import Blog from "./Blog";
+import BlogDetails from "./BlogDetails";
+import AdminInbox from "./admin/AdminInbox";
 
 const Home = lazy(() => import("./Home"));
 const About = lazy(() => import("./About"));
@@ -99,20 +99,19 @@ export default function App() {
           <Route index element={<AdminDashboard />} />
 
           <Route path="projects" element={<AdminProjects />} />
-
           <Route
             path="projects/categories"
             element={<AdminProjectCategories />}
           />
-
           <Route path="projects/new" element={<AdminProjectsForm />} />
-
           <Route path="projects/:id/edit" element={<AdminProjectsForm />} />
 
           <Route path="blog/categories" element={<AdminBlogCategories />} />
           <Route path="blog" element={<AdminBlog />} />
           <Route path="blog/new" element={<AdminBlogForm />} />
           <Route path="blog/:id/edit" element={<AdminBlogForm />} />
+
+          <Route path="inbox" element={<AdminInbox />} />
         </Route>
       </Route>
     </Routes>

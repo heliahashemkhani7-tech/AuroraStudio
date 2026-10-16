@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabace";
+import { supabase } from "@/hooks/lib/supabace";
 
 type Filter = {
   category_id: number;
@@ -222,8 +222,6 @@ export async function getAdminProjects() {
 
   return data;
 }
-
-
 
 export async function getDashboardStats() {
   const [projectsResult, blogsResult, categoriesResult] = await Promise.all([
@@ -884,7 +882,6 @@ export type AdminBlogInput = {
   };
 };
 
-
 export function getBlogImage(path: string) {
   if (!path) return "";
 
@@ -892,13 +889,10 @@ export function getBlogImage(path: string) {
     return path;
   }
 
-  const { data } = supabase.storage
-    .from("blog-images")
-    .getPublicUrl(path);
+  const { data } = supabase.storage.from("blog-images").getPublicUrl(path);
 
   return data.publicUrl;
 }
-
 
 export async function uploadBlogImage(
   file: File,
@@ -1110,5 +1104,56 @@ export async function deleteAdminBlog(blogId: number): Promise<void> {
 
   if (!data) {
     throw new Error("BLOG_NOT_FOUND_OR_ALREADY_DELETED");
+  }
+}
+
+export type ContactMessage = {
+  id: string;
+  name: string;
+  email: string;
+  project_type: string;
+  message: string;
+  is_read: boolean;
+  created_at: string;
+};
+
+export async function getAdminContactMessages(): Promise<ContactMessage[]> {
+  const { data, error } = await supabase
+    .from("contact_messages")
+    .select("id, name, email, project_type, message, is_read, created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching contact messages:", error);
+    throw error;
+  }
+
+  return data as ContactMessage[];
+}
+
+export async function markContactMessageAsRead(
+  messageId: string,
+  isRead: boolean
+): Promise<void> {
+  const { error } = await supabase
+    .from("contact_messages")
+    .update({ is_read: isRead })
+    .eq("id", messageId);
+
+  if (error) {
+    console.error("Error updating contact message:", error);
+    throw error;
+  }
+}
+
+export async function deleteContactMessage(messageId: string): Promise<void> {
+  const { error } = await supabase
+    .from("contact_messages")
+    .delete()
+    .eq("id", messageId);
+
+  if (error) {
+    console.error("Error deleting contact message:", error);
+    throw error;
   }
 }
