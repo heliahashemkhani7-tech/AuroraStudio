@@ -2,34 +2,14 @@ import { useEffect, useState } from "react";
 import { FolderKanban, FileText, Layers3 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-import { Skeleton } from "@/components/ui/skeleton";
 import { getDashboardStats } from "@/features/api";
+import DashboardLoadingSkeleton from "@/components/skeleton/DashboardLoadingSkeleton";
 
 type DashboardStats = {
   projects: number;
   blogs: number;
   categories: number;
 };
-
-function DashboardLoadingSkeleton() {
-  return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 3 }).map((_, index) => (
-        <div
-          key={index}
-          className="rounded-xl border border-border bg-background/50 p-5"
-        >
-          <div className="flex items-center justify-between gap-4">
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-5 w-5 rounded-md" />
-          </div>
-
-          <Skeleton className="mt-4 h-9 w-20" />
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function AdminDashboard() {
   const { t } = useTranslation();
@@ -97,9 +77,7 @@ export default function AdminDashboard() {
   return (
     <section className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold">
-          {t("dashboard.dashboard")}
-        </h1>
+        <h1 className="text-2xl font-semibold">{t("dashboard.dashboard")}</h1>
 
         <p className="mt-1 text-sm text-muted-foreground">
           {t("dashboard.dashboardDescription")}
@@ -123,16 +101,12 @@ export default function AdminDashboard() {
                 className="rounded-xl border border-border bg-background/50 p-5"
               >
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground">
-                    {card.title}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{card.title}</p>
 
                   <Icon size={20} className="text-muted-foreground" />
                 </div>
 
-                <p className="mt-4 text-3xl font-semibold">
-                  {card.value}
-                </p>
+                <p className="mt-4 text-3xl font-semibold">{card.value}</p>
               </div>
             );
           })}

@@ -74,6 +74,12 @@ body {
   /* Border */
   --border-light: rgba(0, 0, 0, 0.05);
   --border-medium: rgba(0, 0, 0, 0.1);
+  --sidebar-bg: rgba(232, 229, 238, 0.96);
+  --sidebar-footer-bg: rgba(227, 223, 234, 0.98);
+  --sidebar-border: rgba(57, 49, 70, 0.1);
+  --sidebar-hover: rgba(75, 65, 90, 0.07);
+  --sidebar-active: rgba(117, 67, 200, 0.12);
+  --dashboard-bg: #dcd3edad;
 }
 
 .dark {
@@ -118,6 +124,13 @@ body {
   /* Border */
   --border-light: rgba(255, 255, 255, 0.12);
   --border-medium: rgba(255, 255, 255, 0.2);
+
+  --sidebar-bg: rgba(23, 21, 29, 0.96);
+  --sidebar-footer-bg: rgba(23, 21, 29, 0.98);
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-hover: rgba(255, 255, 255, 0.055);
+  --sidebar-active: rgba(167, 139, 250, 0.15);
+  --dashboard-bg: #111015;
 }
 
 @theme inline {
@@ -148,6 +161,14 @@ body {
   --color-on-surface: var(--on-surface);
   --color-hero-description: var(--hero-description);
   --background-image-button-gradient: var(--button-gradient);
+  --sidebar-bg: rgba(23, 21, 29, 0.96);
+  --sidebar-bg: rgba(23, 21, 29, 0.96);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-footer-bg: var(--sidebar-footer-bg);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-hover: var(--sidebar-border);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-dashboard-bg: var(--dashboard-bg);
 }
 
 @layer base {
