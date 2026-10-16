@@ -160,6 +160,36 @@
           "remove": "Remove highlight"
         }
       }
+    },
+    "inbox": {
+      "title": "Inbox",
+      "description": "Messages received through your website contact form",
+      "all": "All messages",
+      "unread": "Unread",
+      "read": "Read",
+      "search": "Search messages...",
+      "loading": "Loading messages...",
+      "loadError": "Failed to load messages.",
+      "empty": "No messages yet.",
+      "noResults": "No matching messages found.",
+      "sender": "Sender",
+      "email": "Email",
+      "projectType": "Project type",
+      "message": "Message",
+      "back": "Back to messages",
+      "markRead": "Mark as read",
+      "markUnread": "Mark as unread",
+      "delete": "Delete message",
+      "deleteTitle": "Delete message",
+      "deleteDescription": "Are you sure you want to delete this message? This action cannot be undone.",
+      "deleted": "Message deleted.",
+      "updated": "Message status updated.",
+      "updateError": "Failed to update message status.",
+      "deleteError": "Failed to delete message.",
+      "retry": "Try again",
+      "newMessage": "New",
+      "total": "Total messages",
+      "unreadCount": "Unread messages"
     }
   },
   "dashboard": {
@@ -302,14 +332,15 @@
     "missing": "Missing",
     "view": "View Blog Post",
     "edit": "Edit Blog Post",
-    "delete": "Delete Blog Post",
+    "delete": "Delete",
     "confirmDelete": "Are you sure you want to delete the blog post \"{{title}}\"? This action cannot be undone.",
     "deleteError": "Deletion failed. Please try again.",
     "confirmDeleteTitle": "Confirm Deletion",
     "confirmDeleteDescription": "Are you sure you want to delete this item? This action cannot be undone.",
     "blogDeleted": "Blog post deleted successfully.",
     "deleting": "Deleting...",
-    "projectDeleted": "Blog post deleted successfully."  },
+    "projectDeleted": "Blog post deleted successfully."
+  },
   "blog": {
     "label": "Blog",
     "title": "Insights & Ideas",

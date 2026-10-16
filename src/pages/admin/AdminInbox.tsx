@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
@@ -5,7 +6,6 @@ import {
   Mail,
   MailOpen,
   MessageSquare,
-  RefreshCw,
   Search,
   Trash2,
   User,
@@ -25,7 +25,7 @@ import {
 type InboxFilter = "all" | "unread" | "read";
 
 export default function AdminInbox() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isPersian = i18n.language.startsWith("fa");
 
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -33,99 +33,30 @@ export default function AdminInbox() {
   const [filter, setFilter] = useState<InboxFilter>("all");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
-  const [pendingDelete, setPendingDelete] = useState<ContactMessage | null>(
-    null
-  );
-
-  const text = {
-    title: isPersian ? "صندوق پیام‌ها" : "Inbox",
-    description: isPersian
-      ? "پیام‌های دریافتی از فرم تماس سایت"
-      : "Messages received through your website contact form",
-    all: isPersian ? "همه پیام‌ها" : "All messages",
-    unread: isPersian ? "خوانده‌نشده" : "Unread",
-    read: isPersian ? "خوانده‌شده" : "Read",
-    search: isPersian ? "جست‌وجو در پیام‌ها..." : "Search messages...",
-    loading: isPersian ? "در حال دریافت پیام‌ها..." : "Loading messages...",
-    loadError: isPersian
-      ? "دریافت پیام‌ها ناموفق بود."
-      : "Failed to load messages.",
-    empty: isPersian ? "هنوز پیامی دریافت نشده است." : "No messages yet.",
-    noResults: isPersian
-      ? "پیامی با این مشخصات پیدا نشد."
-      : "No matching messages found.",
-    sender: isPersian ? "فرستنده" : "Sender",
-    email: isPersian ? "ایمیل" : "Email",
-    projectType: isPersian ? "نوع پروژه" : "Project type",
-    message: isPersian ? "متن پیام" : "Message",
-    back: isPersian ? "بازگشت به پیام‌ها" : "Back to messages",
-    markRead: isPersian ? "علامت‌گذاری به‌عنوان خوانده‌شده" : "Mark as read",
-    markUnread: isPersian
-      ? "علامت‌گذاری به‌عنوان خوانده‌نشده"
-      : "Mark as unread",
-    delete: isPersian ? "حذف پیام" : "Delete message",
-    deleteTitle: isPersian ? "حذف پیام" : "Delete message",
-    deleteDescription: isPersian
-      ? "آیا از حذف این پیام مطمئن هستی؟ این عملیات قابل بازگشت نیست."
-      : "Are you sure you want to delete this message? This action cannot be undone.",
-    deleted: isPersian ? "پیام حذف شد." : "Message deleted.",
-    updated: isPersian ? "وضعیت پیام تغییر کرد." : "Message status updated.",
-    updateError: isPersian
-      ? "تغییر وضعیت پیام ناموفق بود."
-      : "Failed to update message status.",
-    deleteError: isPersian
-      ? "حذف پیام ناموفق بود."
-      : "Failed to delete message.",
-    retry: isPersian ? "تلاش مجدد" : "Try again",
-    refresh: isPersian ? "به‌روزرسانی" : "Refresh",
-    newMessage: isPersian ? "جدید" : "New",
-    total: isPersian ? "کل پیام‌ها" : "Total",
-    unreadCount: isPersian ? "خوانده‌نشده" : "Unread",
-  };
-
-  async function loadMessages(isRefresh = false) {
-    try {
-      if (isRefresh) {
-        setRefreshing(true);
-      }
-
-      setError(null);
-
-      const data = await getAdminContactMessages();
-      setMessages(data);
-    } catch (err) {
-      console.error("Error loading contact messages:", err);
-      setError(text.loadError);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }
+  const [pendingDelete, setPendingDelete] =
+    useState<ContactMessage | null>(null);
 
   useEffect(() => {
     let cancelled = false;
 
     async function loadInitialMessages() {
       try {
+        setLoading(true);
+        setError(null);
+
         const data = await getAdminContactMessages();
 
         if (!cancelled) {
           setMessages(data);
-          setError(null);
         }
       } catch (err) {
         console.error("Error loading contact messages:", err);
 
         if (!cancelled) {
-          setError(
-            isPersian
-              ? "دریافت پیام‌ها ناموفق بود."
-              : "Failed to load messages."
-          );
+          setError(t("admin.inbox.loadError"));
         }
       } finally {
         if (!cancelled) {
@@ -139,7 +70,22 @@ export default function AdminInbox() {
     return () => {
       cancelled = true;
     };
-  }, [isPersian]);
+  }, [isPersian, t]);
+
+  async function loadMessages() {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const data = await getAdminContactMessages();
+      setMessages(data);
+    } catch (err) {
+      console.error("Error loading contact messages:", err);
+      setError(t("admin.inbox.loadError"));
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const unreadCount = useMemo(
     () => messages.filter((message) => !message.is_read).length,
@@ -162,7 +108,9 @@ export default function AdminInbox() {
           message.email,
           message.project_type,
           message.message,
-        ].some((value) => value?.toLowerCase().includes(normalizedSearch));
+        ].some((value) =>
+          value?.toLowerCase().includes(normalizedSearch)
+        );
 
       return matchesFilter && matchesSearch;
     });
@@ -192,6 +140,7 @@ export default function AdminInbox() {
 
     try {
       setUpdatingId(message.id);
+
       await markContactMessageAsRead(message.id, true);
 
       setMessages((previous) =>
@@ -201,7 +150,7 @@ export default function AdminInbox() {
       );
     } catch (err) {
       console.error("Failed to mark message as read:", err);
-      toast.error(text.updateError);
+      toast.error(t("admin.inbox.updateError"));
     } finally {
       setUpdatingId(null);
     }
@@ -217,14 +166,16 @@ export default function AdminInbox() {
 
       setMessages((previous) =>
         previous.map((item) =>
-          item.id === message.id ? { ...item, is_read: nextIsRead } : item
+          item.id === message.id
+            ? { ...item, is_read: nextIsRead }
+            : item
         )
       );
 
-      toast.success(text.updated);
+      toast.success(t("admin.inbox.updated"));
     } catch (err) {
       console.error("Failed to update message status:", err);
-      toast.error(text.updateError);
+      toast.error(t("admin.inbox.updateError"));
     } finally {
       setUpdatingId(null);
     }
@@ -244,10 +195,10 @@ export default function AdminInbox() {
         setSelectedId(null);
       }
 
-      toast.success(text.deleted);
+      toast.success(t("admin.inbox.deleted"));
     } catch (err) {
       console.error("Failed to delete contact message:", err);
-      toast.error(text.deleteError);
+      toast.error(t("admin.inbox.deleteError"));
     } finally {
       setDeletingId(null);
       setPendingDelete(null);
@@ -258,28 +209,20 @@ export default function AdminInbox() {
     <section dir={isPersian ? "rtl" : "ltr"} className="space-y-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">{text.title}</h1>
+          <h1 className="text-2xl font-semibold">
+            {t("admin.inbox.title")}
+          </h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            {text.description}
+            {t("admin.inbox.description")}
           </p>
         </div>
-
-        <button
-          type="button"
-          onClick={() => void loadMessages(true)}
-          disabled={loading || refreshing}
-          className="flex items-center justify-center gap-2 rounded-lg border border-border px-4 py-2 text-sm transition-colors hover:bg-dashboard-bg disabled:opacity-50"
-        >
-          <RefreshCw size={16} className={refreshing ? "animate-spin" : ""} />
-          {text.refresh}
-        </button>
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:max-w-md">
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Inbox size={17} />
-            {text.total}
+            {t("admin.inbox.total")}
           </div>
           <p className="mt-2 text-2xl font-semibold">{messages.length}</p>
         </div>
@@ -287,7 +230,7 @@ export default function AdminInbox() {
         <div className="rounded-xl border border-border p-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Mail size={17} />
-            {text.unreadCount}
+            {t("admin.inbox.unreadCount")}
           </div>
           <p className="mt-2 text-2xl font-semibold">{unreadCount}</p>
         </div>
@@ -303,11 +246,12 @@ export default function AdminInbox() {
                   isPersian ? "right-3" : "left-3"
                 }`}
               />
+
               <input
                 type="search"
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                placeholder={text.search}
+                placeholder={t("admin.inbox.search")}
                 className={`w-full rounded-lg border border-border bg-transparent py-2.5 text-sm outline-none transition-colors focus:border-primary ${
                   isPersian ? "pr-10 pl-3" : "pl-10 pr-3"
                 }`}
@@ -326,7 +270,7 @@ export default function AdminInbox() {
                       : "border-border hover:bg-dashboard-bg"
                   }`}
                 >
-                  {text[item]}
+                  {t(`admin.inbox.${item}`)}
                   {item === "unread" && unreadCount > 0
                     ? ` (${unreadCount})`
                     : ""}
@@ -343,12 +287,13 @@ export default function AdminInbox() {
               className="space-y-3 rounded-xl border border-border p-6 text-center"
             >
               <p className="text-red-500">{error}</p>
+
               <button
                 type="button"
                 onClick={() => void loadMessages()}
                 className="rounded-lg border border-border px-4 py-2 text-sm hover:bg-dashboard-bg"
               >
-                {text.retry}
+                {t("admin.inbox.retry")}
               </button>
             </div>
           ) : (
@@ -361,7 +306,9 @@ export default function AdminInbox() {
               {filteredMessages.length === 0 ? (
                 <div className="p-10 text-center text-muted-foreground">
                   <Inbox size={32} className="mx-auto mb-3 opacity-50" />
-                  {messages.length === 0 ? text.empty : text.noResults}
+                  {messages.length === 0
+                    ? t("admin.inbox.empty")
+                    : t("admin.inbox.noResults")}
                 </div>
               ) : (
                 <div className="divide-y divide-border">
@@ -404,7 +351,7 @@ export default function AdminInbox() {
 
                             {!message.is_read && (
                               <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">
-                                {text.newMessage}
+                                {t("admin.inbox.newMessage")}
                               </span>
                             )}
                           </div>
@@ -431,10 +378,14 @@ export default function AdminInbox() {
                           disabled={updatingId === message.id}
                           className="rounded-md p-2 transition-colors hover:bg-border disabled:opacity-50"
                           title={
-                            message.is_read ? text.markUnread : text.markRead
+                            message.is_read
+                              ? t("admin.inbox.markUnread")
+                              : t("admin.inbox.markRead")
                           }
                           aria-label={
-                            message.is_read ? text.markUnread : text.markRead
+                            message.is_read
+                              ? t("admin.inbox.markUnread")
+                              : t("admin.inbox.markRead")
                           }
                         >
                           {message.is_read ? (
@@ -449,8 +400,8 @@ export default function AdminInbox() {
                           onClick={() => setPendingDelete(message)}
                           disabled={deletingId === message.id}
                           className="rounded-md p-2 text-red-500 transition-colors hover:bg-red-500/10 disabled:opacity-50"
-                          title={text.delete}
-                          aria-label={text.delete}
+                          title={t("admin.inbox.delete")}
+                          aria-label={t("admin.inbox.delete")}
                         >
                           <Trash2 size={18} />
                         </button>
@@ -477,8 +428,11 @@ export default function AdminInbox() {
               onClick={() => setSelectedId(null)}
               className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-dashboard-bg"
             >
-              <ArrowLeft size={17} className={isPersian ? "rotate-180" : ""} />
-              {text.back}
+              <ArrowLeft
+                size={17}
+                className={isPersian ? "rotate-180" : ""}
+              />
+              {t("admin.inbox.back")}
             </button>
 
             <div className="flex items-center gap-2">
@@ -493,15 +447,19 @@ export default function AdminInbox() {
                 ) : (
                   <MailOpen size={16} />
                 )}
-                {selectedMessage.is_read ? text.markUnread : text.markRead}
+
+                {selectedMessage.is_read
+                  ? t("admin.inbox.markUnread")
+                  : t("admin.inbox.markRead")}
               </button>
 
               <button
                 type="button"
                 onClick={() => setPendingDelete(selectedMessage)}
-                className="rounded-lg p-2 text-red-500 transition-colors hover:bg-red-500/10"
-                title={text.delete}
-                aria-label={text.delete}
+                disabled={deletingId === selectedMessage.id}
+                className="rounded-lg p-2 text-red-500 transition-colors hover:bg-red-500/10 disabled:opacity-50"
+                title={t("admin.inbox.deleted")}
+                aria-label={t("admin.inbox.deleted")}
               >
                 <Trash2 size={18} />
               </button>
@@ -512,9 +470,13 @@ export default function AdminInbox() {
             <div>
               <div className="mb-3 flex items-center gap-2 text-sm text-muted-foreground">
                 <User size={17} />
-                {text.sender}
+                {t("admin.inbox.sender")}
               </div>
-              <h2 className="text-xl font-semibold">{selectedMessage.name}</h2>
+
+              <h2 className="text-xl font-semibold">
+                {selectedMessage.name}
+              </h2>
+
               <a
                 href={`mailto:${selectedMessage.email}`}
                 className="mt-1 inline-block break-all text-sm text-primary hover:underline"
@@ -525,19 +487,21 @@ export default function AdminInbox() {
 
             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
               <span>
-                {text.projectType}:{" "}
+                {t("admin.inbox.projectType")}:{" "}
                 <span className="font-medium text-text">
                   {selectedMessage.project_type || "—"}
                 </span>
               </span>
+
               <span>{formatDate(selectedMessage.created_at)}</span>
             </div>
 
             <div className="border-t border-border pt-5">
               <h3 className="mb-3 flex items-center gap-2 font-medium">
                 <MessageSquare size={18} />
-                {text.message}
+                {t("admin.inbox.message")}
               </h3>
+
               <p className="whitespace-pre-wrap break-words text-sm leading-8">
                 {selectedMessage.message}
               </p>
@@ -548,9 +512,12 @@ export default function AdminInbox() {
 
       <ConfirmDialog
         open={pendingDelete !== null}
-        loading={pendingDelete !== null && deletingId === pendingDelete.id}
-        title={text.deleteTitle}
-        description={text.deleteDescription}
+        loading={
+          pendingDelete !== null &&
+          deletingId === pendingDelete.id
+        }
+        title={t("admin.inbox.deleteTitle")}
+        description={t("admin.inbox.deleteDescription")}
         onCancel={() => {
           if (deletingId === null) {
             setPendingDelete(null);
