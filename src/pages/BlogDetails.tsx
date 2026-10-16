@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import type { Blog } from "@/features/api";
-import { getBlogBySlug } from "@/features/api";
+import { getBlogBySlug, getBlogImage } from "@/features/api";
 import Container from "@/components/layout/Container";
 
 const BlogDetails = () => {
@@ -44,7 +44,7 @@ const BlogDetails = () => {
     <Container className="z-4 text-text mt-25">
       <div className="rounded-3xl">
         <img
-          src={blog.cover_image}
+          src={getBlogImage(blog.cover_image)}
           alt={translation.title}
           className="md:h-130 w-full"
         />
@@ -73,9 +73,8 @@ const BlogDetails = () => {
           {translation.excerpt}
         </p>
       )}
-
       <div
-        className="prose prose-lg mt-10 max-w-none dark:prose-invert"
+        dir={i18n.language === "fa" ? "rtl" : "ltr"}
         dangerouslySetInnerHTML={{
           __html: translation.content,
         }}

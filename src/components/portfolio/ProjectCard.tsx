@@ -72,6 +72,7 @@ export default function ProjectCard({ project, index }: Props) {
       lg:h-full
       [perspective:1000px]
       group
+      overflow-hidden
       "
       >
         <div

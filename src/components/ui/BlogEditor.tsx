@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { EditorContent, useEditor } from "@tiptap/react";
+import { EditorContent, mergeAttributes, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Heading from "@tiptap/extension-heading";
 
 type BlogEditorProps = {
   value: string;
@@ -9,6 +10,26 @@ type BlogEditorProps = {
   disabled?: boolean;
 };
 
+const StyledHeading = Heading.extend({
+  renderHTML({ node, HTMLAttributes }) {
+    const level = node.attrs.level as 1 | 2 | 3;
+
+    const headingStyles: Record<1 | 2 | 3, string> = {
+      1: "font-size: 2em; font-weight: 700; margin-top: 0.67em; margin-bottom: 0.67em;",
+      2: "font-size: 1.5em; font-weight: 700; margin-top: 1.5em; margin-bottom: 0.75em;",
+      3: "font-size: 1.17em; font-weight: 700; margin-top: 1em; margin-bottom: 0.5em;",
+    };
+
+    return [
+      `h${level}`,
+      mergeAttributes(HTMLAttributes, {
+        style: headingStyles[level] ?? "",
+      }),
+      0,
+    ];
+  },
+});
+
 export default function BlogEditor({
   value,
   onChange,
@@ -16,7 +37,14 @@ export default function BlogEditor({
   disabled = false,
 }: BlogEditorProps) {
   const editor = useEditor({
-    extensions: [StarterKit],
+    extensions: [
+      StarterKit.configure({
+        heading: false,
+      }),
+      StyledHeading.configure({
+        levels: [1, 2, 3],
+      }),
+    ],
     content: value || "",
     editable: !disabled,
     onUpdate: ({ editor }) => {
@@ -35,10 +63,10 @@ export default function BlogEditor({
   useEffect(() => {
     if (!editor) return;
 
-    const currentContent = editor.getHTML();
-
-    if (value !== currentContent) {
-      editor.commands.setContent(value || "", { emitUpdate: false });
+    if (value !== editor.getHTML()) {
+      editor.commands.setContent(value || "", {
+        emitUpdate: false,
+      });
     }
   }, [editor, value]);
 
