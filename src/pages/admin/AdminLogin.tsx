@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { supabase } from "@/lib/supabace";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Eye, EyeOff } from "lucide-react";
+import { supabase } from "@/hooks/lib/supabace";
 
 export default function AdminLogin() {
   const { t } = useTranslation();

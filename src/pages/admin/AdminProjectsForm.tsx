@@ -17,7 +17,7 @@ import ProjectBasicInfo from "../../components/admin/ProjectBasicInfo";
 import ProjectContent from "../../components/admin/ProjectContent";
 import ProjectHighlights from "../../components/admin/ProjectHighlights";
 import type { Category, ProjectFormData } from "./types";
-import { slugify } from "@/lib/slugify";
+import { slugify } from "@/hooks/lib/slugify";
 
 const initialFormData: ProjectFormData = {
   name: "",
