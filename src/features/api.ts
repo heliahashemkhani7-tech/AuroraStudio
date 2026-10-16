@@ -31,20 +31,21 @@ export async function getCategories(languageId: number): Promise<Filter[]> {
   const { data, error } = await supabase
     .from("category_translations")
     .select(
-      `      category_id,
+      `
+      category_id,
       label:name,
-      categories (
-        slug
+      categories!inner (
+        slug,
+        is_deleted
       )
     `
     )
-    .eq("language_id", languageId);
+    .eq("language_id", languageId)
+    .eq("categories.is_deleted", false);
 
-  if (error) {
-    throw error;
-  }
+  if (error) throw error;
 
-  return data as Filter[];
+  return data as unknown as Filter[];
 }
 
 export async function getProjects() {
@@ -90,6 +91,7 @@ export async function getProjectBySlug(slug: string) {
     `
     )
     .eq("slug", slug)
+    .eq("is_deleted", false)
     .single();
 
   if (error) {
@@ -131,7 +133,7 @@ export async function getProjectCard(projectId: number, languageId: number) {
   return data;
 }
 
-export async function getBlogs(languageId: number) {
+export async function getBlogs(languageId: number): Promise<Blog[]> {
   const { data, error } = await supabase
     .from("blog")
     .select(
@@ -152,11 +154,10 @@ export async function getBlogs(languageId: number) {
       )
     `
     )
+    .eq("is_deleted", false)
     .eq("blog_translations.language_id", languageId);
 
-  if (error) {
-    throw error;
-  }
+  if (error) throw error;
 
   return data as Blog[];
 }
@@ -186,15 +187,16 @@ export const getBlogBySlug = async (
     `
     )
     .eq("slug", slug)
+    .eq("is_deleted", false)
     .eq("blog_translations.language_id", languageId)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("Error fetching blog:", error);
     return null;
   }
 
-  return data;
+  return data as Blog | null;
 };
 
 export async function getAdminProjects() {
@@ -235,20 +237,15 @@ export async function getDashboardStats() {
       .select("id", { count: "exact", head: true })
       .eq("is_deleted", false),
 
-    supabase.from("categories").select("id", { count: "exact", head: true }),
+    supabase
+      .from("categories")
+      .select("id", { count: "exact", head: true })
+      .eq("is_deleted", false),
   ]);
 
-  if (projectsResult.error) {
-    throw projectsResult.error;
-  }
-
-  if (blogsResult.error) {
-    throw blogsResult.error;
-  }
-
-  if (categoriesResult.error) {
-    throw categoriesResult.error;
-  }
+  if (projectsResult.error) throw projectsResult.error;
+  if (blogsResult.error) throw blogsResult.error;
+  if (categoriesResult.error) throw categoriesResult.error;
 
   return {
     projects: projectsResult.count ?? 0,
@@ -297,12 +294,14 @@ export async function getAdminCategories(languageId: number) {
       `
       category_id,
       name,
-      categories (
-        slug
+      categories!inner (
+        slug,
+        is_deleted
       )
     `
     )
-    .eq("language_id", languageId);
+    .eq("language_id", languageId)
+    .eq("categories.is_deleted", false);
 
   if (error) {
     console.error("Error fetching admin categories:", error);
@@ -311,6 +310,7 @@ export async function getAdminCategories(languageId: number) {
 
   return data;
 }
+
 export async function getAdminProjectById(projectId: number) {
   const [projectResult, translationsResult, cardsResult] = await Promise.all([
     supabase
@@ -329,6 +329,7 @@ export async function getAdminProjectById(projectId: number) {
         `
       )
       .eq("id", projectId)
+      .eq("is_deleted", false)
       .single(),
 
     supabase
@@ -415,6 +416,7 @@ export async function updateAdminProject(
       highlight_links: project.highlight_links,
     })
     .eq("id", projectId)
+    .eq("is_deleted", false)
     .select()
     .single();
 
@@ -484,6 +486,7 @@ export async function getAdminCategoriesWithTranslations(): Promise<
       )
     `
     )
+    .eq("is_deleted", false)
     .order("id", { ascending: true });
 
   if (error) {
@@ -511,9 +514,7 @@ export async function createAdminCategory(category: {
     .select("id, slug")
     .single();
 
-  if (categoryError) {
-    throw categoryError;
-  }
+  if (categoryError) throw categoryError;
 
   const { error: translationsError } = await supabase
     .from("category_translations")
@@ -555,11 +556,10 @@ export async function updateAdminCategory(category: {
   const { error: categoryError } = await supabase
     .from("categories")
     .update({ slug: category.slug })
-    .eq("id", category.id);
+    .eq("id", category.id)
+    .eq("is_deleted", false);
 
-  if (categoryError) {
-    throw categoryError;
-  }
+  if (categoryError) throw categoryError;
 
   for (const translation of [
     { language_id: 1, name: category.nameEn },
@@ -571,42 +571,35 @@ export async function updateAdminCategory(category: {
       .eq("category_id", category.id)
       .eq("language_id", translation.language_id);
 
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
   }
 }
 
-export async function deleteAdminCategory(categoryId: number) {
+export async function deleteAdminCategory(categoryId: number): Promise<void> {
   const { count, error: projectsError } = await supabase
     .from("projects")
     .select("id", { count: "exact", head: true })
-    .eq("category_id", categoryId);
+    .eq("category_id", categoryId)
+    .eq("is_deleted", false);
 
-  if (projectsError) {
-    throw projectsError;
-  }
+  if (projectsError) throw projectsError;
 
   if ((count ?? 0) > 0) {
     throw new Error("CATEGORY_HAS_PROJECTS");
   }
 
-  const { error: translationsError } = await supabase
-    .from("category_translations")
-    .delete()
-    .eq("category_id", categoryId);
-
-  if (translationsError) {
-    throw translationsError;
-  }
-
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("categories")
-    .delete()
-    .eq("id", categoryId);
+    .update({ is_deleted: true })
+    .eq("id", categoryId)
+    .eq("is_deleted", false)
+    .select("id")
+    .maybeSingle();
 
-  if (error) {
-    throw error;
+  if (error) throw error;
+
+  if (!data) {
+    throw new Error("CATEGORY_NOT_FOUND_OR_ALREADY_DELETED");
   }
 }
 
@@ -659,6 +652,7 @@ export async function getAdminBlogCategories(): Promise<AdminBlogCategory[]> {
       )
     `
     )
+    .eq("is_deleted", false)
     .order("id", { ascending: true });
 
   if (error) {
@@ -738,7 +732,8 @@ export async function updateAdminBlogCategory(category: {
   const { error: categoryError } = await supabase
     .from("blog_categories")
     .update({ slug })
-    .eq("id", category.id);
+    .eq("id", category.id)
+    .eq("is_deleted", false);
 
   if (categoryError) throw categoryError;
 
@@ -776,11 +771,14 @@ export async function updateAdminBlogCategory(category: {
   }
 }
 
-export async function deleteAdminBlogCategory(categoryId: number) {
+export async function deleteAdminBlogCategory(
+  categoryId: number
+): Promise<void> {
   const { count, error: blogsError } = await supabase
     .from("blog")
     .select("id", { count: "exact", head: true })
-    .eq("category_blog_id", categoryId);
+    .eq("category_blog_id", categoryId)
+    .eq("is_deleted", false);
 
   if (blogsError) throw blogsError;
 
@@ -788,19 +786,19 @@ export async function deleteAdminBlogCategory(categoryId: number) {
     throw new Error("BLOG_CATEGORY_HAS_POSTS");
   }
 
-  const { error: translationsError } = await supabase
-    .from("blog_category_translations")
-    .delete()
-    .eq("category_blog_id", categoryId);
-
-  if (translationsError) throw translationsError;
-
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("blog_categories")
-    .delete()
-    .eq("id", categoryId);
+    .update({ is_deleted: true })
+    .eq("id", categoryId)
+    .eq("is_deleted", false)
+    .select("id")
+    .maybeSingle();
 
   if (error) throw error;
+
+  if (!data) {
+    throw new Error("BLOG_CATEGORY_NOT_FOUND_OR_ALREADY_DELETED");
+  }
 }
 
 export type AdminBlog = {
@@ -854,6 +852,7 @@ export async function getAdminBlogs(): Promise<AdminBlog[]> {
       )
     `
     )
+    .eq("is_deleted", false)
     .order("id", { ascending: false });
 
   if (error) {
@@ -958,6 +957,7 @@ export async function getAdminBlogById(blogId: number): Promise<AdminBlog> {
     `
     )
     .eq("id", blogId)
+    .eq("is_deleted", false)
     .single();
 
   if (error) {
@@ -1008,7 +1008,7 @@ export async function createAdminBlog(blog: AdminBlogInput): Promise<number> {
   if (translationsError) {
     console.error("Error creating blog translations:", translationsError);
 
-    // Roll back the article if its translations could not be saved.
+    // Rollback only because creation of the article was incomplete.
     const { error: rollbackError } = await supabase
       .from("blog")
       .delete()
@@ -1028,7 +1028,7 @@ export async function updateAdminBlog(
   blogId: number,
   blog: AdminBlogInput
 ): Promise<void> {
-  const { error: blogError } = await supabase
+  const { data: updatedBlog, error: blogError } = await supabase
     .from("blog")
     .update({
       slug: blog.slug,
@@ -1037,11 +1037,18 @@ export async function updateAdminBlog(
       published_at: blog.published_at,
       category_blog_id: blog.category_blog_id,
     })
-    .eq("id", blogId);
+    .eq("id", blogId)
+    .eq("is_deleted", false)
+    .select("id")
+    .maybeSingle();
 
   if (blogError) {
     console.error("Error updating blog:", blogError);
     throw blogError;
+  }
+
+  if (!updatedBlog) {
+    throw new Error("BLOG_NOT_FOUND_OR_ALREADY_DELETED");
   }
 
   for (const translation of [
@@ -1120,7 +1127,18 @@ export type ContactMessage = {
 export async function getAdminContactMessages(): Promise<ContactMessage[]> {
   const { data, error } = await supabase
     .from("contact_messages")
-    .select("id, name, email, project_type, message, is_read, created_at")
+    .select(
+      `
+      id,
+      name,
+      email,
+      project_type,
+      message,
+      is_read,
+      created_at
+    `
+    )
+    .eq("is_deleted", false)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -1138,7 +1156,8 @@ export async function markContactMessageAsRead(
   const { error } = await supabase
     .from("contact_messages")
     .update({ is_read: isRead })
-    .eq("id", messageId);
+    .eq("id", messageId)
+    .eq("is_deleted", false);
 
   if (error) {
     console.error("Error updating contact message:", error);
@@ -1147,13 +1166,20 @@ export async function markContactMessageAsRead(
 }
 
 export async function deleteContactMessage(messageId: string): Promise<void> {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("contact_messages")
-    .delete()
-    .eq("id", messageId);
+    .update({ is_deleted: true })
+    .eq("id", messageId)
+    .eq("is_deleted", false)
+    .select("id")
+    .maybeSingle();
 
   if (error) {
-    console.error("Error deleting contact message:", error);
+    console.error("Error soft deleting contact message:", error);
     throw error;
+  }
+
+  if (!data) {
+    throw new Error("CONTACT_MESSAGE_NOT_FOUND_OR_ALREADY_DELETED");
   }
 }
