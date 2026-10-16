@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 
 import AdminSidebar from "../admin/AdminSidebar";
-import GrainientBg from "../ui/GrainientBg";
 
 import LanguageSwitcher from "@/features/language/languageSwitcher";
 import ThemeToggle from "@/features/theme/ThemToggle";
@@ -15,22 +14,24 @@ import {
 export default function AdminLayout() {
   return (
     <SidebarProvider>
-      <div className="relative flex min-h-screen w-full overflow-hidden text-text">
-        <GrainientBg />
-
+      <div className="relative flex min-h-svh w-full min-w-0 overflow-x-clip bg-dashboard-bg text-text">
+        {/* Sidebar */}
         <AdminSidebar />
 
-        <SidebarInset className="relative z-10">
-          <header className="flex h-16 items-center justify-between border-b px-6">
-            <SidebarTrigger />
+        {/* Main content */}
+        <SidebarInset className="relative min-h-svh min-w-0 flex-1 bg-transparent">
+          {/* Header */}
+          <header className="sticky top-0 z-20 flex h-16 min-w-0 items-center justify-between border-b border-border/30 bg-background/80 px-4 backdrop-blur-sm sm:px-6">
+            <SidebarTrigger className="size-9 shrink-0 rounded-lg border border-border/30 bg-transparent text-text shadow-none transition-colors hover:bg-hover" />
 
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-2">
               <LanguageSwitcher />
               <ThemeToggle />
             </div>
           </header>
 
-          <main className="p-6">
+          {/* Page content */}
+          <main className="relative min-w-0 max-w-full p-4 sm:p-6">
             <Outlet />
           </main>
         </SidebarInset>

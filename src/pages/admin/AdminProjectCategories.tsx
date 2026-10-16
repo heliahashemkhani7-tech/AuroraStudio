@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   createAdminCategory,
   deleteAdminCategory,
@@ -12,6 +11,7 @@ import {
   updateAdminCategory,
   type AdminCategory,
 } from "@/features/api";
+import CategoriesLoadingSkeleton from "@/components/skeleton/CategoriesLoadingSkeleton";
 
 type CategoryForm = {
   slug: string;
@@ -24,30 +24,6 @@ const emptyForm: CategoryForm = {
   nameEn: "",
   nameFa: "",
 };
-
-function CategoriesLoadingSkeleton() {
-  return (
-    <div className="divide-y divide-border">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <div
-          key={index}
-          className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <div className="min-w-0 flex-1 space-y-2">
-            <Skeleton className="h-5 w-40 max-w-full" />
-            <Skeleton className="h-4 w-56 max-w-full" />
-            <Skeleton className="h-3 w-32 max-w-full" />
-          </div>
-
-          <div className="flex shrink-0 items-center gap-2">
-            <Skeleton className="h-9 w-9 rounded-md" />
-            <Skeleton className="h-9 w-9 rounded-md" />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 export default function AdminProjectCategories() {
   const { i18n } = useTranslation();
@@ -264,7 +240,7 @@ export default function AdminProjectCategories() {
     : "";
 
   return (
-    <section className="space-y-6 text-text">
+    <section dir={isPersian ? "rtl" : "ltr"} className="space-y-6 text-text">
       <div>
         <h1 className="text-2xl font-semibold">
           {isPersian ? "دسته‌بندی پروژه‌ها" : "Project Categories"}
@@ -395,7 +371,12 @@ export default function AdminProjectCategories() {
         </div>
       </form>
 
-      <div className="overflow-hidden rounded-xl border border-border">
+      <div
+        className="overflow-hidden rounded-xl border border-border"
+        style={{
+          boxShadow: "0 8px 30px rgba(117, 67, 200, 0.12)",
+        }}
+      >
         {loading ? (
           <CategoriesLoadingSkeleton />
         ) : categories.length === 0 ? (
@@ -416,7 +397,7 @@ export default function AdminProjectCategories() {
               return (
                 <div
                   key={category.id}
-                  className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between"
+                  className="flex flex-col gap-4 p-4 transition-colors duration-200  hover:bg-dashboard-bg sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="min-w-0 space-y-1">
                     <p className="font-medium">
@@ -437,7 +418,7 @@ export default function AdminProjectCategories() {
                       type="button"
                       onClick={() => handleEdit(category)}
                       aria-label={isPersian ? "ویرایش" : "Edit"}
-                      className="rounded-md border border-border p-2 hover:bg-muted"
+                      className="rounded-md border border-border p-2 transition-colors hover:bg-muted"
                     >
                       <Pencil size={17} />
                     </button>
@@ -447,7 +428,7 @@ export default function AdminProjectCategories() {
                       onClick={() => setPendingDelete(category)}
                       disabled={deletingId !== null}
                       aria-label={isPersian ? "حذف" : "Delete"}
-                      className="rounded-md border border-border p-2 text-red-500 hover:bg-red-500/10 disabled:opacity-50"
+                      className="rounded-md border border-border p-2 text-red-500 transition-colors hover:bg-red-500/10 disabled:opacity-50"
                     >
                       <Trash2 size={17} />
                     </button>

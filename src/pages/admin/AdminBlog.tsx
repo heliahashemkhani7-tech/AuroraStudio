@@ -5,46 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
-import { Skeleton } from "@/components/ui/skeleton";
+import BlogLoadingSkeleton from "@/components/skeleton/BlogLoadingSkeleton";
 import {
   deleteAdminBlog,
   getAdminBlogs,
   getBlogImage,
   type AdminBlog as AdminBlogType,
 } from "@/features/api";
-
-function BlogLoadingSkeleton() {
-  return (
-    <div className="overflow-hidden rounded-xl border border-border">
-      <div className="divide-y divide-border">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <article
-            key={index}
-            className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center"
-          >
-            <Skeleton className="h-24 w-full shrink-0 rounded-lg sm:w-36" />
-
-            <div className="min-w-0 flex-1 space-y-3">
-              <Skeleton className="h-5 w-3/4 max-w-72" />
-
-              <div className="flex flex-wrap items-center gap-2">
-                <Skeleton className="h-6 w-20 rounded-full" />
-                <Skeleton className="h-4 w-28" />
-                <Skeleton className="h-4 w-24" />
-              </div>
-            </div>
-
-            <div className="flex shrink-0 items-center gap-2">
-              <Skeleton className="h-9 w-9 rounded-md" />
-              <Skeleton className="h-9 w-9 rounded-md" />
-              <Skeleton className="h-9 w-9 rounded-md" />
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function AdminBlog() {
   const { t, i18n } = useTranslation();
@@ -57,8 +24,9 @@ export default function AdminBlog() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
-  const [pendingDelete, setPendingDelete] =
-    useState<AdminBlogType | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<AdminBlogType | null>(
+    null
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -99,9 +67,7 @@ export default function AdminBlog() {
 
       await deleteAdminBlog(blog.id);
 
-      setBlogs((previous) =>
-        previous.filter((item) => item.id !== blog.id)
-      );
+      setBlogs((previous) => previous.filter((item) => item.id !== blog.id));
 
       toast.success(t("dashboard.blogDeleted"));
     } catch (error) {
@@ -141,9 +107,7 @@ export default function AdminBlog() {
     <section dir={isPersian ? "rtl" : "ltr"} className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">
-            {t("dashboard.title")}
-          </h1>
+          <h1 className="text-2xl font-semibold">{t("dashboard.title")}</h1>
 
           <p className="mt-1 text-sm text-muted-foreground">
             {t("dashboard.description")}
@@ -153,7 +117,7 @@ export default function AdminBlog() {
         <button
           type="button"
           onClick={() => navigate("/dashboard/blog/new")}
-          className="flex items-center gap-2 rounded-lg bg-border px-4 py-2 text-sm font-medium text-text"
+          className="flex items-center gap-2 rounded-lg bg-border px-4 py-2 text-sm font-medium text-text transition-colors hover:bg-dashboard-bg"
         >
           <Plus size={18} />
           {t("dashboard.add")}
@@ -167,7 +131,12 @@ export default function AdminBlog() {
           {error}
         </div>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-border">
+        <div
+          className="overflow-hidden rounded-xl border border-border  transition-shadow duration-300"
+          style={{
+            boxShadow: "0 8px 30px rgba(117, 67, 200, 0.12)",
+          }}
+        >
           {blogs.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground">
               {t("dashboard.empty")}
@@ -182,9 +151,7 @@ export default function AdminBlog() {
                 const fallbackTranslation = blog.blog_translations[0];
 
                 const title =
-                  translation?.title ||
-                  fallbackTranslation?.title ||
-                  blog.slug;
+                  translation?.title || fallbackTranslation?.title || blog.slug;
 
                 const categoryTranslations =
                   blog.blog_categories?.blog_category_translations ?? [];
@@ -201,7 +168,7 @@ export default function AdminBlog() {
                 return (
                   <article
                     key={blog.id}
-                    className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center"
+                    className="flex flex-col gap-4 p-4 transition-colors duration-200 hover:bg-dashboard-bg sm:flex-row sm:items-center"
                   >
                     <div className="h-24 w-full shrink-0 overflow-hidden rounded-lg bg-border sm:w-36">
                       {blog.cover_image ? (
@@ -240,7 +207,7 @@ export default function AdminBlog() {
                       <button
                         type="button"
                         onClick={() => navigate(`/blog/${blog.slug}`)}
-                        className="rounded-md p-2"
+                        className="rounded-md p-2 transition-colors hover:bg-border"
                         aria-label={t("dashboard.view")}
                         title={t("dashboard.view")}
                       >
@@ -252,7 +219,7 @@ export default function AdminBlog() {
                         onClick={() =>
                           navigate(`/dashboard/blog/${blog.id}/edit`)
                         }
-                        className="rounded-md p-2"
+                        className="rounded-md p-2 transition-colors hover:bg-border"
                         aria-label={t("dashboard.edit")}
                         title={t("dashboard.edit")}
                       >
@@ -263,7 +230,7 @@ export default function AdminBlog() {
                         type="button"
                         onClick={() => setPendingDelete(blog)}
                         disabled={deletingId === blog.id}
-                        className="rounded-md p-2 text-red-500 disabled:opacity-50"
+                        className="rounded-md p-2 text-red-500 transition-colors hover:bg-red-500/10 disabled:opacity-50"
                         aria-label={t("dashboard.delete")}
                         title={t("dashboard.delete")}
                       >
@@ -280,9 +247,7 @@ export default function AdminBlog() {
 
       <ConfirmDialog
         open={pendingDelete !== null}
-        loading={
-          pendingDelete !== null && deletingId === pendingDelete.id
-        }
+        loading={pendingDelete !== null && deletingId === pendingDelete.id}
         title={t("dashboard.confirmDeleteTitle")}
         description={t("dashboard.confirmDelete", {
           title: pendingTitle,
