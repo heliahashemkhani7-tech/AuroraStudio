@@ -3,6 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { ArrowLeft, ImagePlus, X } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 import {
   createAdminBlog,
@@ -157,19 +158,26 @@ export default function AdminBlogForm() {
         console.error("Error loading blog form:", error);
 
         if (!cancelled) {
-          setErrorMessage(t("dashboard.blogForm.loadError"));
+          const message = isPersian
+            ? "بارگذاری اطلاعات مقاله با خطا مواجه شد."
+            : "Failed to load blog post details.";
+
+          setErrorMessage(message);
+          toast.error(message);
         }
       } finally {
-        if (!cancelled) setInitialLoading(false);
+        if (!cancelled) {
+          setInitialLoading(false);
+        }
       }
     }
 
-    loadForm();
+    void loadForm();
 
     return () => {
       cancelled = true;
     };
-  }, [id, isEditMode, t]);
+  }, [id, isEditMode, isPersian]);
 
   function handleFieldChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -221,7 +229,12 @@ export default function AdminBlogForm() {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      setErrorMessage(t("dashboard.blogForm.invalidImage"));
+      const message = isPersian
+        ? "لطفاً یک فایل تصویری معتبر انتخاب کنید."
+        : "Please select a valid image file.";
+
+      setErrorMessage(message);
+      toast.error(message);
       event.target.value = "";
       return;
     }
@@ -230,13 +243,12 @@ export default function AdminBlogForm() {
     setImageFile(file);
   }
 
-  function removeSelectedImage() {
-    setImageFile(null);
-  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage("");
+
+    if (loading) return;
 
     const english = formData.translations.en;
     const persian = formData.translations.fa;
@@ -247,12 +259,22 @@ export default function AdminBlogForm() {
       !formData.category_blog_id ||
       !formData.published_at
     ) {
-      setErrorMessage(t("dashboard.blogForm.requiredFields"));
+      const message = isPersian
+        ? "لطفاً تمام اطلاعات ضروری مقاله را وارد کنید."
+        : "Please fill in all required blog fields.";
+
+      setErrorMessage(message);
+      toast.error(message);
       return;
     }
 
     if (!coverImagePath && !imageFile) {
-      setErrorMessage(t("dashboard.blogForm.coverRequired"));
+      const message = isPersian
+        ? "لطفاً تصویر کاور مقاله را انتخاب کنید."
+        : "Please select a cover image.";
+
+      setErrorMessage(message);
+      toast.error(message);
       return;
     }
 
@@ -264,7 +286,12 @@ export default function AdminBlogForm() {
       !persian.excerpt.trim() ||
       !hasContent(persian.content)
     ) {
-      setErrorMessage(t("dashboard.blogForm.translationsRequired"));
+      const message = isPersian
+        ? "لطفاً عنوان، خلاصه و محتوای مقاله را به هر دو زبان وارد کنید."
+        : "Please provide the title, excerpt, and content in both languages.";
+
+      setErrorMessage(message);
+      toast.error(message);
       return;
     }
 
@@ -274,7 +301,11 @@ export default function AdminBlogForm() {
       let imagePath = coverImagePath;
 
       if (imageFile) {
-        const uploadedImage = await uploadBlogImage(imageFile, formData.slug);
+        const uploadedImage = await uploadBlogImage(
+          imageFile,
+          formData.slug.trim()
+        );
+
         imagePath = uploadedImage.path;
       }
 
@@ -300,15 +331,36 @@ export default function AdminBlogForm() {
 
       if (isEditMode && id) {
         await updateAdminBlog(Number(id), blogData);
+
+        toast.success(
+          isPersian
+            ? "مقاله با موفقیت ویرایش شد."
+            : "Blog post updated successfully."
+        );
       } else {
         await createAdminBlog(blogData);
+
+        toast.success(
+          isPersian
+            ? "مقاله با موفقیت ایجاد شد."
+            : "Blog post created successfully."
+        );
       }
 
       navigate("/dashboard/blog");
     } catch (error) {
       console.error("Error saving blog:", error);
 
-      setErrorMessage(t("dashboard.blogForm.saveError"));
+      const message = isPersian
+        ? isEditMode
+          ? "ویرایش مقاله با خطا مواجه شد."
+          : "ایجاد مقاله با خطا مواجه شد."
+        : isEditMode
+        ? "Failed to update blog post."
+        : "Failed to create blog post.";
+
+      setErrorMessage(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -336,7 +388,7 @@ export default function AdminBlogForm() {
         <button
           type="button"
           onClick={() => navigate("/dashboard/blog")}
-          className="rounded-lg border-2 border-span p-2"
+          className="rounded-lg border-2 border-border p-2"
           aria-label={t("dashboard.blogForm.backToBlog")}
         >
           <ArrowLeft size={18} />
@@ -372,7 +424,7 @@ export default function AdminBlogForm() {
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basic information */}
-        <section className="space-y-5 rounded-xl border border-span p-5">
+        <section className="space-y-5 rounded-xl border border-border p-5">
           <h2 className="text-lg font-semibold">
             {t("dashboard.blogForm.basicInformation")}
           </h2>
@@ -388,7 +440,7 @@ export default function AdminBlogForm() {
                 value={formData.author}
                 onChange={handleFieldChange}
                 required
-                className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+                className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
                 placeholder={t("dashboard.blogForm.authorPlaceholder")}
               />
             </label>
@@ -408,7 +460,7 @@ export default function AdminBlogForm() {
                   }))
                 }
                 required
-                className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+                className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
               >
                 <option value="">
                   {t("dashboard.blogForm.categoryPlaceholder")}
@@ -453,7 +505,7 @@ export default function AdminBlogForm() {
                 }}
                 required
                 dir="ltr"
-                className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+                className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
                 placeholder="my-blog-post"
               />
 
@@ -473,7 +525,7 @@ export default function AdminBlogForm() {
                 value={formData.published_at}
                 onChange={handleFieldChange}
                 required
-                className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+                className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
               />
             </label>
           </div>
@@ -485,7 +537,7 @@ export default function AdminBlogForm() {
             </span>
 
             {currentImageUrl ? (
-              <div className="relative max-w-xl overflow-hidden rounded-xl border border-span">
+              <div className="relative max-w-xl overflow-hidden rounded-xl border border-border">
                 <img
                   src={currentImageUrl}
                   alt={t("dashboard.blogForm.previewAlt")}
@@ -498,7 +550,7 @@ export default function AdminBlogForm() {
                   </span>
 
                   <div className="flex items-center gap-2">
-                    <label className="cursor-pointer rounded-lg border border-span px-3 py-2 text-sm hover:bg-muted">
+                    <label className="cursor-pointer rounded-lg border border-border px-3 py-2 text-sm hover:bg-muted">
                       {t("dashboard.blogForm.changeImage")}
 
                       <input
@@ -512,8 +564,11 @@ export default function AdminBlogForm() {
                     {imageFile && (
                       <button
                         type="button"
-                        onClick={removeSelectedImage}
-                        className="rounded-lg border border-span p-2"
+                        onClick={() => {
+                          setImageFile(null);
+                          setErrorMessage("");
+                        }}
+                        className="rounded-lg border border-border p-2"
                         aria-label={t("dashboard.blogForm.cancelImage")}
                       >
                         <X size={16} />
@@ -523,7 +578,7 @@ export default function AdminBlogForm() {
                 </div>
               </div>
             ) : (
-              <label className="flex min-h-36 max-w-xl cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-span p-6 text-center hover:bg-muted/40">
+              <label className="flex min-h-36 max-w-xl cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border p-6 text-center hover:bg-muted/40">
                 <ImagePlus size={28} />
 
                 <span className="text-sm">
@@ -548,7 +603,7 @@ export default function AdminBlogForm() {
         {/* English content */}
         <section
           dir="ltr"
-          className="space-y-5 rounded-xl border border-span p-5"
+          className="space-y-5 rounded-xl border border-border p-5"
         >
           <h2 className="text-lg font-semibold">
             {t("dashboard.blogForm.englishContent")}
@@ -564,7 +619,7 @@ export default function AdminBlogForm() {
               onChange={(event) => handleTitleChange("en", event.target.value)}
               required
               dir="ltr"
-              className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
               placeholder={t("dashboard.blogForm.englishTitlePlaceholder")}
             />
           </label>
@@ -582,7 +637,7 @@ export default function AdminBlogForm() {
               required
               rows={3}
               dir="ltr"
-              className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
               placeholder={t("dashboard.blogForm.englishExcerptPlaceholder")}
             />
           </label>
@@ -608,7 +663,7 @@ export default function AdminBlogForm() {
         {/* Persian content */}
         <section
           dir="rtl"
-          className="space-y-5 rounded-xl border border-span p-5"
+          className="space-y-5 rounded-xl border border-border p-5"
         >
           <h2 className="text-lg font-semibold">
             {t("dashboard.blogForm.persianContent")}
@@ -624,7 +679,7 @@ export default function AdminBlogForm() {
               onChange={(event) => handleTitleChange("fa", event.target.value)}
               required
               dir="rtl"
-              className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
               placeholder={t("dashboard.blogForm.persianTitlePlaceholder")}
             />
           </label>
@@ -642,7 +697,7 @@ export default function AdminBlogForm() {
               required
               rows={3}
               dir="rtl"
-              className="w-full rounded-lg border border-span bg-background px-3 py-2.5"
+              className="w-full rounded-lg border border-border bg-background px-3 py-2.5"
               placeholder={t("dashboard.blogForm.persianExcerptPlaceholder")}
             />
           </label>
@@ -671,7 +726,7 @@ export default function AdminBlogForm() {
             type="button"
             onClick={() => navigate("/dashboard/blog")}
             disabled={loading}
-            className="rounded-lg border border-span px-5 py-2.5 disabled:opacity-50"
+            className="rounded-lg border border-border px-5 py-2.5 disabled:opacity-50"
           >
             {t("dashboard.blogForm.cancel")}
           </button>

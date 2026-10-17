@@ -33,7 +33,7 @@ const StyledHeading = Heading.extend({
 export default function BlogEditor({
   value,
   onChange,
-  placeholder = "محتوای مقاله را اینجا بنویس...",
+  placeholder = "Write your article here...",
   disabled = false,
 }: BlogEditorProps) {
   const editor = useEditor({
@@ -76,7 +76,7 @@ export default function BlogEditor({
 
   if (!editor) {
     return (
-      <div className="min-h-[300px] animate-pulse rounded-lg border border-span bg-muted/30" />
+      <div className="min-h-[300px] animate-pulse rounded-lg border border-border bg-muted/30" />
     );
   }
 
@@ -84,15 +84,17 @@ export default function BlogEditor({
     `rounded-md border px-3 py-1.5 text-sm transition-colors ${
       active
         ? "border-primary bg-primary text-primary-foreground"
-        : "border-span hover:bg-muted"
+        : "border-border hover:bg-muted"
     }`;
 
   return (
-    <div className="overflow-hidden rounded-lg border border-span">
-      <div className="flex flex-wrap items-center gap-2 border-b border-span p-3">
+    <div className="overflow-hidden rounded-lg border border-border">
+      <div className="flex flex-wrap items-center gap-2 border-b border-border p-3">
         <button
           type="button"
           disabled={disabled}
+          aria-label="Bold"
+          title="Bold"
           className={buttonClass(editor.isActive("bold"))}
           onClick={() => editor.chain().focus().toggleBold().run()}
         >
@@ -102,6 +104,8 @@ export default function BlogEditor({
         <button
           type="button"
           disabled={disabled}
+          aria-label="Italic"
+          title="Italic"
           className={buttonClass(editor.isActive("italic"))}
           onClick={() => editor.chain().focus().toggleItalic().run()}
         >
@@ -111,50 +115,60 @@ export default function BlogEditor({
         <button
           type="button"
           disabled={disabled}
+          aria-label="Heading"
+          title="Heading"
           className={buttonClass(editor.isActive("heading", { level: 2 }))}
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
         >
-          تیتر
+          Heading
         </button>
 
         <button
           type="button"
           disabled={disabled}
+          aria-label="Bullet List"
+          title="Bullet List"
           className={buttonClass(editor.isActive("bulletList"))}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
         >
-          فهرست نقطه‌ای
+          Bullet List
         </button>
 
         <button
           type="button"
           disabled={disabled}
+          aria-label="Numbered List"
+          title="Numbered List"
           className={buttonClass(editor.isActive("orderedList"))}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
         >
-          فهرست شماره‌ای
+          Numbered List
         </button>
 
         <button
           type="button"
           disabled={disabled}
+          aria-label="Blockquote"
+          title="Blockquote"
           className={buttonClass(editor.isActive("blockquote"))}
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
         >
-          نقل‌قول
+          Blockquote
         </button>
 
         <button
           type="button"
           disabled={disabled}
+          aria-label="Clear Formatting"
+          title="Clear Formatting"
           className={buttonClass(false)}
           onClick={() =>
             editor.chain().focus().unsetAllMarks().clearNodes().run()
           }
         >
-          پاک‌کردن قالب‌بندی
+          Clear Formatting
         </button>
       </div>
 

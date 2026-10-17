@@ -21,7 +21,7 @@ export default function ProjectHighlights({
   const { t } = useTranslation();
 
   return (
-    <div className="space-y-6 rounded-xl border-2 border-span p-6">
+    <div className="space-y-6 rounded-xl border-2 border-border p-6">
       <div>
         <h2 className="text-lg font-semibold">
           {t("admin.projects.form.projectHighlights.title")}
@@ -37,13 +37,13 @@ export default function ProjectHighlights({
           value={highlightInput}
           onChange={(event) => onHighlightInputChange(event.target.value)}
           placeholder={t("admin.projects.form.projectHighlights.placeholder")}
-          className="flex-1 rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+          className="flex-1 rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
         />
 
         <button
           type="button"
           onClick={onAddHighlight}
-          className="rounded-lg border-2 border-span px-3"
+          className="rounded-lg border-2 border-border px-3"
           aria-label={t("admin.projects.form.projectHighlights.add")}
         >
           <Plus size={18} />
@@ -55,7 +55,7 @@ export default function ProjectHighlights({
           {formData.highlight_links.map((link, index) => (
             <div
               key={`${link}-${index}`}
-              className="flex items-start justify-between gap-3 rounded-lg border-2 border-span px-3 py-2 text-sm"
+              className="flex items-start justify-between gap-3 rounded-lg border-2 border-border px-3 py-2 text-sm"
             >
               <span className="min-w-0 break-words whitespace-normal">
                 {link}

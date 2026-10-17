@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { ExternalLink, Pencil, Plus, Trash2 } from "lucide-react";
+import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import ProjectsLoadingSkeleton from "@/components/skeleton/ProjectsLoadingSkeleton";
+import PortfolioFilter from "@/components/portfolio/PortfolioFilter";
 import { deleteAdminProject, getAdminProjects } from "@/features/api";
 
 type AdminProject = {
@@ -43,6 +44,15 @@ export default function AdminProjects() {
   const [error, setError] = useState<string | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
   const [deleting, setDeleting] = useState(false);
+
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredProjects =
+    activeFilter === "all"
+      ? projects
+      : projects.filter(
+          (project) => String(project.category_id) === activeFilter
+        );
 
   useEffect(() => {
     let cancelled = false;
@@ -90,7 +100,9 @@ export default function AdminProjects() {
       );
 
       setPendingDeleteId(null);
-      toast.success(t("dashboard.projectDeleted"));
+      toast.success(
+        isPersian ? "پروژه با موفقیت حذف شد." : "Project deleted successfully."
+      );
     } catch (error) {
       console.error("Failed to delete project:", error);
       toast.error(t("dashboard.deleteError"));
@@ -103,7 +115,9 @@ export default function AdminProjects() {
     <section dir={isPersian ? "rtl" : "ltr"} className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">{t("dashboard.projects")}</h1>
+          <h1 className="text-2xl font-semibold">
+            {t("dashboard.projects")}
+          </h1>
 
           <p className="mt-1 text-sm text-muted-foreground">
             {t("dashboard.manageProjects")}
@@ -136,13 +150,28 @@ export default function AdminProjects() {
             boxShadow: "0 8px 30px rgba(117, 67, 200, 0.12)",
           }}
         >
+          {projects.length > 0 && (
+            <div className="border-b border-border/30 p-4">
+              <PortfolioFilter
+                activeFilter={activeFilter}
+                setActiveFilter={setActiveFilter}
+              />
+            </div>
+          )}
+
           {projects.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground">
               {t("dashboard.noProjects")}
             </div>
+          ) : filteredProjects.length === 0 ? (
+            <div className="p-8 text-center text-muted-foreground">
+              {isPersian
+                ? "پروژه‌ای در این دسته‌بندی وجود ندارد."
+                : "No projects in this category."}
+            </div>
           ) : (
             <div className="divide-y divide-border">
-              {projects.map((project) => {
+              {filteredProjects.map((project) => {
                 const techStack = Array.isArray(project.tech_stack)
                   ? project.tech_stack
                   : [];
@@ -191,7 +220,9 @@ export default function AdminProjects() {
                         <button
                           type="button"
                           onClick={() =>
-                            navigate(`/dashboard/projects/${project.id}/edit`)
+                            navigate(
+                              `/dashboard/projects/${project.id}/edit`
+                            )
                           }
                           className="rounded-md p-2 transition-colors hover:bg-border"
                           aria-label={t("dashboard.editProject")}
@@ -236,80 +267,7 @@ export default function AdminProjects() {
                           </p>
                         )}
                       </div>
-
-                      <div className="space-y-3">
-                        <div>
-                          <h3 className="mb-1 text-sm font-medium">
-                            {labels.liveWebsite}
-                          </h3>
-
-                          {project.live_url ? (
-                            <a
-                              href={project.live_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex max-w-full items-center gap-1.5 text-sm text-primary transition-colors hover:underline"
-                            >
-                              <ExternalLink size={14} className="shrink-0" />
-                              <span className="truncate">
-                                {labels.openLink}
-                              </span>
-                            </a>
-                          ) : (
-                            <p className="text-xs text-muted-foreground">
-                              {labels.noLink}
-                            </p>
-                          )}
-                        </div>
-
-                        <div>
-                          <h3 className="mb-1 text-sm font-medium">
-                            {labels.projectOverview}
-                          </h3>
-
-                          {project.overview_button_link ? (
-                            <a
-                              href={project.overview_button_link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 text-sm text-primary transition-colors hover:underline"
-                            >
-                              <ExternalLink size={14} />
-                              {labels.openLink}
-                            </a>
-                          ) : (
-                            <p className="text-xs text-muted-foreground">
-                              {labels.noLink}
-                            </p>
-                          )}
-                        </div>
-                      </div>
                     </div>
-
-                    {highlightLinks.length > 0 && (
-                      <div className="mt-4">
-                        <h3 className="mb-2 text-sm font-medium">
-                          {labels.highlights}
-                        </h3>
-
-                        <div className="flex flex-wrap gap-2">
-                          {highlightLinks.map((link, index) => (
-                            <a
-                              key={`${link}-${index}`}
-                              href={link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs text-primary transition-colors hover:bg-dashboard-bg"
-                            >
-                              <ExternalLink size={12} className="shrink-0" />
-                              <span className="max-w-48 truncate">
-                                {labels.highlights} {index + 1}
-                              </span>
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
                   </article>
                 );
               })}

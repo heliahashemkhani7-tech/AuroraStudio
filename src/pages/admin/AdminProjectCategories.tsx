@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Pencil, Trash2, X, Check } from "lucide-react";
+import { Pencil, Plus, Trash2, X, Save } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { toast } from "sonner";
 
@@ -37,9 +37,9 @@ export default function AdminProjectCategories() {
     null
   );
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [editingId, setEditingId] = useState<number | null>(null);
   const [form, setForm] = useState<CategoryForm>(emptyForm);
+  const [formOpen, setFormOpen] = useState(false);
 
   const loadCategories = useCallback(
     async (showLoading = true) => {
@@ -101,17 +101,27 @@ export default function AdminProjectCategories() {
     };
   }, [isPersian]);
 
-  const resetForm = () => {
-    setForm(emptyForm);
+  const closeForm = () => {
+    if (saving) return;
+
+    setFormOpen(false);
     setEditingId(null);
+    setForm(emptyForm);
     setError("");
-    setSuccess("");
   };
 
-  const handleEdit = (category: AdminCategory) => {
+  const startCreate = () => {
+    setEditingId(null);
+    setForm(emptyForm);
+    setError("");
+    setFormOpen(true);
+  };
+
+  const startEdit = (category: AdminCategory) => {
     const english = category.category_translations.find(
       (item) => item.language_id === 1
     );
+
     const persian = category.category_translations.find(
       (item) => item.language_id === 2
     );
@@ -123,13 +133,12 @@ export default function AdminProjectCategories() {
       nameFa: persian?.name ?? "",
     });
     setError("");
-    setSuccess("");
+    setFormOpen(true);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
-    setSuccess("");
 
     const slug = form.slug.trim().toLowerCase();
     const nameEn = form.nameEn.trim();
@@ -167,17 +176,20 @@ export default function AdminProjectCategories() {
         });
       }
 
-      resetForm();
-
       toast.success(
         isPersian
           ? isCreating
             ? "دسته‌بندی با موفقیت اضافه شد."
             : "دسته‌بندی با موفقیت ویرایش شد."
           : isCreating
-          ? "Category created successfully."
-          : "Category updated successfully."
+            ? "Category created successfully."
+            : "Category updated successfully."
       );
+
+      setFormOpen(false);
+      setEditingId(null);
+      setForm(emptyForm);
+      setError("");
 
       await loadCategories(false);
     } catch (err) {
@@ -206,7 +218,10 @@ export default function AdminProjectCategories() {
       );
 
       if (editingId === category.id) {
-        resetForm();
+        setFormOpen(false);
+        setEditingId(null);
+        setForm(emptyForm);
+        setError("");
       }
 
       setPendingDelete(null);
@@ -225,8 +240,8 @@ export default function AdminProjectCategories() {
             ? "این دسته‌بندی به پروژه متصل است؛ ابتدا دسته‌بندی پروژه را تغییر بده."
             : "This category is assigned to projects. Reassign them before deleting it."
           : isPersian
-          ? "حذف دسته‌بندی ناموفق بود."
-          : "Failed to delete category."
+            ? "حذف دسته‌بندی ناموفق بود."
+            : "Failed to delete category."
       );
     } finally {
       setDeletingId(null);
@@ -241,16 +256,28 @@ export default function AdminProjectCategories() {
 
   return (
     <section dir={isPersian ? "rtl" : "ltr"} className="space-y-6 text-text">
-      <div>
-        <h1 className="text-2xl font-semibold">
-          {isPersian ? "دسته‌بندی پروژه‌ها" : "Project Categories"}
-        </h1>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold">
+            {isPersian ? "دسته‌بندی پروژه‌ها" : "Project Categories"}
+          </h1>
 
-        <p className="mt-1 text-sm text-muted-foreground">
-          {isPersian
-            ? "دسته‌بندی‌ها و نام فارسی و انگلیسی آن‌ها را مدیریت کن."
-            : "Manage project categories and their English and Persian names."}
-        </p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {isPersian
+              ? "دسته‌بندی‌ها و نام فارسی و انگلیسی آن‌ها را مدیریت کن."
+              : "Manage project categories and their English and Persian names."}
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={startCreate}
+          disabled={formOpen || saving}
+          className="flex items-center justify-center gap-2 rounded-lg bg-border px-4 py-2 text-sm font-medium text-text transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          <Plus size={18} />
+          {isPersian ? "افزودن دسته‌بندی" : "Add Category"}
+        </button>
       </div>
 
       {error && (
@@ -262,114 +289,126 @@ export default function AdminProjectCategories() {
         </div>
       )}
 
-      {success && (
-        <div
-          role="status"
-          className="rounded-lg border border-green-500/30 bg-green-500/10 p-3 text-sm text-green-600"
+      {formOpen && (
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5 rounded-xl border border-border p-5"
         >
-          {success}
-        </div>
-      )}
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-semibold">
+              {editingId === null
+                ? isPersian
+                  ? "افزودن دسته‌بندی"
+                  : "Add Category"
+                : isPersian
+                  ? "ویرایش دسته‌بندی"
+                  : "Edit Category"}
+            </h2>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4 rounded-xl border border-border p-5"
-      >
-        <h2 className="font-semibold">
-          {editingId === null
-            ? isPersian
-              ? "افزودن دسته‌بندی"
-              : "Add Category"
-            : isPersian
-            ? "ویرایش دسته‌بندی"
-            : "Edit Category"}
-        </h2>
-
-        <div className="grid gap-4 md:grid-cols-3">
-          <label className="space-y-2 text-sm">
-            <span>Slug</span>
-            <input
-              value={form.slug}
-              onChange={(event) =>
-                setForm((previous) => ({
-                  ...previous,
-                  slug: event.target.value,
-                }))
-              }
-              placeholder="e.g. websites"
-              dir="ltr"
-              required
-              className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
-            />
-          </label>
-
-          <label className="space-y-2 text-sm">
-            <span>English name</span>
-            <input
-              value={form.nameEn}
-              onChange={(event) =>
-                setForm((previous) => ({
-                  ...previous,
-                  nameEn: event.target.value,
-                }))
-              }
-              placeholder="e.g. Websites"
-              dir="ltr"
-              required
-              className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
-            />
-          </label>
-
-          <label className="space-y-2 text-sm">
-            <span>نام فارسی</span>
-            <input
-              value={form.nameFa}
-              onChange={(event) =>
-                setForm((previous) => ({
-                  ...previous,
-                  nameFa: event.target.value,
-                }))
-              }
-              placeholder="مثلاً وب‌سایت‌ها"
-              dir="rtl"
-              required
-              className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-primary"
-            />
-          </label>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="submit"
-            disabled={saving}
-            className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground disabled:opacity-50"
-          >
-            <Check size={16} />
-            {saving
-              ? isPersian
-                ? "در حال ذخیره..."
-                : "Saving..."
-              : editingId === null
-              ? isPersian
-                ? "افزودن"
-                : "Add"
-              : isPersian
-              ? "ذخیره تغییرات"
-              : "Save Changes"}
-          </button>
-
-          {editingId !== null && (
             <button
               type="button"
-              onClick={resetForm}
-              className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm"
+              onClick={closeForm}
+              disabled={saving}
+              aria-label={isPersian ? "بستن فرم" : "Close form"}
+              className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-text disabled:opacity-50"
+            >
+              <X size={18} />
+            </button>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <label className="space-y-2 text-sm">
+              <span>{isPersian ? "نام انگلیسی" : "English name"}</span>
+              <input
+                value={form.nameEn}
+                onChange={(event) =>
+                  setForm((previous) => ({
+                    ...previous,
+                    nameEn: event.target.value,
+                  }))
+                }
+                placeholder="e.g. Websites"
+                dir="ltr"
+                required
+                disabled={saving}
+                className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+              />
+            </label>
+
+            <label className="space-y-2 text-sm">
+              <span>{isPersian ? "نام فارسی" : "Persian name"}</span>
+              <input
+                value={form.nameFa}
+                onChange={(event) =>
+                  setForm((previous) => ({
+                    ...previous,
+                    nameFa: event.target.value,
+                  }))
+                }
+                placeholder="مثلاً وب‌سایت‌ها"
+                dir="rtl"
+                required
+                disabled={saving}
+                className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+              />
+            </label>
+
+            <label className="space-y-2 text-sm md:col-span-2">
+              <span>Slug</span>
+              <input
+                value={form.slug}
+                onChange={(event) =>
+                  setForm((previous) => ({
+                    ...previous,
+                    slug: event.target.value,
+                  }))
+                }
+                placeholder="e.g. websites"
+                dir="ltr"
+                required
+                disabled={saving}
+                className="w-full rounded-lg border border-border bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+              />
+              <span className="block text-xs text-muted-foreground">
+                {isPersian
+                  ? "فقط حروف کوچک انگلیسی، عدد و خط تیره مجاز است."
+                  : "Use lowercase English letters, numbers, and hyphens only."}
+              </span>
+            </label>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="submit"
+              disabled={saving}
+              className="flex items-center gap-2 rounded-lg bg-border px-4 py-2 text-sm font-medium text-text transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <Save size={16} />
+              {saving
+                ? isPersian
+                  ? "در حال ذخیره..."
+                  : "Saving..."
+                : editingId === null
+                  ? isPersian
+                    ? "افزودن"
+                    : "Add"
+                  : isPersian
+                    ? "ذخیره تغییرات"
+                    : "Save Changes"}
+            </button>
+
+            <button
+              type="button"
+              onClick={closeForm}
+              disabled={saving}
+              className="flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50"
             >
               <X size={16} />
               {isPersian ? "انصراف" : "Cancel"}
             </button>
-          )}
-        </div>
-      </form>
+          </div>
+        </form>
+      )}
 
       <div
         className="overflow-hidden rounded-xl border border-border"
@@ -397,28 +436,27 @@ export default function AdminProjectCategories() {
               return (
                 <div
                   key={category.id}
-                  className="flex flex-col gap-4 p-4 transition-colors duration-200  hover:bg-dashboard-bg sm:flex-row sm:items-center sm:justify-between"
+                  className="flex flex-col gap-4 p-4 transition-colors duration-200 hover:bg-dashboard-bg sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div className="min-w-0 space-y-1">
                     <p className="font-medium">
                       {isPersian ? persian || english : english || persian}
                     </p>
-
-                    <p className="text-sm text-muted-foreground">
-                      {english || "—"} / {persian || "—"}
-                    </p>
-
-                    <p dir="ltr" className="text-xs text-muted-foreground">
-                      {category.slug} · ID: {category.id}
+                    <p
+                      dir="ltr"
+                      className="text-sm text-muted-foreground"
+                    >
+                      {category.slug}
                     </p>
                   </div>
 
                   <div className="flex shrink-0 items-center gap-2">
                     <button
                       type="button"
-                      onClick={() => handleEdit(category)}
+                      onClick={() => startEdit(category)}
+                      disabled={saving || deletingId !== null}
                       aria-label={isPersian ? "ویرایش" : "Edit"}
-                      className="rounded-md border border-border p-2 transition-colors hover:bg-muted"
+                      className="rounded-md border border-border p-2 transition-colors hover:bg-muted disabled:opacity-50"
                     >
                       <Pencil size={17} />
                     </button>

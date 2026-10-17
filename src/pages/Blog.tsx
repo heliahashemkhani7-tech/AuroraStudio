@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { getBlogs, type Blog as BlogType } from "@/features/api";
 import BlogCard from "@/components/blog/BlogCard";
+import BlogFilter from "@/components/blog/BlogFilter";
 import BlogSkeleton from "@/components/skeleton/BlogSkeleton";
 
 const Blog = () => {
@@ -11,6 +12,14 @@ const Blog = () => {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredBlogs =
+    activeFilter === "all"
+      ? blogs
+      : blogs.filter(
+          (blog) => String(blog.category_blog_id) === activeFilter
+        );
 
   useEffect(() => {
     let isActive = true;
@@ -20,7 +29,7 @@ const Blog = () => {
       setError(false);
 
       try {
-        const languageId = i18n.language === "fa" ? 2 : 1;
+        const languageId = i18n.language.startsWith("fa") ? 2 : 1;
         const data = await getBlogs(languageId);
 
         if (isActive) {
@@ -39,7 +48,7 @@ const Blog = () => {
       }
     };
 
-    loadBlogs();
+    void loadBlogs();
 
     return () => {
       isActive = false;
@@ -51,7 +60,7 @@ const Blog = () => {
   }
 
   return (
-    <Container className="z-4 text-text mt-30">
+    <Container className="z-4 mt-30 text-text">
       <section>
         <p className="mb-3 text-sm uppercase">{t("blog.label")}</p>
 
@@ -71,11 +80,28 @@ const Blog = () => {
         </p>
       ) : (
         <section className="mt-12">
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {blogs.map((blog) => (
-              <BlogCard key={blog.id} blog={blog} />
-            ))}
-          </div>
+          {blogs.length > 0 && (
+            <div className="mb-8">
+              <BlogFilter
+                activeFilter={activeFilter}
+                setActiveFilter={setActiveFilter}
+              />
+            </div>
+          )}
+
+          {filteredBlogs.length === 0 ? (
+            <p className="py-12 text-center text-muted-foreground">
+              {i18n.language.startsWith("fa")
+                ? "مقاله‌ای در این دسته‌بندی وجود ندارد."
+                : "No blog posts in this category."}
+            </p>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filteredBlogs.map((blog) => (
+                <BlogCard key={blog.id} blog={blog} />
+              ))}
+            </div>
+          )}
         </section>
       )}
     </Container>

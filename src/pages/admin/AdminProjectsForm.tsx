@@ -3,6 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 import {
   createAdminProject,
@@ -57,36 +58,58 @@ export default function AdminProjectsForm() {
 
   const [techInput, setTechInput] = useState("");
   const [highlightInput, setHighlightInput] = useState("");
-
   const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const isPersian = i18n.language.startsWith("fa");
+
   useEffect(() => {
+    let cancelled = false;
+
     async function loadCategories() {
       try {
-        const languageId = i18n.language === "fa" ? 2 : 1;
+        const languageId = isPersian ? 2 : 1;
         const data = await getAdminCategories(languageId);
 
-        setCategories(
-          data.map((category) => ({
-            category_id: category.category_id,
-            name: category.name,
-          }))
-        );
+        if (!cancelled) {
+          setCategories(
+            data.map((category) => ({
+              category_id: category.category_id,
+              name: category.name,
+            }))
+          );
+        }
       } catch (error) {
         console.error("Error loading categories:", error);
+
+        if (!cancelled) {
+          toast.error(
+            isPersian
+              ? "بارگذاری دسته‌بندی‌ها با خطا مواجه شد."
+              : "Failed to load categories."
+          );
+        }
       }
     }
 
-    loadCategories();
-  }, [i18n.language]);
+    void loadCategories();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [i18n.language, isPersian]);
 
   useEffect(() => {
     if (!isEditMode || !id) return;
 
-    async function loadProject() {
-      try {
-        setLoading(true);
+    let cancelled = false;
 
+    async function loadProject() {
+      setLoading(true);
+
+      try {
         const project = await getAdminProjectById(Number(id));
+
+        if (cancelled) return;
 
         const englishTranslation = project.project_translations.find(
           (translation) => translation.language_id === 1
@@ -150,13 +173,27 @@ export default function AdminProjectsForm() {
         });
       } catch (error) {
         console.error("Error loading project:", error);
+
+        if (!cancelled) {
+          toast.error(
+            isPersian
+              ? "بارگذاری اطلاعات پروژه با خطا مواجه شد."
+              : "Failed to load project details."
+          );
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
-    loadProject();
-  }, [id, isEditMode]);
+    void loadProject();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [id, isEditMode, isPersian]);
 
   const imagePreview = useMemo(() => {
     if (!imageFile) return "";
@@ -196,7 +233,12 @@ export default function AdminProjectsForm() {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      console.error("Please select an image file.");
+      toast.error(
+        isPersian
+          ? "لطفاً یک فایل تصویری معتبر انتخاب کنید."
+          : "Please select a valid image file."
+      );
+
       event.target.value = "";
       return;
     }
@@ -206,6 +248,7 @@ export default function AdminProjectsForm() {
 
   function addTechStack() {
     const value = techInput.trim();
+
     if (!value) return;
 
     setFormData((prev) => ({
@@ -225,6 +268,7 @@ export default function AdminProjectsForm() {
 
   function addHighlight() {
     const value = highlightInput.trim();
+
     if (!value) return;
 
     setFormData((prev) => ({
@@ -247,9 +291,20 @@ export default function AdminProjectsForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    try {
-      setLoading(true);
+    if (loading) return;
 
+    if (!formData.category_id || !formData.name.trim()) {
+      toast.error(
+        isPersian
+          ? "لطفاً نام پروژه و دسته‌بندی را وارد کنید."
+          : "Please enter the project name and select a category."
+      );
+      return;
+    }
+
+    setLoading(true);
+
+    try {
       let imagePath = formData.live_url;
 
       if (imageFile) {
@@ -274,8 +329,20 @@ export default function AdminProjectsForm() {
 
       if (isEditMode && id) {
         await updateAdminProject(Number(id), projectData);
+
+        toast.success(
+          isPersian
+            ? "پروژه با موفقیت ویرایش شد."
+            : "Project updated successfully."
+        );
       } else {
         await createAdminProject(projectData);
+
+        toast.success(
+          isPersian
+            ? "پروژه با موفقیت ایجاد شد."
+            : "Project created successfully."
+        );
       }
 
       navigate("/dashboard/projects");
@@ -283,6 +350,16 @@ export default function AdminProjectsForm() {
       console.error(
         isEditMode ? "Error updating project:" : "Error creating project:",
         error
+      );
+
+      toast.error(
+        isEditMode
+          ? isPersian
+            ? "ویرایش پروژه با خطا مواجه شد."
+            : "Failed to update project."
+          : isPersian
+          ? "ایجاد پروژه با خطا مواجه شد."
+          : "Failed to create project."
       );
     } finally {
       setLoading(false);
@@ -299,7 +376,8 @@ export default function AdminProjectsForm() {
         <button
           type="button"
           onClick={() => navigate("/dashboard/projects")}
-          className="rounded-lg border-2 border-span p-2"
+          className="rounded-lg border-2 border-border p-2"
+          aria-label={isPersian ? "بازگشت به پروژه‌ها" : "Back to projects"}
         >
           <ArrowLeft size={18} />
         </button>
@@ -347,7 +425,7 @@ export default function AdminProjectsForm() {
           <button
             type="button"
             onClick={() => navigate("/dashboard/projects")}
-            className="rounded-lg border border-span px-5 py-2.5"
+            className="rounded-lg border border-border px-5 py-2.5"
           >
             {t("dashboard.cancel")}
           </button>

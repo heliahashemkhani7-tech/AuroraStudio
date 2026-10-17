@@ -18,7 +18,7 @@ export default function ProjectContent({
 
   return (
     <>
-      <div className="space-y-6 rounded-xl  border-2 border-span p-6">
+      <div className="space-y-6 rounded-xl  border-2 border-border p-6">
         <div>
           <h2 className="text-lg font-semibold"> {t("dashboard.english")}</h2>
         </div>
@@ -35,7 +35,7 @@ export default function ProjectContent({
               value={formData.description_en}
               onChange={onChange}
               rows={3}
-              className="w-full resize-none rounded-lg  border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="w-full resize-none rounded-lg  border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
 
@@ -50,7 +50,7 @@ export default function ProjectContent({
               value={formData.detail_en}
               onChange={onChange}
               rows={5}
-              className="w-full resize-none rounded-lg  border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="w-full resize-none rounded-lg  border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
 
@@ -68,7 +68,7 @@ export default function ProjectContent({
               value={formData.overview_paragraphs_en}
               onChange={onChange}
               rows={6}
-              className="w-full resize-none rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="w-full resize-none rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
 
@@ -78,7 +78,7 @@ export default function ProjectContent({
               value={formData.client_en}
               onChange={onChange}
               placeholder="Client"
-              className="rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
 
             <input
@@ -86,7 +86,7 @@ export default function ProjectContent({
               value={formData.role_en}
               onChange={onChange}
               placeholder="Role"
-              className="rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
 
             <input
@@ -94,13 +94,13 @@ export default function ProjectContent({
               value={formData.year_en}
               onChange={onChange}
               placeholder="Year"
-              className="rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
         </div>
       </div>
 
-      <div className="space-y-6 rounded-xl border-2 border-span p-6">
+      <div className="space-y-6 rounded-xl border-2 border-border p-6">
         <div>
           <h2 className="text-lg font-semibold"> {t("dashboard.persian")}</h2>
         </div>
@@ -117,7 +117,7 @@ export default function ProjectContent({
               value={formData.description_fa}
               onChange={onChange}
               rows={3}
-              className="w-full resize-none rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="w-full resize-none rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
 
@@ -132,7 +132,7 @@ export default function ProjectContent({
               value={formData.detail_fa}
               onChange={onChange}
               rows={5}
-              className="w-full resize-none rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="w-full resize-none rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
 
@@ -150,7 +150,7 @@ export default function ProjectContent({
               value={formData.overview_paragraphs_fa}
               onChange={onChange}
               rows={6}
-              className="w-full resize-none rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="w-full resize-none rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
 
@@ -160,7 +160,7 @@ export default function ProjectContent({
               value={formData.client_fa}
               onChange={onChange}
               placeholder="مشتری"
-              className="rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
 
             <input
@@ -168,7 +168,7 @@ export default function ProjectContent({
               value={formData.role_fa}
               onChange={onChange}
               placeholder="نقش"
-              className="rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
 
             <input
@@ -176,7 +176,7 @@ export default function ProjectContent({
               value={formData.year_fa}
               onChange={onChange}
               placeholder="سال"
-              className="rounded-lg border-2 border-span bg-transparent px-3 py-2 outline-none focus:border-primary"
+              className="rounded-lg border-2 border-border bg-transparent px-3 py-2 outline-none focus:border-primary"
             />
           </div>
         </div>

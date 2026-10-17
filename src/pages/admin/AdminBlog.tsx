@@ -6,6 +6,8 @@ import { toast } from "sonner";
 
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import BlogLoadingSkeleton from "@/components/skeleton/BlogLoadingSkeleton";
+import BlogFilter from "@/components/blog/BlogFilter";
+
 import {
   deleteAdminBlog,
   getAdminBlogs,
@@ -24,9 +26,17 @@ export default function AdminBlog() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
-  const [pendingDelete, setPendingDelete] = useState<AdminBlogType | null>(
-    null
-  );
+  const [pendingDelete, setPendingDelete] =
+    useState<AdminBlogType | null>(null);
+
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredBlogs =
+    activeFilter === "all"
+      ? blogs
+      : blogs.filter(
+          (blog) => String(blog.category_blog_id) === activeFilter
+        );
 
   useEffect(() => {
     let cancelled = false;
@@ -67,7 +77,9 @@ export default function AdminBlog() {
 
       await deleteAdminBlog(blog.id);
 
-      setBlogs((previous) => previous.filter((item) => item.id !== blog.id));
+      setBlogs((previous) =>
+        previous.filter((item) => item.id !== blog.id)
+      );
 
       toast.success(t("dashboard.blogDeleted"));
     } catch (error) {
@@ -107,7 +119,9 @@ export default function AdminBlog() {
     <section dir={isPersian ? "rtl" : "ltr"} className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">{t("dashboard.title")}</h1>
+          <h1 className="text-2xl font-semibold">
+            {t("dashboard.title")}
+          </h1>
 
           <p className="mt-1 text-sm text-muted-foreground">
             {t("dashboard.description")}
@@ -132,18 +146,33 @@ export default function AdminBlog() {
         </div>
       ) : (
         <div
-          className="overflow-hidden rounded-xl border border-border  transition-shadow duration-300"
+          className="overflow-hidden rounded-xl border border-border transition-shadow duration-300"
           style={{
             boxShadow: "0 8px 30px rgba(117, 67, 200, 0.12)",
           }}
         >
+          {blogs.length > 0 && (
+            <div className="border-b border-border/30 p-4">
+              <BlogFilter
+                activeFilter={activeFilter}
+                setActiveFilter={setActiveFilter}
+              />
+            </div>
+          )}
+
           {blogs.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground">
               {t("dashboard.empty")}
             </div>
+          ) : filteredBlogs.length === 0 ? (
+            <div className="p-8 text-center text-muted-foreground">
+              {isPersian
+                ? "مقاله‌ای در این دسته‌بندی وجود ندارد."
+                : "No blog posts in this category."}
+            </div>
           ) : (
             <div className="divide-y divide-border">
-              {blogs.map((blog) => {
+              {filteredBlogs.map((blog) => {
                 const translation = blog.blog_translations.find(
                   (item) => item.language_id === languageId
                 );
@@ -151,7 +180,9 @@ export default function AdminBlog() {
                 const fallbackTranslation = blog.blog_translations[0];
 
                 const title =
-                  translation?.title || fallbackTranslation?.title || blog.slug;
+                  translation?.title ||
+                  fallbackTranslation?.title ||
+                  blog.slug;
 
                 const categoryTranslations =
                   blog.blog_categories?.blog_category_translations ?? [];
@@ -247,7 +278,9 @@ export default function AdminBlog() {
 
       <ConfirmDialog
         open={pendingDelete !== null}
-        loading={pendingDelete !== null && deletingId === pendingDelete.id}
+        loading={
+          pendingDelete !== null && deletingId === pendingDelete.id
+        }
         title={t("dashboard.confirmDeleteTitle")}
         description={t("dashboard.confirmDelete", {
           title: pendingTitle,
