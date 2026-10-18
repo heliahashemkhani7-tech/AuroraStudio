@@ -59,9 +59,7 @@ export default function AdminSidebar() {
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
 
-  const isProjectsActive = location.pathname.startsWith(
-    "/dashboard/projects"
-  );
+  const isProjectsActive = location.pathname.startsWith("/dashboard/projects");
   const isBlogActive = location.pathname.startsWith("/dashboard/blog");
   const isInboxActive = location.pathname === "/dashboard/inbox";
 
@@ -145,6 +143,7 @@ export default function AdminSidebar() {
               {/* Dashboard */}
               <SidebarMenuItem className="min-w-0 max-w-full">
                 <SidebarMenuButton
+                  
                   isActive={location.pathname === "/dashboard"}
                   className={getMenuButtonClassName(
                     location.pathname === "/dashboard"
@@ -156,9 +155,7 @@ export default function AdminSidebar() {
                     className={linkClassName}
                   >
                     <LayoutDashboard className="shrink-0" />
-                    <span className="truncate">
-                      {t("dashboard.dashboard")}
-                    </span>
+                    <span className="truncate">{t("dashboard.dashboard")}</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -184,16 +181,13 @@ export default function AdminSidebar() {
                     </SidebarMenuButton>
                   </CollapsibleTrigger>
 
-                  <CollapsibleContent
-                    className={submenuAnimationClassName}
-                  >
+                  <CollapsibleContent className={submenuAnimationClassName}>
                     <SidebarMenu className={submenuClassName}>
                       {/* Project List */}
                       <SidebarMenuItem className="min-w-0 max-w-full">
                         <SidebarMenuButton
-                          isActive={
-                            location.pathname === "/dashboard/projects"
-                          }
+                          
+                          isActive={location.pathname === "/dashboard/projects"}
                           className={getMenuButtonClassName(
                             location.pathname === "/dashboard/projects"
                           )}
@@ -214,6 +208,7 @@ export default function AdminSidebar() {
                       {/* New Project */}
                       <SidebarMenuItem className="min-w-0 max-w-full">
                         <SidebarMenuButton
+                          
                           isActive={
                             location.pathname === "/dashboard/projects/new"
                           }
@@ -237,6 +232,7 @@ export default function AdminSidebar() {
                       {/* Project Categories */}
                       <SidebarMenuItem className="min-w-0 max-w-full">
                         <SidebarMenuButton
+                          
                           isActive={
                             location.pathname ===
                             "/dashboard/projects/categories"
@@ -284,13 +280,12 @@ export default function AdminSidebar() {
                     </SidebarMenuButton>
                   </CollapsibleTrigger>
 
-                  <CollapsibleContent
-                    className={submenuAnimationClassName}
-                  >
+                  <CollapsibleContent className={submenuAnimationClassName}>
                     <SidebarMenu className={submenuClassName}>
                       {/* Blog List */}
                       <SidebarMenuItem className="min-w-0 max-w-full">
                         <SidebarMenuButton
+                          
                           isActive={location.pathname === "/dashboard/blog"}
                           className={getMenuButtonClassName(
                             location.pathname === "/dashboard/blog"
@@ -312,9 +307,8 @@ export default function AdminSidebar() {
                       {/* New Blog */}
                       <SidebarMenuItem className="min-w-0 max-w-full">
                         <SidebarMenuButton
-                          isActive={
-                            location.pathname === "/dashboard/blog/new"
-                          }
+                          
+                          isActive={location.pathname === "/dashboard/blog/new"}
                           className={getMenuButtonClassName(
                             location.pathname === "/dashboard/blog/new"
                           )}
@@ -335,13 +329,12 @@ export default function AdminSidebar() {
                       {/* Blog Categories */}
                       <SidebarMenuItem className="min-w-0 max-w-full">
                         <SidebarMenuButton
+                          
                           isActive={
-                            location.pathname ===
-                            "/dashboard/blog/categories"
+                            location.pathname === "/dashboard/blog/categories"
                           }
                           className={getMenuButtonClassName(
-                            location.pathname ===
-                              "/dashboard/blog/categories"
+                            location.pathname === "/dashboard/blog/categories"
                           )}
                         >
                           <Link
@@ -364,6 +357,7 @@ export default function AdminSidebar() {
               {/* Inbox */}
               <SidebarMenuItem className="min-w-0 max-w-full">
                 <SidebarMenuButton
+                  
                   isActive={isInboxActive}
                   className={getMenuButtonClassName(isInboxActive)}
                 >
@@ -430,9 +424,7 @@ export default function AdminSidebar() {
                   className="cursor-pointer gap-2"
                 >
                   <KeyRound className="size-4" />
-                  <span>
-                    {isPersian ? "تغییر رمز عبور" : "Reset Password"}
-                  </span>
+                  <span>{isPersian ? "تغییر رمز عبور" : "Reset Password"}</span>
                 </DropdownMenuItem>
 
                 <DropdownMenuSeparator />
