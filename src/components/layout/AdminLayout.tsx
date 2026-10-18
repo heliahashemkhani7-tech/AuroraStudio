@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 import AdminSidebar from "../admin/AdminSidebar";
 
@@ -11,7 +11,12 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 
+import { ExternalLink } from "lucide-react";
+import { useTranslation } from "react-i18next";
+
 export default function AdminLayout() {
+  const { t } = useTranslation();
+
   return (
     <SidebarProvider>
       <div className="relative flex min-h-svh w-full min-w-0 overflow-x-clip bg-dashboard-bg text-text">
@@ -25,6 +30,14 @@ export default function AdminLayout() {
             <SidebarTrigger className="size-9 shrink-0 rounded-lg border border-border/30 bg-transparent text-text shadow-none transition-colors hover:bg-hover" />
 
             <div className="flex shrink-0 items-center gap-2">
+              <Link
+                to="/"
+                className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-text transition-colors hover:bg-hover"
+              >
+                <ExternalLink className="size-4" />
+                <span>{t("admin.backToSite")}</span>
+              </Link>
+
               <LanguageSwitcher />
               <ThemeToggle />
             </div>

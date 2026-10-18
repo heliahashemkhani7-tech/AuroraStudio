@@ -199,32 +199,6 @@ export const getBlogBySlug = async (
   return data as Blog | null;
 };
 
-export async function getAdminProjects() {
-  const { data, error } = await supabase
-    .from("projects")
-    .select(
-      `
-      id,
-      category_id,
-      name,
-      technology,
-      live_url,
-      tech_stack,
-      overview_button_link,
-      highlight_links
-    `
-    )
-    .eq("is_deleted", false)
-    .order("id", { ascending: false });
-
-  if (error) {
-    console.error("Error fetching admin projects:", error);
-    throw error;
-  }
-
-  return data;
-}
-
 export async function getDashboardStats() {
   const [projectsResult, blogsResult, categoriesResult] = await Promise.all([
     supabase
@@ -430,11 +404,24 @@ export async function updateAdminProject(
 
 export async function uploadProjectImage(
   file: File,
-  folder = "projects"
+  folder = "projects",
+  filePrefix?: string
 ): Promise<{ path: string; publicUrl: string }> {
+  if (!file.type.startsWith("image/")) {
+    throw new Error("INVALID_PROJECT_IMAGE");
+  }
+
+  const safeFolder =
+    folder.trim().replace(/[^a-zA-Z0-9_-]/g, "-") || "projects";
+
   const safeName = file.name.normalize("NFKD").replace(/[^a-zA-Z0-9.-]/g, "-");
 
-  const filePath = `${folder}/${Date.now()}-${safeName}`;
+  const safePrefix = filePrefix?.trim().replace(/[^a-zA-Z0-9_-]/g, "-");
+
+  const fileName = `${
+    safePrefix ? `${safePrefix}-` : ""
+  }${Date.now()}-${safeName}`;
+  const filePath = `${safeFolder}/${fileName}`;
 
   const { data, error } = await supabase.storage
     .from("project-images")
@@ -457,7 +444,6 @@ export async function uploadProjectImage(
     publicUrl: publicData.publicUrl,
   };
 }
-
 export type AdminCategory = {
   id: number;
   slug: string;
@@ -1182,4 +1168,31 @@ export async function deleteContactMessage(messageId: string): Promise<void> {
   if (!data) {
     throw new Error("CONTACT_MESSAGE_NOT_FOUND_OR_ALREADY_DELETED");
   }
+}
+
+export async function getAdminProjects() {
+  const { data, error } = await supabase
+    .from("projects")
+    .select(
+      `
+      id,
+      slug,
+      category_id,
+      name,
+      technology,
+      live_url,
+      tech_stack,
+      overview_button_link,
+      highlight_links
+    `
+    )
+    .eq("is_deleted", false)
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching admin projects:", error);
+    throw error;
+  }
+
+  return data;
 }

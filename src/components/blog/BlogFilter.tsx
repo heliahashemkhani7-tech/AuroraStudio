@@ -13,11 +13,8 @@ type Filter = {
   label: string;
 };
 
-export default function BlogFilter({
-  activeFilter,
-  setActiveFilter,
-}: Props) {
-  const { i18n } = useTranslation();
+export default function BlogFilter({ activeFilter, setActiveFilter }: Props) {
+  const { t, i18n } = useTranslation();
   const [filters, setFilters] = useState<Filter[]>([]);
 
   useEffect(() => {
@@ -57,8 +54,6 @@ export default function BlogFilter({
     };
   }, [i18n.language]);
 
-  const isPersian = i18n.language.startsWith("fa");
-
   return (
     <div className="flex w-full justify-center">
       <ToggleGroup
@@ -75,7 +70,7 @@ export default function BlogFilter({
           value="all"
           className="rounded-xl px-5 py-2 data-[pressed]:bg-border data-[pressed]:text-text data-[pressed]:border-border"
         >
-          {isPersian ? "همه" : "All"}
+          {t("blogFilter.all")}
         </ToggleGroupItem>
 
         {filters.map((filter) => (

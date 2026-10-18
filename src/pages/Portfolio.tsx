@@ -111,7 +111,7 @@ export default function Portfolio() {
 
   return (
     <Container className="flex items-center">
-      <div className="z-10 text-text flex flex-col w-screen overflow-hidden mt-10">
+      <div className="z-10 text-text flex flex-col w-screen mt-10">
         <PortfolioHero />
 
         <PortfolioFilter

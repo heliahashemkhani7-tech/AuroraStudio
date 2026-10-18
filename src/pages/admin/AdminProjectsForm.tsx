@@ -1,3 +1,4 @@
+
 import { useEffect, useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { ArrowLeft } from "lucide-react";
@@ -51,17 +52,20 @@ export default function AdminProjectsForm() {
   const { id } = useParams();
 
   const isEditMode = Boolean(id);
+  const isPersian = i18n.language.startsWith("fa");
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<ProjectFormData>(initialFormData);
+  const [formData, setFormData] =
+    useState<ProjectFormData>(initialFormData);
 
   const [techInput, setTechInput] = useState("");
-  const [highlightInput, setHighlightInput] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [highlightFiles, setHighlightFiles] = useState<
+    (File | null)[]
+  >([]);
 
-  const isPersian = i18n.language.startsWith("fa");
-
+  // دریافت دسته‌بندی‌ها
   useEffect(() => {
     let cancelled = false;
 
@@ -98,6 +102,7 @@ export default function AdminProjectsForm() {
     };
   }, [i18n.language, isPersian]);
 
+  // دریافت اطلاعات پروژه در حالت ویرایش
   useEffect(() => {
     if (!isEditMode || !id) return;
 
@@ -111,13 +116,15 @@ export default function AdminProjectsForm() {
 
         if (cancelled) return;
 
-        const englishTranslation = project.project_translations.find(
-          (translation) => translation.language_id === 1
-        );
+        const englishTranslation =
+          project.project_translations.find(
+            (translation) => translation.language_id === 1
+          );
 
-        const persianTranslation = project.project_translations.find(
-          (translation) => translation.language_id === 2
-        );
+        const persianTranslation =
+          project.project_translations.find(
+            (translation) => translation.language_id === 2
+          );
 
         const englishCards = project.project_card.filter(
           (card) => card.language_id === 1
@@ -127,9 +134,22 @@ export default function AdminProjectsForm() {
           (card) => card.language_id === 2
         );
 
-        const getCardValue = (cards: typeof englishCards, label: string) =>
-          cards.find((card) => card.label.toLowerCase() === label.toLowerCase())
-            ?.value ?? "";
+        const getCardValue = (
+          cards: typeof englishCards,
+          label: string
+        ) =>
+          cards.find(
+            (card) =>
+              card.label.toLowerCase() === label.toLowerCase()
+          )?.value ?? "";
+
+        const highlightLinks: string[] =
+          Array.isArray(project.highlight_links) &&
+          project.highlight_links.every(
+            (item): item is string => typeof item === "string"
+          )
+            ? project.highlight_links
+            : [];
 
         setFormData({
           name: project.name ?? "",
@@ -145,11 +165,13 @@ export default function AdminProjectsForm() {
               ? project.tech_stack
               : [],
 
-          overview_button_link: project.overview_button_link ?? "",
+          overview_button_link:
+            project.overview_button_link ?? "",
 
           description_en: englishTranslation?.description ?? "",
           detail_en: englishTranslation?.detail ?? "",
-          overview_paragraphs_en: englishTranslation?.overview_paragraphs ?? "",
+          overview_paragraphs_en:
+            englishTranslation?.overview_paragraphs ?? "",
 
           client_en: getCardValue(englishCards, "CLIENT"),
           role_en: getCardValue(englishCards, "ROLE"),
@@ -157,20 +179,18 @@ export default function AdminProjectsForm() {
 
           description_fa: persianTranslation?.description ?? "",
           detail_fa: persianTranslation?.detail ?? "",
-          overview_paragraphs_fa: persianTranslation?.overview_paragraphs ?? "",
+          overview_paragraphs_fa:
+            persianTranslation?.overview_paragraphs ?? "",
 
           client_fa: getCardValue(persianCards, "مشتری"),
           role_fa: getCardValue(persianCards, "نقش"),
           year_fa: getCardValue(persianCards, "سال"),
 
-          highlight_links:
-            Array.isArray(project.highlight_links) &&
-            project.highlight_links.every(
-              (item): item is string => typeof item === "string"
-            )
-              ? project.highlight_links
-              : [],
+          highlight_links: highlightLinks,
         });
+
+        // فایل‌های جدید خالی‌اند؛ تصاویر فعلی از مسیرهای ذخیره‌شده می‌آیند.
+        setHighlightFiles(highlightLinks.map(() => null));
       } catch (error) {
         console.error("Error loading project:", error);
 
@@ -195,6 +215,7 @@ export default function AdminProjectsForm() {
     };
   }, [id, isEditMode, isPersian]);
 
+  // پیش‌نمایش تصویر بنر
   const imagePreview = useMemo(() => {
     if (!imageFile) return "";
 
@@ -220,7 +241,9 @@ export default function AdminProjectsForm() {
     }));
   }
 
-  function handleCategoryChange(event: ChangeEvent<HTMLSelectElement>) {
+  function handleCategoryChange(
+    event: ChangeEvent<HTMLSelectElement>
+  ) {
     setFormData((prev) => ({
       ...prev,
       category_id: event.target.value,
@@ -244,6 +267,7 @@ export default function AdminProjectsForm() {
     }
 
     setImageFile(file);
+    event.target.value = "";
   }
 
   function addTechStack() {
@@ -262,23 +286,23 @@ export default function AdminProjectsForm() {
   function removeTechStack(index: number) {
     setFormData((prev) => ({
       ...prev,
-      tech_stack: prev.tech_stack.filter((_, itemIndex) => itemIndex !== index),
+      tech_stack: prev.tech_stack.filter(
+        (_, itemIndex) => itemIndex !== index
+      ),
     }));
   }
 
+  // افزودن جایگاه جدید برای تصویر هایلایت
   function addHighlight() {
-    const value = highlightInput.trim();
-
-    if (!value) return;
-
     setFormData((prev) => ({
       ...prev,
-      highlight_links: [...prev.highlight_links, value],
+      highlight_links: [...prev.highlight_links, ""],
     }));
 
-    setHighlightInput("");
+    setHighlightFiles((prev) => [...prev, null]);
   }
 
+  // حذف جایگاه تصویر از فرم
   function removeHighlight(index: number) {
     setFormData((prev) => ({
       ...prev,
@@ -286,9 +310,36 @@ export default function AdminProjectsForm() {
         (_, itemIndex) => itemIndex !== index
       ),
     }));
+
+    setHighlightFiles((prev) =>
+      prev.filter((_, itemIndex) => itemIndex !== index)
+    );
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  // انتخاب یا لغو انتخاب فایل جدید برای هایلایت
+  function handleHighlightImageChange(
+    index: number,
+    file: File | null
+  ) {
+    if (file && !file.type.startsWith("image/")) {
+      toast.error(
+        isPersian
+          ? "لطفاً یک فایل تصویری معتبر انتخاب کنید."
+          : "Please select a valid image file."
+      );
+      return;
+    }
+
+    setHighlightFiles((prev) =>
+      prev.map((currentFile, itemIndex) =>
+        itemIndex === index ? file : currentFile
+      )
+    );
+  }
+
+  async function handleSubmit(
+    event: FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
     if (loading) return;
@@ -305,26 +356,61 @@ export default function AdminProjectsForm() {
     setLoading(true);
 
     try {
+      const projectSlug = slugify(formData.name) || "projects";
+
+      /*
+       * تمام تصاویر این پروژه داخل پوشه‌ای با نام slug پروژه
+       * در باکت project-images ذخیره می‌شوند.
+       *
+       * مثال:
+       * nexus-analytics/banner-...
+       * nexus-analytics/highlight-1-...
+       */
+
+      // آپلود بنر در پوشه پروژه
       let imagePath = formData.live_url;
 
       if (imageFile) {
         const uploadedImage = await uploadProjectImage(
           imageFile,
-          slugify(formData.name) || "projects"
+          projectSlug,
+          "banner"
         );
 
         imagePath = uploadedImage.path;
       }
 
+      // حفظ مسیرهای قبلی هایلایت و جایگزینی موارد جدید
+      const highlightLinks = [...formData.highlight_links];
+
+      for (let index = 0; index < highlightFiles.length; index++) {
+        const file = highlightFiles[index];
+
+        if (!file) continue;
+
+        const uploadedImage = await uploadProjectImage(
+          file,
+          projectSlug,
+          `highlight-${index + 1}`
+        );
+
+        highlightLinks[index] = uploadedImage.path;
+      }
+
+      // ذخیره نکردن جایگاه‌های خالی
+      const savedHighlightLinks = highlightLinks.filter(
+        (link) => link.trim() !== ""
+      );
+
       const projectData = {
-        slug: slugify(formData.name),
+        slug: projectSlug,
         category_id: Number(formData.category_id),
-        name: formData.name,
+        name: formData.name.trim(),
         technology: formData.technology,
         live_url: imagePath,
         tech_stack: formData.tech_stack,
         overview_button_link: formData.overview_button_link,
-        highlight_links: formData.highlight_links,
+        highlight_links: savedHighlightLinks,
       };
 
       if (isEditMode && id) {
@@ -348,7 +434,9 @@ export default function AdminProjectsForm() {
       navigate("/dashboard/projects");
     } catch (error) {
       console.error(
-        isEditMode ? "Error updating project:" : "Error creating project:",
+        isEditMode
+          ? "Error updating project:"
+          : "Error creating project:",
         error
       );
 
@@ -358,8 +446,8 @@ export default function AdminProjectsForm() {
             ? "ویرایش پروژه با خطا مواجه شد."
             : "Failed to update project."
           : isPersian
-          ? "ایجاد پروژه با خطا مواجه شد."
-          : "Failed to create project."
+            ? "ایجاد پروژه با خطا مواجه شد."
+            : "Failed to create project."
       );
     } finally {
       setLoading(false);
@@ -377,7 +465,9 @@ export default function AdminProjectsForm() {
           type="button"
           onClick={() => navigate("/dashboard/projects")}
           className="rounded-lg border-2 border-border p-2"
-          aria-label={isPersian ? "بازگشت به پروژه‌ها" : "Back to projects"}
+          aria-label={
+            isPersian ? "بازگشت به پروژه‌ها" : "Back to projects"
+          }
         >
           <ArrowLeft size={18} />
         </button>
@@ -411,14 +501,17 @@ export default function AdminProjectsForm() {
           onImageChange={handleImageChange}
         />
 
-        <ProjectContent formData={formData} onChange={handleChange} />
+        <ProjectContent
+          formData={formData}
+          onChange={handleChange}
+        />
 
         <ProjectHighlights
           formData={formData}
-          highlightInput={highlightInput}
-          onHighlightInputChange={setHighlightInput}
+          highlightFiles={highlightFiles}
           onAddHighlight={addHighlight}
           onRemoveHighlight={removeHighlight}
+          onHighlightImageChange={handleHighlightImageChange}
         />
 
         <div className="flex justify-end gap-3">
@@ -438,8 +531,8 @@ export default function AdminProjectsForm() {
             {loading
               ? t("dashboard.saving")
               : isEditMode
-              ? t("dashboard.updateProject")
-              : t("dashboard.createProject")}
+                ? t("dashboard.updateProject")
+                : t("dashboard.createProject")}
           </button>
         </div>
       </form>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pencil, Plus, Trash2 } from "lucide-react";
+import { ExternalLink, Pencil, Plus, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -7,7 +7,12 @@ import { toast } from "sonner";
 import ConfirmDialog from "@/components/ui/ConfirmDialog";
 import ProjectsLoadingSkeleton from "@/components/skeleton/ProjectsLoadingSkeleton";
 import PortfolioFilter from "@/components/portfolio/PortfolioFilter";
-import { deleteAdminProject, getAdminProjects } from "@/features/api";
+
+import {
+  deleteAdminProject,
+  getAdminProjects,
+  getProjectImage,
+} from "@/features/api";
 
 type AdminProject = {
   id: number;
@@ -29,14 +34,16 @@ export default function AdminProjects() {
   const labels = {
     category: isPersian ? "دسته‌بندی" : "Category",
     technologies: isPersian ? "تکنولوژی‌ها" : "Technologies",
-    liveWebsite: isPersian ? "وب‌سایت زنده" : "Live website",
-    projectOverview: isPersian ? "معرفی پروژه" : "Project overview",
     highlights: isPersian ? "ویژگی‌های طراحی" : "Design highlights",
     noLink: isPersian ? "ثبت نشده" : "Not provided",
     noTechnologies: isPersian
       ? "تکنولوژی‌ای ثبت نشده"
       : "No technologies added",
-    openLink: isPersian ? "مشاهده لینک" : "Open link",
+    openLink: isPersian ? "مشاهده وب‌سایت" : "View website",
+    noImage: isPersian ? "تصویری ثبت نشده" : "No image available",
+    emptyCategory: isPersian
+      ? "پروژه‌ای در این دسته‌بندی وجود ندارد."
+      : "No projects in this category.",
   };
 
   const [projects, setProjects] = useState<AdminProject[]>([]);
@@ -44,14 +51,13 @@ export default function AdminProjects() {
   const [error, setError] = useState<string | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
   const [deleting, setDeleting] = useState(false);
-
   const [activeFilter, setActiveFilter] = useState("all");
 
   const filteredProjects =
     activeFilter === "all"
       ? projects
       : projects.filter(
-          (project) => String(project.category_id) === activeFilter
+          (project) => String(project.category_id) === activeFilter,
         );
 
   useEffect(() => {
@@ -96,12 +102,13 @@ export default function AdminProjects() {
       await deleteAdminProject(id);
 
       setProjects((previous) =>
-        previous.filter((project) => project.id !== id)
+        previous.filter((project) => project.id !== id),
       );
 
       setPendingDeleteId(null);
+
       toast.success(
-        isPersian ? "پروژه با موفقیت حذف شد." : "Project deleted successfully."
+        isPersian ? "پروژه با موفقیت حذف شد." : "Project deleted successfully.",
       );
     } catch (error) {
       console.error("Failed to delete project:", error);
@@ -111,13 +118,21 @@ export default function AdminProjects() {
     }
   };
 
+  const getImageUrl = (path: string | null | undefined) => {
+    if (!path) return "";
+
+    if (/^https?:\/\//i.test(path)) {
+      return path;
+    }
+
+    return getProjectImage(path);
+  };
+
   return (
     <section dir={isPersian ? "rtl" : "ltr"} className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">
-            {t("dashboard.projects")}
-          </h1>
+          <h1 className="text-2xl font-semibold">{t("dashboard.projects")}</h1>
 
           <p className="mt-1 text-sm text-muted-foreground">
             {t("dashboard.manageProjects")}
@@ -145,7 +160,7 @@ export default function AdminProjects() {
         </div>
       ) : (
         <div
-          className="overflow-hidden rounded-xl border border-border"
+          className="overflow-hidden rounded-xl border border-border/40"
           style={{
             boxShadow: "0 8px 30px rgba(117, 67, 200, 0.12)",
           }}
@@ -165,12 +180,10 @@ export default function AdminProjects() {
             </div>
           ) : filteredProjects.length === 0 ? (
             <div className="p-8 text-center text-muted-foreground">
-              {isPersian
-                ? "پروژه‌ای در این دسته‌بندی وجود ندارد."
-                : "No projects in this category."}
+              {labels.emptyCategory}
             </div>
           ) : (
-            <div className="divide-y divide-border">
+            <div className="divide-y divide-border/30">
               {filteredProjects.map((project) => {
                 const techStack = Array.isArray(project.tech_stack)
                   ? project.tech_stack
@@ -180,92 +193,140 @@ export default function AdminProjects() {
                   ? project.highlight_links
                   : [];
 
+                // تصویر کارت Portfolio از همین فیلد دریافت می‌شود.
+                const imageUrl = getImageUrl(project.live_url);
+
                 return (
                   <article
                     key={project.id}
-                    className="p-4 transition-colors duration-200 hover:bg-dashboard-bg sm:p-5"
+                    className="group transition-colors duration-300 hover:bg-muted/20"
                   >
-                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                      <div className="min-w-0 flex-1 space-y-2">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <h2 className="text-base font-semibold">
-                            {project.name}
-                          </h2>
-
-                          <span className="rounded-full border border-border px-2 py-1 text-xs text-muted-foreground">
-                            ID: {project.id}
-                          </span>
-                        </div>
-
-                        <p className="text-sm text-muted-foreground">
-                          {project.technology || labels.noTechnologies}
-                        </p>
-
-                        <div className="flex flex-wrap items-center gap-2 text-xs">
-                          <span className="rounded-full border border-border px-2 py-1">
-                            {labels.category}: {project.category_id}
-                          </span>
-
-                          <span className="rounded-full px-2 py-1 text-text">
-                            {techStack.length} {labels.technologies}
-                          </span>
-
-                          <span className="rounded-full px-2 py-1 text-text">
-                            {highlightLinks.length} {labels.highlights}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="flex shrink-0 items-center gap-2 self-end sm:self-start">
-                        <button
-                          type="button"
-                          onClick={() =>
-                            navigate(
-                              `/dashboard/projects/${project.id}/edit`
-                            )
-                          }
-                          className="rounded-md p-2 transition-colors hover:bg-border"
-                          aria-label={t("dashboard.editProject")}
-                          title={t("dashboard.editProject")}
-                        >
-                          <Pencil size={18} />
-                        </button>
-
-                        <button
-                          type="button"
-                          className="rounded-md p-2 text-red-500 transition-colors hover:bg-red-500/10 disabled:opacity-50"
-                          aria-label={t("dashboard.deleteProject")}
-                          title={t("dashboard.deleteProject")}
-                          disabled={deleting}
-                          onClick={() => setPendingDeleteId(project.id)}
-                        >
-                          <Trash2 size={18} />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 grid gap-4 md:grid-cols-2">
-                      <div className="space-y-2">
-                        <h3 className="text-sm font-medium">
-                          {labels.technologies}
-                        </h3>
-
-                        {techStack.length > 0 ? (
-                          <div className="flex flex-wrap gap-2">
-                            {techStack.map((technology, index) => (
-                              <span
-                                key={`${technology}-${index}`}
-                                className="rounded-md border border-border px-2 py-1 text-xs"
-                              >
-                                {technology}
-                              </span>
-                            ))}
-                          </div>
+                    <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-start sm:p-5">
+                      {/* Project cover image */}
+                      <div className="h-44 w-full shrink-0 overflow-hidden rounded-lg border border-border/30 bg-muted sm:h-32 sm:w-48 md:h-36 md:w-56">
+                        {imageUrl ? (
+                          <img
+                            src={imageUrl}
+                            alt={project.name}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            onError={(event) => {
+                              event.currentTarget.style.visibility = "hidden";
+                            }}
+                          />
                         ) : (
-                          <p className="text-xs text-muted-foreground">
-                            {labels.noTechnologies}
-                          </p>
+                          <div className="flex h-full items-center justify-center px-3 text-center text-xs text-muted-foreground">
+                            {labels.noImage}
+                          </div>
                         )}
+                      </div>
+
+                      {/* Project information */}
+                      <div className="min-w-0 flex-1 space-y-3">
+                        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                          <div className="min-w-0 space-y-2">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <h2 className="break-words text-base font-semibold">
+                                {project.name}
+                              </h2>
+
+                              <span className="rounded-full border border-border/50 bg-background/40 px-2 py-1 text-xs text-muted-foreground">
+                                ID: {project.id}
+                              </span>
+                            </div>
+
+                            <p className="break-words text-sm text-muted-foreground">
+                              {project.technology || labels.noTechnologies}
+                            </p>
+
+                            <div className="flex flex-wrap items-center gap-2 text-xs">
+                              <span className="rounded-full border border-border/50 bg-background/40 px-2 py-1">
+                                {labels.category}: {project.category_id}
+                              </span>
+
+                              <span className="rounded-full border border-border/30 bg-background/30 px-2 py-1">
+                                {techStack.length} {labels.technologies}
+                              </span>
+
+                              <span className="rounded-full border border-border/30 bg-background/30 px-2 py-1">
+                                {highlightLinks.length} {labels.highlights}
+                              </span>
+                            </div>
+
+                            {project.live_url ? (
+                              <a
+                                href={
+                                  /^https?:\/\//i.test(project.live_url)
+                                    ? project.live_url
+                                    : getProjectImage(project.live_url)
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(event) => event.stopPropagation()}
+                                className="inline-flex max-w-full items-center gap-1.5 break-all pt-1 text-xs text-muted-foreground underline decoration-border underline-offset-4 transition-colors hover:text-text"
+                              >
+                                <ExternalLink size={13} className="shrink-0" />
+                                {labels.openLink}
+                              </a>
+                            ) : (
+                              <p className="pt-1 text-xs text-muted-foreground">
+                                {labels.noLink}
+                              </p>
+                            )}
+                          </div>
+
+                          {/* Actions */}
+                          <div className="flex shrink-0 items-center gap-2 self-end sm:self-start">
+                            <button
+                              type="button"
+                              onClick={() =>
+                                navigate(
+                                  `/dashboard/projects/${project.id}/edit`,
+                                )
+                              }
+                              className="rounded-md border border-border/30 bg-background/40 p-2 transition-colors hover:bg-border"
+                              aria-label={t("dashboard.editProject")}
+                              title={t("dashboard.editProject")}
+                            >
+                              <Pencil size={18} />
+                            </button>
+
+                            <button
+                              type="button"
+                              className="rounded-md border border-red-500/20 bg-background/40 p-2 text-red-500 transition-colors hover:bg-red-500/10 disabled:opacity-50"
+                              aria-label={t("dashboard.deleteProject")}
+                              title={t("dashboard.deleteProject")}
+                              disabled={deleting}
+                              onClick={() => setPendingDeleteId(project.id)}
+                            >
+                              <Trash2 size={18} />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Technologies */}
+                        <div className="space-y-2">
+                          <h3 className="text-sm font-medium">
+                            {labels.technologies}
+                          </h3>
+
+                          {techStack.length > 0 ? (
+                            <div className="flex flex-wrap gap-2">
+                              {techStack.map((technology, index) => (
+                                <span
+                                  key={`${technology}-${index}`}
+                                  className="max-w-full break-words rounded-md border border-border/40 bg-background/40 px-2 py-1 text-xs"
+                                >
+                                  {technology}
+                                </span>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-xs text-muted-foreground">
+                              {labels.noTechnologies}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </article>

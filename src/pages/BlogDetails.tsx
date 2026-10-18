@@ -5,54 +5,11 @@ import { useTranslation } from "react-i18next";
 import type { Blog } from "@/features/api";
 import { getBlogBySlug, getBlogImage } from "@/features/api";
 import Container from "@/components/layout/Container";
-import { Skeleton } from "@/components/ui/skeleton";
-
-const BlogDetailsSkeleton = () => (
-  <Container className="z-4 mt-25 text-text">
-    <div className="space-y-8">
-      {/* Cover */}
-      <Skeleton className="aspect-video w-full rounded-3xl md:aspect-[16/7]" />
-
-      {/* Author and date */}
-      <div className="flex items-center gap-3">
-        <Skeleton className="h-4 w-24" />
-        <Skeleton className="h-1 w-1 rounded-full" />
-        <Skeleton className="h-4 w-28" />
-      </div>
-
-      {/* Title */}
-      <div className="space-y-3">
-        <Skeleton className="h-9 w-full md:h-12" />
-        <Skeleton className="h-9 w-4/5 md:h-12" />
-      </div>
-
-      {/* Excerpt */}
-      <div className="space-y-3">
-        <Skeleton className="h-5 w-full" />
-        <Skeleton className="h-5 w-11/12" />
-        <Skeleton className="h-5 w-3/4" />
-      </div>
-
-      {/* Article content */}
-      <div className="space-y-4 pt-4">
-        <Skeleton className="h-7 w-2/5" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-10/12" />
-        <Skeleton className="h-4 w-4/5" />
-
-        <Skeleton className="mt-6 h-7 w-1/2" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-11/12" />
-        <Skeleton className="h-4 w-3/4" />
-      </div>
-    </div>
-  </Container>
-);
+import BlogDetailsSkeleton from "@/components/skeleton/BlogDetailsSkeleton";
 
 const BlogDetails = () => {
   const { slug } = useParams<{ slug: string }>();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [blog, setBlog] = useState<Blog | null>(null);
   const [loading, setLoading] = useState(true);
@@ -115,13 +72,11 @@ const BlogDetails = () => {
       <Container className="z-4 mt-25 text-text">
         <div className="py-20 text-center">
           <h1 className="text-2xl font-semibold">
-            {isPersian ? "مقاله پیدا نشد" : "Article not found"}
+            {t("blogDetails.notFound")}
           </h1>
 
           <p className="mt-3 text-muted-foreground">
-            {isPersian
-              ? "دریافت مقاله با خطا مواجه شد یا این مقاله وجود ندارد."
-              : "We couldn't load this article, or it doesn't exist."}
+            {t("blogDetails.loadError")}
           </p>
         </div>
       </Container>
