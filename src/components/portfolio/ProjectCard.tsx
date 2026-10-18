@@ -63,66 +63,144 @@ export default function ProjectCard({ project, index }: Props) {
   };
 
   return (
-    <Link to={`/portfolio/${project.slug}`}>
+    <Link to={`/portfolio/${project.slug}`} className="block min-w-0">
       <div
         className="
- 
-      relative
-      h-[250px]
-      lg:h-full
-      [perspective:1000px]
-      group
-      overflow-hidden
-      "
+          relative
+          h-[250px]
+          lg:h-full
+          [perspective:1000px]
+          group
+          min-w-0
+        "
       >
         <div
           className="
-        relative
-        h-full
-        w-full
-        transition-transform
-        duration-700
-        [transform-style:preserve-3d]
-        group-hover:[transform:rotateY(180deg)]
-        "
+            relative
+            h-full
+            w-full
+            transition-transform
+            duration-700
+            [transform-style:preserve-3d]
+            group-hover:[transform:rotateY(180deg)]
+          "
         >
           {/* ================= FRONT ================= */}
+
           <ElectricBorder
-            className={`       bg-glass-bg
-      lg:min-w-[calc((70vw-40px)/3)]
-      md:min-w-[calc((90vw-40px)/3)]
-      min-w-xs
- my-2 cursor-pointer max-w-xs mx-5 md:max-w-xl ${getHeight()}`}
+            className={`
+              bg-glass-bg
+              lg:min-w-[calc((70vw-40px)/3)]
+              md:min-w-[calc((90vw-40px)/3)]
+              min-w-xs
+              my-2
+              cursor-pointer
+              max-w-xs
+              mx-5
+              md:max-w-xl
+              ${getHeight()}
+            `}
             color="var(--text)"
             chaos={0.03}
           >
             <Card
-              className={`flex justify-between [--card-spacing:0]  h-[250px] ${getHeight()}`}
+              className={`
+                flex
+                flex-col
+                justify-between
+                [--card-spacing:0]
+                h-[250px]
+                ${getHeight()}
+                overflow-hidden
+                min-w-0
+              `}
             >
-              <div>
+              <div className="w-full overflow-hidden">
                 <img
                   src={project.link}
                   alt={project.title}
-                  className="w-full object-contain transition-transform duration-700 group-hover:scale-105"
+                  className="
+                    w-full
+                    object-contain
+                    transition-transform
+                    duration-700
+                    group-hover:scale-105
+                  "
                 />
               </div>
-
               <CardContent
-                className={`top-30 md:top-30 lg:top-45 absolute pl-8 rtl:right-3 flex flex-col gap-2   w-full`}
+                className="
+    absolute
+    inset-x-0
+    bottom-0
+    max-h-full
+    box-border
+    flex
+    flex-col
+    gap-2
+    w-full
+    min-w-0
+    overflow-hidden
+    pl-8
+    pr-4
+    pb-4
+    pt-2
+  "
               >
-                <div className="flex gap-2 text-white w-full mb-2" dir="ltr">
-                  <Badge dir="ltr" className="text-badge-text">
+                <div
+                  className="
+      flex
+      gap-2
+      text-white
+      w-full
+      min-w-0
+      overflow-hidden
+    "
+                  dir="ltr"
+                >
+                  <Badge
+                    dir="ltr"
+                    className="text-badge-text shrink-0 max-w-[55%] truncate"
+                  >
                     {project.category}
                   </Badge>
 
-                  <Badge className="bg-badge-dark">{project.technology}</Badge>
+                  <Badge className="bg-badge-dark shrink-0 max-w-[45%] truncate">
+                    {project.technology}
+                  </Badge>
                 </div>
 
-                <h3 className="text-xl font-semibold text-text mb-2" dir="ltr">
+                <h3
+                  className="
+      text-xl
+      font-semibold
+      text-text
+      line-clamp-1
+      break-words
+      overflow-hidden
+      min-w-0
+      w-full
+    "
+                  dir="ltr"
+                  title={project.title}
+                >
                   {project.title}
                 </h3>
 
-                <p className="text-sm">{project.description}</p>
+                <p
+                  className="
+      text-sm
+      leading-5
+      line-clamp-2
+      break-words
+      overflow-hidden
+      min-w-0
+      w-full
+    "
+                  title={project.description}
+                >
+                  {project.description}
+                </p>
               </CardContent>
             </Card>
           </ElectricBorder>
@@ -131,65 +209,94 @@ export default function ProjectCard({ project, index }: Props) {
 
           <Card
             className={`
-            absolute
-            inset-0
-            h-[250px]
-            ${getHeight()}
-            overflow-hidden
-            [backface-visibility:hidden]
-            [transform:rotateY(180deg)]
-            [--card-spacing:0]
+              absolute
+              inset-0
+              h-[250px]
+              ${getHeight()}
+              overflow-hidden
+              min-w-0
+              [backface-visibility:hidden]
+              [transform:rotateY(180deg)]
+              [--card-spacing:0]
             `}
           >
             <img
               src={project.link}
               alt={project.title}
               className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            object-cover
-            "
+                absolute
+                inset-0
+                h-full
+                w-full
+                object-cover
+              "
             />
 
             <div className="absolute inset-0 bg-back-card" />
+
             <CardContent
               className="
-            relative
-            z-10
-            flex
-            h-full
-            w-full
-            flex-col
-            justify-end
-            gap-3
-            p-5
-            "
+                relative
+                z-10
+                flex
+                h-full
+                w-full
+                min-w-0
+                flex-col
+                justify-end
+                gap-3
+                p-5
+                overflow-hidden
+              "
             >
-              <h3 className="text-2xl font-semibold text-span">
+              <h3
+                className="
+                  text-2xl
+                  font-semibold
+                  text-span
+                  line-clamp-1
+                  break-words
+                  overflow-hidden
+                "
+                title={project.title}
+              >
                 {project.title}
               </h3>
 
-              <p className="text-sm leading-6 text-text">{project.detail}</p>
+              <p
+                className="
+                  text-sm
+                  leading-6
+                  text-text
+                  line-clamp-3
+                  break-words
+                  overflow-hidden
+                "
+                title={project.detail}
+              >
+                {project.detail}
+              </p>
 
               <button
+                type="button"
                 className="
-              mt-2
-              w-fit
-              rounded-full
-              border
-              border-white
-              px-4
-              py-2
-              text-sm
-              text-text
-              transition
-              hover:bg-white
-              hover:text-black
-              "
+                  mt-2
+                  w-fit
+                  max-w-full
+                  shrink-0
+                  rounded-full
+                  border
+                  border-white
+                  px-4
+                  py-2
+                  text-sm
+                  text-text
+                  transition
+                  hover:bg-white
+                  hover:text-black
+                "
               >
-                {t("portfolio.btn")}{" "}
+                {t("portfolio.btn")}
               </button>
             </CardContent>
           </Card>

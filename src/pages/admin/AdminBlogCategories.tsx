@@ -365,17 +365,6 @@ export default function AdminBlogCategories() {
                 >
                   <div className="min-w-0 space-y-1">
                     <h2 className="font-medium">{displayName}</h2>
-
-                    <p className="text-sm text-muted-foreground">
-                      {isRtl ? english : persian}
-                    </p>
-
-                    <p
-                      dir="ltr"
-                      className="break-all text-xs text-muted-foreground"
-                    >
-                      {category.slug}
-                    </p>
                   </div>
 
                   <div className="flex shrink-0 items-center gap-2">

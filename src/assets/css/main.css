@@ -35,7 +35,7 @@ body {
   --nav-hambur: #000000;
   --nav-text: #000000;
   --background: #ffffff;
-  --border: #a7acb7;
+  --border: #a7acb777;
   --seprator: #7f59d73c;
   --hover-btn: #9ac3fb;
   --separator: #00000039;
@@ -98,7 +98,7 @@ body {
   /* Text */
   --text: #d4e4fa;
   --span: #adc6ff;
-  --border: #a7acb796;
+  --border: #a7acb748;
   --hero-description: #c6c6cb;
 
   --color3: #1c2b3c;
@@ -127,7 +127,7 @@ body {
 
   --sidebar-bg: rgba(23, 21, 29, 0.96);
   --sidebar-footer-bg: rgba(23, 21, 29, 0.98);
-  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-border: rgba(255, 255, 255, 0.507);
   --sidebar-hover: rgba(255, 255, 255, 0.055);
   --sidebar-active: rgba(167, 139, 250, 0.15);
   --dashboard-bg: #111015;

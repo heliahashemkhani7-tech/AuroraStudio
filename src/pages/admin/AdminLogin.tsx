@@ -1,13 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Eye, EyeOff } from "lucide-react";
 import { supabase } from "@/hooks/lib/supabace";
 import { toast } from "sonner";
 
 export default function AdminLogin() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,8 +34,15 @@ export default function AdminLogin() {
         return;
       }
 
-      window.location.href = "/dashboard";
-    } catch {
+      toast.success(
+        i18n.language.startsWith("fa")
+          ? "با موفقیت وارد حساب شدی."
+          : "Logged in successfully."
+      );
+
+      navigate("/dashboard", { replace: true });
+    } catch (error) {
+      console.error("Login error:", error);
       toast.error(t("admin.login.invalidCredentials"));
     } finally {
       setLoading(false);
@@ -44,7 +53,9 @@ export default function AdminLogin() {
     <div className="z-5 flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-md border-2 border-border bg-glass-bg text-text">
         <CardContent className="flex flex-col items-center gap-6 p-6">
-          <h1 className="text-2xl font-semibold">{t("admin.login.title")}</h1>
+          <h1 className="text-2xl font-semibold">
+            {t("admin.login.title")}
+          </h1>
 
           <form onSubmit={handleLogin} className="flex w-full flex-col gap-4">
             <input

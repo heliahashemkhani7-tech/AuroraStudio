@@ -190,7 +190,8 @@
       "newMessage": "New",
       "total": "Total messages",
       "unreadCount": "Unread messages"
-    }
+    },
+    "backToSite": "Back to website"
   },
   "dashboard": {
     "admin": "Admin Panel",
@@ -345,5 +346,57 @@
     "label": "Blog",
     "title": "Insights & Ideas",
     "description": "Discover articles, insights, and ideas about design, development, technology, and digital experiences."
+  },
+  "blogFilter": {
+    "all": "All"
+  },
+  "profilePage": {
+    "title": "User Profile",
+    "description": "View and update your account information.",
+    "accountInformation": "Account Information",
+    "accountEmail": "Account Email",
+    "emailCannotChange": "Email cannot be changed on this page.",
+    "displayName": "Display Name",
+    "displayNamePlaceholder": "Your display name",
+    "displayNameRequired": "Please enter a display name.",
+    "loadError": "Failed to load account information.",
+    "saveSuccess": "Profile updated. Please sign in again.",
+    "saveError": "Failed to update profile.",
+    "signOutError": "Profile updated, but sign-out failed. Please try again.",
+    "saveChanges": "Save Changes"
+  },
+  "projectsPage": {
+    "category": "Category",
+    "technologies": "Technologies",
+    "liveWebsite": "Live website",
+    "projectOverview": "Project overview",
+    "highlights": "Design highlights",
+    "notProvided": "Not provided",
+    "noTechnologies": "No technologies added",
+    "openLink": "Open link",
+    "emptyCategory": "No projects in this category.",
+    "deleteSuccess": "Project deleted successfully."
+  },
+  "resetPasswordPage": {
+    "title": "Change Password",
+    "description": "Choose a new password to keep your account secure.",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "passwordPlaceholder": "At least 8 characters",
+    "confirmPasswordPlaceholder": "Enter your new password again",
+    "passwordHint": "Choose a strong password that you do not use for another account.",
+    "passwordTooShort": "Password must be at least 8 characters long.",
+    "passwordMismatch": "Passwords do not match.",
+    "noActiveSession": "No active session.",
+    "saveSuccess": "Password changed. Please sign in again.",
+    "saveError": "Failed to change password. Please try again.",
+    "signOutError": "Password changed, but sign-out failed. Please try again.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "submit": "Update Password"
+  },
+  "blogDetails": {
+    "notFound": "Article not found",
+    "loadError": "We couldn't load this article, or it doesn't exist."
   }
 }
